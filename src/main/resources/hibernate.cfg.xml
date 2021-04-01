@@ -14,7 +14,8 @@
     <property name="current_session_context_class">thread</property>
     <property name="hbm2ddl.auto">update</property>
 
-<!--    <mapping class="Models.User"/>-->
+    <mapping class="com.website.models.UserEntity"/>
+    <mapping class="com.website.models.CartEntity"/>
 
 </session-factory>
 </hibernate-configuration>
