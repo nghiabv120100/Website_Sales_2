@@ -1,26 +1,51 @@
 package com.website.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "cart", schema = "website_sales")
+@Table(name = "Cart")
 public class CartEntity {
-    private int id;
-    private Long totalPrice;
-    private Integer status;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "total_price")
+    private Long totalPrice;
+
+    @Column(name = "status")
+    private Integer status;
+
+    //ToDo Dang lam carts
+
+    @ManyToOne
+    @JoinColumn(name = "shipper_id")
+    private UserEntity shipperEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private UserEntity employeeEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private UserEntity clientEntity;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cartEntity")
+    private List<Product_Cart_Entity> productCartEntityList;
+
+    public CartEntity() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "total_price")
     public Long getTotalPrice() {
         return totalPrice;
     }
@@ -29,8 +54,6 @@ public class CartEntity {
         this.totalPrice = totalPrice;
     }
 
-    @Basic
-    @Column(name = "status")
     public Integer getStatus() {
         return status;
     }
@@ -39,25 +62,35 @@ public class CartEntity {
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CartEntity that = (CartEntity) o;
-
-        if (id != that.id) return false;
-        if (totalPrice != null ? !totalPrice.equals(that.totalPrice) : that.totalPrice != null) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-
-        return true;
+    public UserEntity getShipperEntity() {
+        return shipperEntity;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (totalPrice != null ? totalPrice.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        return result;
+    public void setShipperEntity(UserEntity shipperEntity) {
+        this.shipperEntity = shipperEntity;
+    }
+
+    public UserEntity getEmployeeEntity() {
+        return employeeEntity;
+    }
+
+    public void setEmployeeEntity(UserEntity employeeEntity) {
+        this.employeeEntity = employeeEntity;
+    }
+
+    public UserEntity getClientEntity() {
+        return clientEntity;
+    }
+
+    public void setClientEntity(UserEntity clientEntity) {
+        this.clientEntity = clientEntity;
+    }
+
+    public List<Product_Cart_Entity> getProductCartEntityList() {
+        return productCartEntityList;
+    }
+
+    public void setProductCartEntityList(List<Product_Cart_Entity> productCartEntityList) {
+        this.productCartEntityList = productCartEntityList;
     }
 }

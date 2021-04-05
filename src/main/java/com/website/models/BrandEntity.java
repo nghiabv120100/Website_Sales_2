@@ -1,27 +1,40 @@
 package com.website.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "brand", schema = "website_sales")
+@Table(name = "Brand")
 public class BrandEntity {
-    private int id;
-    private String brandName;
-    private String image;
-    private Integer status;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "brand_name")
+    private String brandName;
+
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "status")
+    private Integer status;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "brandEntity")
+    private List<ProductEntity> productEntityList ;
+
+    public BrandEntity() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "brand_name")
     public String getBrandName() {
         return brandName;
     }
@@ -30,8 +43,6 @@ public class BrandEntity {
         this.brandName = brandName;
     }
 
-    @Basic
-    @Column(name = "image")
     public String getImage() {
         return image;
     }
@@ -40,8 +51,6 @@ public class BrandEntity {
         this.image = image;
     }
 
-    @Basic
-    @Column(name = "status")
     public Integer getStatus() {
         return status;
     }
@@ -50,27 +59,20 @@ public class BrandEntity {
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BrandEntity that = (BrandEntity) o;
-
-        if (id != that.id) return false;
-        if (brandName != null ? !brandName.equals(that.brandName) : that.brandName != null) return false;
-        if (image != null ? !image.equals(that.image) : that.image != null) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-
-        return true;
+    public List<ProductEntity> getProductEntityList() {
+        return productEntityList;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (brandName != null ? brandName.hashCode() : 0);
-        result = 31 * result + (image != null ? image.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        return result;
+    public void setProductEntityList(List<ProductEntity> productEntityList) {
+        this.productEntityList = productEntityList;
     }
+
+    public BrandEntity(Long id, String brandName, String image, Integer status, List<ProductEntity> productEntityList) {
+        this.id = id;
+        this.brandName = brandName;
+        this.image = image;
+        this.status = status;
+        this.productEntityList = productEntityList;
+    }
+
 }

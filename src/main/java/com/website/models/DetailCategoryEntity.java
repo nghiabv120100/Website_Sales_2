@@ -1,27 +1,44 @@
 package com.website.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "detail_category", schema = "website_sales")
+@Table(name = "Detail_Category")
 public class DetailCategoryEntity {
-    private int id;
-    private String detailCateName;
-    private String image;
-    private Integer status;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "detailCateName")
+    private String detailCateName;
+
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "status")
+    private Integer status;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "detailCategoryEntity")
+    private List<ProductEntity> productEntityList;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryEntity categoryEntity;
+
+    public DetailCategoryEntity() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "detail_cate_name")
     public String getDetailCateName() {
         return detailCateName;
     }
@@ -30,8 +47,6 @@ public class DetailCategoryEntity {
         this.detailCateName = detailCateName;
     }
 
-    @Basic
-    @Column(name = "image")
     public String getImage() {
         return image;
     }
@@ -40,8 +55,6 @@ public class DetailCategoryEntity {
         this.image = image;
     }
 
-    @Basic
-    @Column(name = "status")
     public Integer getStatus() {
         return status;
     }
@@ -50,28 +63,19 @@ public class DetailCategoryEntity {
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        DetailCategoryEntity that = (DetailCategoryEntity) o;
-
-        if (id != that.id) return false;
-        if (detailCateName != null ? !detailCateName.equals(that.detailCateName) : that.detailCateName != null)
-            return false;
-        if (image != null ? !image.equals(that.image) : that.image != null) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-
-        return true;
+    public List<ProductEntity> getProductEntityList() {
+        return productEntityList;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (detailCateName != null ? detailCateName.hashCode() : 0);
-        result = 31 * result + (image != null ? image.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        return result;
+    public void setProductEntityList(List<ProductEntity> productEntityList) {
+        this.productEntityList = productEntityList;
+    }
+
+    public CategoryEntity getCategoryEntity() {
+        return categoryEntity;
+    }
+
+    public void setCategoryEntity(CategoryEntity categoryEntity) {
+        this.categoryEntity = categoryEntity;
     }
 }
