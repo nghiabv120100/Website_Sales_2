@@ -18,10 +18,12 @@ public class Test {
             Session session = factory.openSession();
             Transaction transaction = session.beginTransaction();
 
-            BrandEntity brandEntity = new BrandEntity();
-            brandEntity.setBrandName("iPhone 7 Plus");
-
-            session.save(brandEntity);
+//            BrandEntity brandEntity = new BrandEntity();
+//            brandEntity.setBrandName("iPhone 7 Plus");
+            UserEntity userEntity = new UserEntity();
+            userEntity.setFullname("ff");
+            userEntity.setId(3);
+            session.save(userEntity);
 
             transaction.commit();
 
