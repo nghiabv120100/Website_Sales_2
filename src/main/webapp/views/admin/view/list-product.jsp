@@ -66,21 +66,17 @@
 											</tr>
 										</thead>
 										<tbody>
-										<c:forEach items="${proList }" var="pro" >
+										<c:forEach items="${lstProduct }" var="pro" >
 											<tr class="odd gradeX">
-												<td>${pro.id }</td>
+												<td>${pro.getId() }</td>
 												<c:url value="/image/${pro.getImage()}" var="imgUrl"></c:url>
 												<td><img style="width: 50px;height: 50px;object-fit: cover" src="${imgUrl}" /></td>
 
-												<td>${pro.productName }</td>
-												<td>${pro.quantity}</td>
-												<td>${pro.price }</td>
+												<td>${pro.getProName() }</td>
+												<td>${pro.getQuantity()}</td>
+												<td>${pro.getPrice()}</td>
 												<td>
-													<c:forEach items="${detailCateList}" var="detailCate">
-														<c:if test="${detailCate.id==pro.detailCateId}">
-															<c:out value="${detailCate.detailCateName}"></c:out>
-														</c:if>
-													</c:forEach>
+													pro.getDetail_Cat
 												</td>
 
 												<%--<td>${pro.detailCateId}</td>--%>

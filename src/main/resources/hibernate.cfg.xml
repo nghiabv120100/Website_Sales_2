@@ -15,7 +15,17 @@
     <property name="hbm2ddl.auto">update</property>
 
     <mapping class="com.website.models.UserEntity"/>
+    <mapping class="com.website.models.ProductEntity"/>
+    <mapping class="com.website.models.BrandEntity"/>
     <mapping class="com.website.models.CartEntity"/>
-
+    <mapping class="com.website.models.CartItemEntity"/>
+    <mapping class="com.website.models.CartItemEntityPK"/>
+    <mapping class="com.website.models.CategoryEntity"/>
+    <mapping class="com.website.models.CommentEntity"/>
+    <mapping class="com.website.models.DetailCategoryEntity"/>
+    <mapping class="com.website.models.GoodsReceivedDetailEntity"/>
+    <mapping class="com.website.models.GoodsReceivedDetailEntityPK"/>
+    <mapping class="com.website.models.GoodsReceivedNoteEntity"/>
+    <mapping class="com.website.models.SupplierEntity"/>
 </session-factory>
 </hibernate-configuration>
