@@ -75,9 +75,7 @@
 												<td>${pro.getProName() }</td>
 												<td>${pro.getQuantity()}</td>
 												<td>${pro.getPrice()}</td>
-												<td>
-													pro.getDetail_Cat
-												</td>
+												<td>${pro.getDetailCategoryEntity().getDetailCateName()}</td>
 
 												<%--<td>${pro.detailCateId}</td>--%>
 												<td>${pro.describePro } </td>

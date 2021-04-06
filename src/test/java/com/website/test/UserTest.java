@@ -1,12 +1,19 @@
 package com.website.test;
 
+import com.website.dao.DetailCategoryDAO;
 import com.website.dao.UserDAO;
+import com.website.models.DetailCategoryEntity;
 import com.website.models.UserEntity;
 import org.testng.annotations.Test;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
-public class UserTest {
+public class UserTest  {
     @Test
     public void checkFindAll() {
         UserDAO userDAO = new UserDAO();
@@ -56,6 +63,13 @@ public class UserTest {
         String sortExpression ="id";
         String sortDirection ="DESC";  //ASC|DESC
         Object[] objects = userDAO.findByProperty(property,value,sortExpression,sortDirection);
+
+    }
+
+    @Test
+    public void checkFindAllDetailCategory() {
+        DetailCategoryDAO detailCategoryDAO = new DetailCategoryDAO();
+        List<DetailCategoryEntity> lst = detailCategoryDAO.findAll();
 
     }
 }

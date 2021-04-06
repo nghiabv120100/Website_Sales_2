@@ -63,7 +63,7 @@ public class GenericDAO<ID extends Serializable,T> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.persist(entity);
+            session.save(entity);
             transaction.commit();
         }
         catch (HibernateException e) {
