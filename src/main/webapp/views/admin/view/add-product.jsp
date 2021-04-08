@@ -70,7 +70,7 @@
 												<label>Chi tiết loại sản phẩm</label>
 												<div class="checkbox">
 													<select name="detailCateId" id="detailCateId">
-														<c:forEach items="${detailCategories}" var="c">
+														<c:forEach items="${lstDetailCate}" var="c">
 															<option value='${c.getId()}'>${c.detailCateName}</option>
 														</c:forEach>
 													</select>
@@ -81,7 +81,7 @@
 												<label>Thương hiệu sản phẩm</label>
 												<div class="checkbox">
 													<select name="brandId" id="brandId">
-														<c:forEach items="${brands}" var="c">
+														<c:forEach items="${lstBrand}" var="c">
 															<option value='${c.id}'>${c.brandName}</option>
 														</c:forEach>
 													</select>
@@ -126,18 +126,22 @@
 			var productName= $('#productName').val();
 			var price= parseFloat($('#price').val());
 			var quantity = parseInt($('#quantity').val());
-			var describePro= CKEDITOR.instances.editer.getData();
+			// var describePro= CKEDITOR.instances.editer.getData();
 			var detailCateId=parseInt($('#detailCateId').val());
 			var image = $('input[type=file]').val().split('\\').pop();
 			var brandId=parseInt($('#brandId').val())
 			var data={
-				"productName":productName,
+				"proName":productName,
 				"price":price,
 				"quantity":quantity,
-				"describePro":describePro,
+				// "describePro":describePro,
 				"image":image,
-				"detailCateId":detailCateId,
-				"brandId":brandId
+				"detailCategoryEntity": {
+					"id":detailCateId,
+				},
+				"brandEntity":{
+					"id":brandId
+				}
 			}
 			console.log("Hello"+detailCateId);
 			updateProduct(data)
@@ -165,7 +169,7 @@
 
 
 	<script type="text/javascript" language="javascript">
-   CKEDITOR.replace('editer', {width: '700px',height: '300px'});
+   CKEDITOR.replace('ckeditor', {width: '700px',height: '300px'});
 </script>
 </body>
 </html>
