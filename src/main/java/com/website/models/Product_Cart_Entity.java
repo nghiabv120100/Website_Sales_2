@@ -13,7 +13,7 @@ public class Product_Cart_Entity {
     private Integer quantity;
 
     @Column(name= "unit_price")
-    private Long unitPrice;
+    private Integer unitPrice;
 
     @ManyToOne
     @MapsId("cart_id")
@@ -44,11 +44,11 @@ public class Product_Cart_Entity {
         this.quantity = quantity;
     }
 
-    public Long getUnitPrice() {
+    public Integer getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Long unitPrice) {
+    public void setUnitPrice(Integer unitPrice) {
         this.unitPrice = unitPrice;
     }
 

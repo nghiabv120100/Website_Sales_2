@@ -9,7 +9,7 @@ public class ProductEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "product_name")
     private String proName;
@@ -18,7 +18,7 @@ public class ProductEntity {
     private int quantity;
 
     @Column(name = "price")
-    private long price;
+    private Integer price;
 
     @Column(name = "describe_product")
     private String describePro;
@@ -53,11 +53,11 @@ public class ProductEntity {
     public ProductEntity() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -77,11 +77,11 @@ public class ProductEntity {
         this.quantity = quantity;
     }
 
-    public long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

@@ -7,9 +7,9 @@ import java.util.Date;
 @Table(name = "Comment")
 public class CommentEntity {
     @Id
-    @Column(name ="comment_id")
+    @Column(name ="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name =  "write_date")
     private Date writeDate;
@@ -31,14 +31,26 @@ public class CommentEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity productEntity;
 
+    @OneToOne
+    @JoinColumn(name = "parent_id")
+    private CommentEntity commentEntity;
+
+    public CommentEntity getCommentEntity() {
+        return commentEntity;
+    }
+
+    public void setCommentEntity(CommentEntity commentEntity) {
+        this.commentEntity = commentEntity;
+    }
+
     public CommentEntity() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

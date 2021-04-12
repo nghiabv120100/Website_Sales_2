@@ -8,32 +8,32 @@ import java.util.Objects;
 public class Product_Cart_Key implements Serializable {
 
     @Column(name = "pro_id")
-    private Long pro_id;
+    private Integer pro_id;
 
     @Column(name = "cart_id")
-    private Long cart_id;
+    private Integer cart_id;
 
     public Product_Cart_Key() {
     }
 
-    public Product_Cart_Key(Long pro_id, Long cart_id) {
+    public Product_Cart_Key(Integer pro_id, Integer cart_id) {
         this.pro_id = pro_id;
         this.cart_id = cart_id;
     }
 
-    public Long getPro_id() {
+    public Integer getPro_id() {
         return pro_id;
     }
 
-    public void setPro_id(Long pro_id) {
+    public void setPro_id(Integer pro_id) {
         this.pro_id = pro_id;
     }
 
-    public Long getCart_id() {
+    public Integer getCart_id() {
         return cart_id;
     }
 
-    public void setCart_id(Long cart_id) {
+    public void setCart_id(Integer cart_id) {
         this.cart_id = cart_id;
     }
 

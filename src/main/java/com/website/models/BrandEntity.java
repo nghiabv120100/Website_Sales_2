@@ -10,7 +10,7 @@ public class BrandEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "brand_name")
     private String brandName;
@@ -27,11 +27,11 @@ public class BrandEntity {
     public BrandEntity() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -67,7 +67,7 @@ public class BrandEntity {
         this.productEntityList = productEntityList;
     }
 
-    public BrandEntity(Long id, String brandName, String image, Integer status, List<ProductEntity> productEntityList) {
+    public BrandEntity(Integer id, String brandName, String image, Integer status, List<ProductEntity> productEntityList) {
         this.id = id;
         this.brandName = brandName;
         this.image = image;
