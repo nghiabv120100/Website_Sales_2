@@ -16,4 +16,7 @@ public class ProductService {
     public void save(ProductEntity product) {
         productDAO.save(product);
     }
+    public ProductEntity findById(int id) {
+        return productDAO.findById(id);
+    }
 }

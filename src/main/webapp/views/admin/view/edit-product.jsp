@@ -51,7 +51,7 @@
 											<input id="id" name="id" value="${product.id }" hidden="">
 											<div class="form-group">
 												<label>Tên sản phẩm</label> <input id="productName" class="form-control"
-													value="${product.productName}" name="productName" />
+													value="${product.proName}" name="productName" />
 											</div>
 											<div class="form-group">
 												<label>Giá(VNĐ)</label> <input id="price" class="form-control"
@@ -67,14 +67,28 @@
 												<div class="checkbox">
 													<select id="detailCateId" name="detailCateId">
 
-														<c:forEach  var="c" items="${detailCategories}" >
+														<c:forEach  var="c" items="${lstDetailCate}" >
 															<option value="${c.id}"
-																	<c:if test="${c.id==product.detailCateId}">
+																	<c:if test="${c.id==product.detailCategoryEntity.id}">
 																		<c:out value="selected"/>
 																	</c:if>
 															>
 																	${c.detailCateName}
 															</option>
+														</c:forEach>
+													</select>
+												</div>
+
+											</div>
+											<div class="form-group">
+												<label>Thương hiệu sản phẩm</label>
+												<div class="checkbox">
+													<select name="brandId" id="brandId">
+														<c:forEach items="${lstBrand}" var="c">
+															<option value='${c.id}'>${c.brandName}</option>
+															<c:if test="${c.id==product.id}">
+																<c:out value="selected"/>
+															</c:if>
 														</c:forEach>
 													</select>
 												</div>

@@ -40,6 +40,16 @@ public class ProductController extends HttpServlet {
             req.setAttribute("lstDetailCate",lstDetailCate);
             req.setAttribute("lstBrand",lstBrand);
             url ="views/admin/view/add-product.jsp";
+        } else if (type.equals("edit")) {
+            int id = Integer.parseInt(req.getParameter("id"));
+            ProductEntity productEntity = productService.findById(id);
+            List<BrandEntity> lstBrand = brandService.findAll();
+            List<DetailCategoryEntity> lstDetailCate = detailCategoryService.findAll();
+            req.setAttribute("lstDetailCate", lstDetailCate);
+            req.setAttribute("lstBrand", lstBrand);
+            req.setAttribute("product",productEntity);
+            url = "views/admin/view/edit-product.jsp";
+
         }
         RequestDispatcher rd = req.getRequestDispatcher(url);
         rd.forward(req,resp);
