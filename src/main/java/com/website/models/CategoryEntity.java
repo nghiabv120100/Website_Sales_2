@@ -10,7 +10,7 @@ public class CategoryEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "catename")
     private String cateName;
@@ -21,17 +21,18 @@ public class CategoryEntity {
     @Column(name = "status")
     private Integer status;
 
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryEntity")
     private List<DetailCategoryEntity> detailCategoryEntityList;
 
     public CategoryEntity() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

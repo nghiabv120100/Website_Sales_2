@@ -11,7 +11,7 @@ public class GoodsReceivedEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "date_goods_received")
     private Date date_Goods_Received;
@@ -36,11 +36,11 @@ public class GoodsReceivedEntity {
     public GoodsReceivedEntity() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

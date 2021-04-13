@@ -18,7 +18,7 @@ public class ProductEntity {
     private int quantity;
 
     @Column(name = "price")
-    private long price;
+    private Integer price;
 
     @Column(name = "describe_product")
     private String describePro;
@@ -77,11 +77,11 @@ public class ProductEntity {
         this.quantity = quantity;
     }
 
-    public long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
