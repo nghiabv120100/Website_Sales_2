@@ -36,7 +36,7 @@
                 <label for="email">Email:</label>
                 <input required="true" type="email" class="form-control" id="email"
                 value="${accountRegister.email}">
-                <label style="color: red">${errEmail}</label>
+                    <label style="color: red">${errEmail}</label>
                 <label></label>
             </div>
             <div class="form-group">

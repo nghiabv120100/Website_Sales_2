@@ -4,6 +4,7 @@
 <c:url value="/api-admin-product" var="APIurl"></c:url>
 <c:url value="/views/admin/static" var="url"></c:url>
 <c:url value="/admin-product-list" var="PCurl"></c:url>
+<script src="./Validation.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -164,6 +165,16 @@
 				}
 			})
 		}
+	</script>
+	<script>
+		Validator({
+			form: '#form',
+			formGroupSelector: '.form-group',
+			errorSelector: '.form-message',
+			rule: [
+					Validator.isRequired('productName')
+			]
+		})
 	</script>
 
 
