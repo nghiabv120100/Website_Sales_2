@@ -29,6 +29,7 @@ public class GenericDAO<ID extends Serializable,T> {
             transaction = session.beginTransaction();
             StringBuilder sql = new StringBuilder("from ");
             sql.append(this.getPersistenceClassName());
+            sql.append(" where status !=0");
             Query query = session.createQuery(sql.toString());
             list = query.list();
             transaction.commit();
@@ -49,6 +50,25 @@ public class GenericDAO<ID extends Serializable,T> {
             Object obj = session.merge(entity);
             result = (T) obj;
             transaction.commit();
+        }
+        catch (HibernateException e) {
+            transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+        return  result;
+    }
+
+    public int delete(T entity) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        int result = 0;
+        Transaction transaction = session.beginTransaction();
+        try {
+            Object obj = session.merge(entity);
+
+            transaction.commit();
+            result=1;
         }
         catch (HibernateException e) {
             transaction.rollback();

@@ -1,8 +1,9 @@
 package com.website.controller.admin.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.website.models.BrandEntity;
 import com.website.models.ProductEntity;
-import com.website.service.ProductService;
+import com.website.service.BrandService;
 import com.website.utils.HttpUtil;
 
 import javax.servlet.ServletException;
@@ -12,20 +13,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/api-admin-product"})
-public class ProductAPI extends HttpServlet {
+@WebServlet(urlPatterns = {"/api-admin-brand"})
+public class BrandAPI extends HttpServlet {
+    private BrandService brandService = new BrandService();
 
-    private ProductService productService = new ProductService();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json"); //
         // Convert from type json to Model
-        ProductEntity product = HttpUtil.of(req.getReader()).toModel(ProductEntity.class);
+        BrandEntity brand = HttpUtil.of(req.getReader()).toModel(BrandEntity.class);
 
-        productService.save(product);
-        mapper.writeValue(resp.getOutputStream(),product);
+        brandService.save(brand);
+        mapper.writeValue(resp.getOutputStream(),brand);
     }
 
     @Override
@@ -34,10 +35,9 @@ public class ProductAPI extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json"); //
         // Convert from type json to Model
-        ProductEntity product = HttpUtil.of(req.getReader()).toModel(ProductEntity.class);
-
-        productService.update(product);
-        mapper.writeValue(resp.getOutputStream(),product);
+        BrandEntity newBrand = HttpUtil.of(req.getReader()).toModel(BrandEntity.class);
+        BrandEntity brand = brandService.update(newBrand);
+        mapper.writeValue(resp.getOutputStream(),brand);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ProductAPI extends HttpServlet {
         resp.setContentType("application/json"); //
         // Convert from type json to Model
         Integer id = Integer.parseInt(req.getReader().readLine());
-        int result= productService.delete(id);
+        int result = brandService.delete(id);
         mapper.writeValue(resp.getOutputStream(),result);
     }
 }

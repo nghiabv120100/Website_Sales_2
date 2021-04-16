@@ -1,0 +1,9 @@
+
+Status
+ 	0:	Deleted
+	1:	activity
+
+--------------------------------------
+Lỗi đang gặp phải
+	- Chưa insert được ảnh vào project
+	- Chưa insert được describe xuống database (do ko lấy được dữ liệu từ CKEDITOR)

@@ -101,7 +101,7 @@
     function updateProduct(data){
         $.ajax({
             url: '${APIurl}',
-            type: 'POST',
+            type: 'PUT',
             enctype: 'multipart/form-data',
             processData:false,
             contentType: 'application/json',

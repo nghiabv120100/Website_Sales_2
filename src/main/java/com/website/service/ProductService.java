@@ -19,4 +19,13 @@ public class ProductService {
     public ProductEntity findById(int id) {
         return productDAO.findById(id);
     }
+
+    public ProductEntity update(ProductEntity product) {
+        return productDAO.update(product);
+    }
+    public int delete(Integer id) {
+        ProductEntity product = findById(id);
+        product.setStatus(0);
+        return productDAO.delete(product);
+    }
 }

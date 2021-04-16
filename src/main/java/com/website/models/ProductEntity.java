@@ -1,5 +1,7 @@
 package com.website.models;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -51,6 +53,7 @@ public class ProductEntity {
     private DetailCategoryEntity detailCategoryEntity;
 
     public ProductEntity() {
+        this.status=1;
     }
 
     public Integer getId() {

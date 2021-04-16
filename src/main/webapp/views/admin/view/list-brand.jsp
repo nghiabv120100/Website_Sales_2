@@ -36,7 +36,7 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Danh sách sản phẩm</h2>
+                    <h2>Danh sách thương hiệu</h2>
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -63,7 +63,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${brands }" var="brand" >
+                                    <c:forEach items="${lstBrand }" var="brand" >
                                         <tr class="odd gradeX">
                                             <td>${brand.id }</td>
                                             <c:url value="/views/web/static/images/${brand.image}" var="imgUrl"></c:url>

@@ -25,6 +25,7 @@ public class BrandEntity {
     private List<ProductEntity> productEntityList ;
 
     public BrandEntity() {
+        this.status=1;
     }
 
     public Integer getId() {

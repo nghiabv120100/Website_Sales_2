@@ -58,6 +58,10 @@
 													value="${product.price }" type="number" name="price" />
 											</div>
 											<div class="form-group">
+												<label>Số lượng</label> <input class="form-control"
+																			   value="${product.quantity}" placeholder="Nhập số lượng sản phẩm" type="number" name="quantity" id="quantity" />
+											</div>
+											<div class="form-group">
 												<label>Mô tả </label> <br>
 												<textarea rows="4" cols="50" name="editer" id="editer" >${product.describePro}</textarea>
 											</div>
@@ -98,7 +102,7 @@
 												<label>Ảnh sản phẩm</label> <input type="file" name="image" value="${product.image }" />
 											</div>
 											<button id="btnEdit"  class="btn btn-default">Cập nhật</button>
-											<button type="reset" class="btn btn-primary">Reset</button>
+											<button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=edit&id=${product.id}'">Reset</button>
 										</form>
 									</div>
 								</div>
@@ -133,19 +137,26 @@
 			e.preventDefault();
 			var productName= $('#productName').val();
 			var price= parseFloat($('#price').val());
-			var describePro= CKEDITOR.instances.editer.getData();
+			var quantity = parseInt($('#quantity').val());
+			// var describePro= CKEDITOR.instances.editer.getData();
 			var id= parseInt($('#id').val()) ;
 			var detailCateId=parseInt($('#detailCateId').val());
 			// var image= $('#image').val();
 			var image = $('input[type=file]').val().split('\\').pop();
-			console.log(describePro)
+			var brandId=parseInt($('#brandId').val())
 			var data={
-				"productName":productName,
-				"price":price,
-				"describePro":describePro,
 				"id":id,
+				"proName":productName,
+				"price":price,
+				"quantity":quantity,
+				// "describePro":describePro,
 				"image":image,
-				"detailCateId":detailCateId
+				"detailCategoryEntity": {
+					"id":detailCateId,
+				},
+				"brandEntity":{
+					"id":brandId
+				}
 			}
 			updateProduct(data)
 
