@@ -55,7 +55,7 @@
 												<label>Ảnh sản phẩm</label> <input type="file" name="image" id="image"/>
 											</div>
 											<button type="button" id="btnAdd" class="btn btn-default">Thêm</button>
-											<button type="reset" class="btn btn-primary">Reset</button>
+											<button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=add'">Reset</button>
 										</form>
 
 

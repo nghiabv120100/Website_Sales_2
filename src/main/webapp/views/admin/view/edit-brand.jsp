@@ -56,7 +56,7 @@
                                             <label>Ảnh sản phẩm</label> <input value="${brand.image}" type="file" name="image" id="image"/>
                                         </div>
                                         <button type="button" id="btnEdit" class="btn btn-default">Sửa</button>
-                                        <button type="reset" class="btn btn-primary">Reset</button>
+                                        <button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=edit&id=${brand.id}">Reset</button>
                                     </form>
 
 

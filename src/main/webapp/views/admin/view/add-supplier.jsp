@@ -1,10 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
-<c:url value="/api-admin-product" var="APIurl"></c:url>
+<c:url value="/api-admin-supplier" var="APIurl"></c:url>
 <c:url value="/views/admin/static" var="url"></c:url>
-<c:url value="/admin-product-list" var="PCurl"></c:url>
-<script src="./Validation.js"></script>
+<c:url value="/admin-supplier-list" var="PCurl"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +31,7 @@
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Thêm sản phẩm</h2>
+						<h2>Thêm nhà cung cấp</h2>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -45,53 +44,22 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-6">
-										<h3>Nhập thông tin sản phẩm</h3>
+										<h3>Nhập thông tin nhà cung cấp</h3>
 
 										<form role="form" action="api-admin-product" method="post" enctype="multipart/form-data">
 											<div class="form-group">
-												<label>Tên sản phẩm</label> <input class="form-control"
-													placeholder="Nhập tên sản phẩm" name="productName" id="productName" />
+												<label>Tên nhà cung cấp</label> <input class="form-control"
+													placeholder="Nhập tên nhà cung cấp" name="cateName" id="cateName" />
 											</div>
 											<div class="form-group">
-												<label>Giá (VNĐ)</label> <input class="form-control"
-													placeholder="Nhập giá sản phẩm" type="number" name="price" id="price" />
+												<label>SĐT nhà cung cấp</label> <input class="form-control"
+																					   placeholder="Nhập tên nhà cung cấp" name="cateName" id="cateName" />
 											</div>
 											<div class="form-group">
-												<label>Số lượng</label> <input class="form-control"
-																				placeholder="Nhập số lượng sản phẩm" type="number" name="quantity" id="quantity" />
-											</div>
-											<div class="form-group">
-												<label>Mô tả sản phảm </label>
-												<br>
-												<textarea rows="4" cols="50" name="editer" id="editer" ></textarea>
-
+												<label>Địa chỉ nhà cung cấp</label> <input class="form-control"
+																					   placeholder="Nhập tên nhà cung cấp" name="cateName" id="cateName" />
 											</div>
 
-											<div class="form-group">
-												<label>Chi tiết loại sản phẩm</label>
-												<div class="checkbox">
-													<select name="detailCateId" id="detailCateId">
-														<c:forEach items="${lstDetailCate}" var="c">
-															<option value='${c.getId()}'>${c.detailCateName}</option>
-														</c:forEach>
-													</select>
-												</div>
-
-											</div>
-											<div class="form-group">
-												<label>Thương hiệu sản phẩm</label>
-												<div class="checkbox">
-													<select name="brandId" id="brandId">
-														<c:forEach items="${lstBrand}" var="c">
-															<option value='${c.id}'>${c.brandName}</option>
-														</c:forEach>
-													</select>
-												</div>
-
-											</div>
-											<div class="form-group">
-												<label>Ảnh sản phẩm</label> <input type="file" name="image" id="image"/>
-											</div>
 											<button type="button" id="btnAdd" class="btn btn-default">Thêm</button>
 											<button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=add'">Reset</button>
 										</form>
@@ -124,27 +92,13 @@
 	<script>
 		$('#btnAdd').click(function (e){
 			e.preventDefault();
-			var productName= $('#productName').val();
-			var price= parseFloat($('#price').val());
-			var quantity = parseInt($('#quantity').val());
-			// var describePro= CKEDITOR.instances.editer.getData();
-			var detailCateId=parseInt($('#detailCateId').val());
+			var cateName= $('#cateName').val();
 			var image = $('input[type=file]').val().split('\\').pop();
-			var brandId=parseInt($('#brandId').val())
 			var data={
-				"proName":productName,
-				"price":price,
-				"quantity":quantity,
-				// "describePro":describePro,
-				"image":image,
-				"detailCategoryEntity": {
-					"id":detailCateId,
-				},
-				"brandEntity":{
-					"id":brandId
-				}
+				"cateName":cateName,
+				"image":image
 			}
-			console.log("Hello"+detailCateId);
+
 			updateProduct(data)
 		});
 		function updateProduct(data){
@@ -166,21 +120,11 @@
 			})
 		}
 	</script>
-	<script>
-		Validator({
-			form: '#form',
-			formGroupSelector: '.form-group',
-			errorSelector: '.form-message',
-			rule: [
-					Validator.isRequired('productName')
-			]
-		})
-	</script>
 
 
 
 	<script type="text/javascript" language="javascript">
-   CKEDITOR.replace('ckeditor', {width: '700px',height: '300px'});
+   CKEDITOR.replace('editer', {width: '700px',height: '300px'});
 </script>
 </body>
 </html>
