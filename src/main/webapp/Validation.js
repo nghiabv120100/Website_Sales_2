@@ -50,6 +50,7 @@ function Validator(options) {
 
     var formElement = document.querySelector(options.form);
     if (formElement) {
+
         formElement.onsubmit = function(e){
             e.preventDefault();
             var isFormValid =true;
@@ -59,9 +60,9 @@ function Validator(options) {
                 if (!isValid){
                     isFormValid =false;
                 }
-            }); 
+            });
 
-          
+
             if(isFormValid) {
                 if (typeof options.onSubmit === 'function'){
                     var enableInputs = formElement.querySelectorAll('[name]');
@@ -88,7 +89,7 @@ function Validator(options) {
                     return values;
                     }, {});
                     options.onSubmit(formValues);
-                } 
+                }
 
                 else {
                     formElement.submit();

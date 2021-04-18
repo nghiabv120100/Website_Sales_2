@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url value="/views/web" var="login"></c:url>
-<c:url value="/trang-chu" var="HomeUrl"> </c:url>
+<c:url value="/validationlogin" var="loginApi"></c:url>
+<%--<c:url value="/trang-chu" var="HomeUrl"> </c:url>--%>
 <html>
 <head>
     <title>Title</title>
@@ -22,25 +23,25 @@
                     <a href="${HomeUrl}?action=home" class="mt2" style=" color:#696763;"><i class="fas fa-home fa-4x"></i></a>
                 </div>
             </div>
-            <div class="row" style="margin-top: 100px;">
+            <div class="row" style=" margin-top: 100px;">
                 <div class="col-1"></div>
                 <div class="col-4">
                     <h4>Đăng nhập</h4>
                     <div class="login-form">
-                        <form action="${pageContext.request.contextPath }/dang-nhap" method="post">
+                        <form action="${pageContext.request.contextPath }/validationlogin" method="post" id="login-form">
                             <div class="form-group">
                                 <h5>Tên đăng nhập</h5>
-                                <input name="username" type="text" class="form-control" placeholder="Tên đăng nhập">
+                                <input id="username" name="username" type="text" class="form-control" placeholder="Tên đăng nhập">
+                                <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <h5>Mật khẩu</h5>
-                                <input name="password" type="password" class="form-control" placeholder="Mật khẩu">
+                                <input id="password" name="password" type="password" class="form-control" placeholder="Mật khẩu">
+                                <span class="form-message"></span>
                             </div>
                             <label>${msg}</label><br>
                             <button type="submit" class="btn btn-success btn-primary" style="margin-top: 10px; color: white; background-color: #696763; border: none;">Đăng nhập</button>
-
                             <input type="hidden" name="action" value="login">
-
                         </form>
                         <form action="${pageContext.request.contextPath }/dang-ky?type=register" method="get ">
                             <button type="submit" class="btn btn-link">Đăng kí</button>
@@ -54,16 +55,21 @@
                 <div class="col-5" >
                     <div class="col-8">
                         <h4>Quên mật khẩu</h4>
-                        <form action="${pageContext.request.contextPath }/trang-chu" method="post">
+                        <form action="${pageContext.request.contextPath }/trang-chu" method="post" id="register-form">
                             <div class="form-group">
                                 <h5>Tên tài khoản</h5>
-                                <input name="userName" type="text" class="form-control" placeholder="Nhập tên tài khoản">
+                                <input id="username2" name="userName" type="text" class="form-control" placeholder="Nhập tên tài khoản">
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
                                 <h5>Nhập email</h5>
-                                <input name="emailReset" type="text" class="form-control" placeholder="Nhập email">
+                                <input id="email" name="emailReset" type="text" class="form-control" placeholder="Nhập email">
+                                <span class="form-message"></span>
                             </div>
                             <label>${msg}</label><br>
                             <button type="submit" class="btn btn-success btn-primary " style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Gửi </button>
                             <input type="hidden" name="action" value="login">
+                            <span class="form-message"></span>
                         </form>
                     </div>
                 </div>
@@ -71,7 +77,29 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+<script src='${pageContext.request.contextPath }/Validation.js'></script>
+<script>
+    Validator({
+        form: '#login-form',
+        formGroupSelector: '.form-group',
+        errorSelector : '.form-message',
+        rules: [
+            Validator.isRequired('#username', 'Vui lòng nhập đầy đủ tên tài khoản của bạn'),
+            Validator.minLength('#password', '6')
+        ]
+    });
+    Validator({
+        form: '#register-form',
+        formGroupSelector: '.form-group',
+        errorSelector : '.form-message',
+        rules: [
+            Validator.isRequired('#username2', 'Vui lòng nhập đầy đủ tên tài khoản của bạn'),
+            Validator.isEmail('#email')
+        ]
+    });
+</script>
 </body>
 </html>
