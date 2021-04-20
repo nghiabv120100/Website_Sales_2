@@ -29,6 +29,7 @@ public class DetailCategoryEntity {
     private CategoryEntity categoryEntity;
 
     public DetailCategoryEntity() {
+        this.setStatus(1);
     }
 
     public Integer getId() {

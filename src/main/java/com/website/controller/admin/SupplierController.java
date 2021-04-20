@@ -26,6 +26,11 @@ public class SupplierController extends HttpServlet {
             url="views/admin/view/list-supplier.jsp";
         } else if (type.equals("add")) {
             url="views/admin/view/add-supplier.jsp";
+        } else if (type.equals("edit")) {
+            Integer id = Integer.parseInt(req.getParameter("id").trim());
+            SupplierEntity supplier = supplierService.findById(id);
+            req.setAttribute("supplier",supplier);
+            url="views/admin/view/edit-supplier.jsp";
         }
         RequestDispatcher rd = req.getRequestDispatcher(url);
         rd.forward(req,resp);

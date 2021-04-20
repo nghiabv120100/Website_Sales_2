@@ -26,6 +26,7 @@ public class CategoryEntity {
     private List<DetailCategoryEntity> detailCategoryEntityList;
 
     public CategoryEntity() {
+        this.setStatus(1);
     }
 
     public Integer getId() {

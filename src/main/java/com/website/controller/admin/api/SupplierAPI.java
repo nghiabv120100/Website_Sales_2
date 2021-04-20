@@ -35,8 +35,8 @@ public class SupplierAPI extends HttpServlet {
         resp.setContentType("application/json");
 
         SupplierEntity supplier = HttpUtil.of(req.getReader()).toModel(SupplierEntity.class);
-        supplierService.update(supplier);
-        mapper.writeValue(resp.getOutputStream(),1);
+        SupplierEntity newsupplier= supplierService.update(supplier);
+        mapper.writeValue(resp.getOutputStream(),newsupplier);
     }
 
     @Override

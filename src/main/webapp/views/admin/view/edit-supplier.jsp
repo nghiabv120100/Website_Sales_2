@@ -31,7 +31,7 @@
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Thêm nhà cung cấp</h2>
+						<h2>Cập nhật nhà cung cấp</h2>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -47,21 +47,22 @@
 										<h3>Nhập thông tin nhà cung cấp</h3>
 
 										<form role="form" action="api-admin-product" method="post" enctype="multipart/form-data">
+											<input id="id" type="hidden" value="${supplier.id}">
 											<div class="form-group">
-												<label>Tên nhà cung cấp</label> <input class="form-control"
+												<label>Tên nhà cung cấp</label> <input class="form-control" value="${supplier.nameSupplier}"
 													placeholder="Nhập tên nhà cung cấp" name="supplierName" id="supplierName" />
 											</div>
 											<div class="form-group">
-												<label>SĐT nhà cung cấp</label> <input class="form-control"
+												<label>SĐT nhà cung cấp</label> <input class="form-control" value="${supplier.phoneNumber}"
 																					   placeholder="Nhập SĐT nhà cung cấp" name="phone" id="phone" />
 											</div>
 											<div class="form-group">
-												<label>Địa chỉ nhà cung cấp</label> <input class="form-control"
+												<label>Địa chỉ nhà cung cấp</label> <input class="form-control" value="${supplier.address}"
 																					   placeholder="Nhập địa chỉ nhà cung cấp" name="address" id="address" />
 											</div>
 
-											<button type="button" id="btnAdd" class="btn btn-default">Thêm</button>
-											<button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=add'">Reset</button>
+											<button type="button" id="btnAdd" class="btn btn-default">Cập nhật</button>
+											<button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=edit'">Reset</button>
 										</form>
 
 
@@ -92,11 +93,13 @@
 	<script>
 		$('#btnAdd').click(function (e){
 			e.preventDefault();
+			var id= $('#id').val();
 			var supplierName= $('#supplierName').val();
 			var phone= $('#phone').val();
 			var address= $('#address').val();
 
 			var data={
+				"id":id,
 				"nameSupplier":supplierName,
 				"phoneNumber":phone,
 				"address":address
@@ -107,7 +110,7 @@
 		function updateProduct(data){
 			$.ajax({
 				url: '${APIurl}',
-				type: 'POST',
+				type: 'PUT',
 				enctype: 'multipart/form-data',
 				processData:false,
 				contentType: 'application/json',

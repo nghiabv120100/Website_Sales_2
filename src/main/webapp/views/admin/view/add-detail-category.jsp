@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
-<c:url value="/api-admin-supplier" var="APIurl"></c:url>
+<c:url value="/api-admin-detailcategory" var="APIurl"></c:url>
 <c:url value="/views/admin/static" var="url"></c:url>
-<c:url value="/admin-supplier-list" var="PCurl"></c:url>
+<c:url value="/admin-detailcategory-list" var="PCurl"></c:url>
+<script src="./Validation.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,7 @@
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Thêm nhà cung cấp</h2>
+						<h2>Thêm chi tiết danh mục</h2>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -44,27 +45,30 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-6">
-										<h3>Nhập thông tin nhà cung cấp</h3>
+										<h3>Nhập thông tin chi tiết danh mục</h3>
 
 										<form role="form" action="api-admin-product" method="post" enctype="multipart/form-data">
 											<div class="form-group">
-												<label>Tên nhà cung cấp</label> <input class="form-control"
-													placeholder="Nhập tên nhà cung cấp" name="supplierName" id="supplierName" />
-											</div>
-											<div class="form-group">
-												<label>SĐT nhà cung cấp</label> <input class="form-control"
-																					   placeholder="Nhập SĐT nhà cung cấp" name="phone" id="phone" />
-											</div>
-											<div class="form-group">
-												<label>Địa chỉ nhà cung cấp</label> <input class="form-control"
-																					   placeholder="Nhập địa chỉ nhà cung cấp" name="address" id="address" />
+												<label>Tên chi tiết danh mục</label> <input class="form-control"
+													placeholder="Nhập tên chi tiết danh mục" name="detailCateName" id="detailCateName" />
 											</div>
 
+											<div class="form-group">
+												<label>Thương hiệu chi tiết danh mục</label>
+												<div class="checkbox">
+													<select name="cateId" id="cateId">
+														<c:forEach items="${lstCategory}" var="c">
+															<option value='${c.id}'>${c.cateName}</option>
+														</c:forEach>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label>Ảnh chi tiết danh mục</label> <input type="file" name="image" id="image"/>
+											</div>
 											<button type="button" id="btnAdd" class="btn btn-default">Thêm</button>
 											<button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=add'">Reset</button>
 										</form>
-
-
 									</div>
 								</div>
 							</div>
@@ -92,16 +96,17 @@
 	<script>
 		$('#btnAdd').click(function (e){
 			e.preventDefault();
-			var supplierName= $('#supplierName').val();
-			var phone= $('#phone').val();
-			var address= $('#address').val();
-
+			var detailCateName= $('#detailCateName').val();
+			var cateId=parseInt($('#cateId').val());
+			var image = $('input[type=file]').val().split('\\').pop();
 			var data={
-				"nameSupplier":supplierName,
-				"phoneNumber":phone,
-				"address":address
+				"detailCateName":detailCateName,
+				"image":image,
+				"categoryEntity": {
+					"id":cateId,
+				}
 			}
-
+			console.log("Hello"+cateId);
 			updateProduct(data)
 		});
 		function updateProduct(data){
@@ -123,11 +128,8 @@
 			})
 		}
 	</script>
-
-
-
 	<script type="text/javascript" language="javascript">
-   CKEDITOR.replace('editer', {width: '700px',height: '300px'});
+   CKEDITOR.replace('ckeditor', {width: '700px',height: '300px'});
 </script>
 </body>
 </html>

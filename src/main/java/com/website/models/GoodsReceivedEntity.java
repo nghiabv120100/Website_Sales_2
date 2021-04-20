@@ -34,6 +34,7 @@ public class GoodsReceivedEntity {
     private List<Product_GoodReceived_Entity> productGoodReceivedEntityList;
 
     public GoodsReceivedEntity() {
+        this.setStatus(1);
     }
 
     public Integer getId() {

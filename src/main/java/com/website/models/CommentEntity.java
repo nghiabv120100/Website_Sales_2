@@ -44,6 +44,7 @@ public class CommentEntity {
     }
 
     public CommentEntity() {
+        this.setStatus(1);
     }
 
     public Integer getId() {

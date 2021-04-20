@@ -37,9 +37,10 @@ public class DetailCategoryAPI extends HttpServlet {
         resp.setContentType("application/json"); //
         // Convert from type json to Model
 
-        DetailCategoryEntity detailCategoryEntity = HttpUtil.of(req.getReader()).toModel(DetailCategoryEntity.class);
+        Integer id = Integer.parseInt(req.getReader().readLine());
+        DetailCategoryEntity newDetailCate = detailCategoryService.findById(id);
 
-        DetailCategoryEntity detailCate= detailCategoryService.update(detailCategoryEntity);
+        DetailCategoryEntity detailCate= detailCategoryService.update(newDetailCate);
         mapper.writeValue(resp.getOutputStream(),detailCate);
     }
 

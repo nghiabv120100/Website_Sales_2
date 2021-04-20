@@ -53,7 +53,7 @@ public class ProductEntity {
     private DetailCategoryEntity detailCategoryEntity;
 
     public ProductEntity() {
-        this.status=1;
+        this.setStatus(1);
     }
 
     public Integer getId() {

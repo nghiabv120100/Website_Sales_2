@@ -13,6 +13,8 @@
 							Quản lí sản phẩm</a></li>
 					<li><a href='<c:url value="/admin-category-list?type=list"/>'><i class="fa fa-desktop fa-3x"></i>
 						Quản lí loại hàng</a></li>
+					<li><a href='<c:url value="/admin-detailcategory-list?type=list"/>'><i class="fa fa-desktop fa-3x"></i>
+						Quản lí chi tiết loại hàng</a></li>
 					<li><a href='<c:url value="/admin-brand-list?type=list"/>'><i class="fa fa-desktop fa-3x"></i>
 						Quản lí thương hiệu</a></li>
 					<li><a href='<c:url value="/admin-supplier-list?type=list"/>'><i class="fa fa-desktop fa-3x"></i>

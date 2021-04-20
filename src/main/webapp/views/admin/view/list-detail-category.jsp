@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<c:url var="APIurl" value="/api-admin-supplier"/>
+<c:url var="APIurl" value="/api-admin-detailcategory"/>
 <c:url value="/views/admin/static" var="url"></c:url>
 <c:url value="/views/web/static" var="urlUser"> </c:url>
-<c:url value="/admin-supplier-list" var="PCurl"></c:url>
+<c:url value="/admin-detailcategory-list" var="PCurl"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +36,7 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Danh sách nhà cung cấp</h2>
+                    <h2>Danh sách chi tiết danh mục</h2>
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div>
-                        <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value="/admin-supplier-list?type=add"/>' style="color: white">Thêm nhà cung cấp</a></button>
+                        <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value="/admin-detailcategory-list?type=add"/>' style="color: white">Thêm chi tiết danh mục</a></button>
                     </div>
 
                     <!-- Advanced Tables -->
@@ -57,26 +57,28 @@
                                     <thead>
                                     <tr>
                                         <th>ID </th>
-                                        <th>Tên nhà cung cấp</th>
-                                        <th>SĐT nhà cung cấp</th>
-                                        <th>Đia Chỉ</th>
+                                        <th>Ảnh chi tiết danh mục</th>
+                                        <th>Tên chi tiết danh mục</th>
+                                        <th>Tên danh mục</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${lstSupplier}" var="supplier" >
+                                    <c:forEach items="${lstDetailCategory}" var="detailcategory" >
                                         <tr class="odd gradeX">
-                                            <td>${supplier.id }</td>
-                                            <td>${supplier.nameSupplier }</td>
-                                            <td>${supplier.phoneNumber}</td>
-                                            <td>${supplier.address}</td>
+                                            <td>${detailcategory.id }</td>
+                                            <c:url value="/views/web/static/images/${detailcategory.image}" var="imgUrl"></c:url>
+                                            <td><img style="width: 50px;height: 50px;object-fit: cover" src="${imgUrl}" /></td>
+
+                                            <td>${detailcategory.detailCateName }</td>
+                                            <td>${detailcategory.categoryEntity.cateName}</td>
                                             <td>
                                                 <button style="width: 70px;">
-                                                    <a href="<c:url value="/admin-supplier-list?type=edit&id=${supplier.id }"/>"
+                                                    <a href="<c:url value="/admin-detailcategory-list?type=edit&id=${detailcategory.id }"/>"
                                                        class="center">Xem/Sửa</a>
                                                 </button>
                                                 |
-                                                <button id="btnDelete" type ="button" onclick = "deletesupplier(${supplier.id})"
+                                                <button id="btnDelete" type ="button" onclick = "deletedetailcategory(${detailcategory.id})"
                                                         class="center">Xóa
                                                 </button>
                                             </td>
@@ -122,7 +124,7 @@
 <%--	Delete--%>
 <script>
 
-    function deletesupplier(data){
+    function deletedetailcategory(data){
         $.ajax({
             url: '${APIurl}',
             type: 'DELETE',

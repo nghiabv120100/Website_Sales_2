@@ -28,6 +28,7 @@ public class SupplierEntity {
     private List<GoodsReceivedEntity> goodsReceivedEntityList;
 
     public SupplierEntity() {
+        this.setStatus(1);
     }
 
     public Integer getId() {

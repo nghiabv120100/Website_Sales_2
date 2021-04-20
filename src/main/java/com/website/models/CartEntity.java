@@ -36,6 +36,7 @@ public class CartEntity {
     private List<Product_Cart_Entity> productCartEntityList;
 
     public CartEntity() {
+        this.setStatus(1);
     }
 
     public Integer getId() {
