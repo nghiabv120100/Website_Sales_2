@@ -23,6 +23,8 @@
 							Quản lí người dùng</a></li>
 					<li><a href='<c:url value="/admin-order-list?type=list"/>'><i
 							class="fa fa-bar-chart-o fa-3x"></i> Quản lí đơn hàng</a></li>
+					<li><a href='<c:url value="/admin-warehouse_receipt-list?type=list"/>'><i
+							class="fa fa-bar-chart-o fa-3x"></i> Quản lí phiếu nhập hàng</a></li>
 				</ul>
 			</div>
 		</nav>
