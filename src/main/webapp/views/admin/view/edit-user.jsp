@@ -49,31 +49,49 @@
 											enctype="multipart/form-data">
 											<input name="id" value="${user.id }" id="id" type="text" hidden="">
 											<div class="form-group">
-												<label>Tên người dùng</label> <input class="form-control"
-													value="${user.username }" name="username" id="username"/>
+												<label>Tên người dùng</label> <input class="form-control" value="${user.fullname}"
+																					 placeholder="Nhập tên người dùng" name="fullname" id="fullname" />
 											</div>
 											<div class="form-group">
-												<label>Mật khẩu</label> <input class="form-control"
-													value="${user.password }" type="password" name="password" id="password"/>
+												<label>Tên đăng nhập</label> <input class="form-control" value="${user.username}"
+																					placeholder="Tên đăng nhập"
+																					name="username" id="username" />
+											</div>
+											<div class="form-group">
+												<label>Mật khẩu</label> <input class="form-control" value="${user.passWord}"
+																			   placeholder="Nhập mật khẩu" type="password"
+																			   name="password" id="password" />
 											</div>
 											<div class="form-group">
 												<label>Email</label> <input class="form-control"
 													value="${user.email }" name="email" id="email"/>
 											</div>
 											<div class="form-group">
-												<label>Số điện thoại</label> <input class="form-control" value="${user.phonenumber}"
+												<label>Số điện thoại</label> <input class="form-control" value="${user.phone_number}"
 																					placeholder="Please enter phone number" name="phonenumber" id="phonenumber" />
 											</div>
 											<div class="form-group">
-												<label>Địa chỉ</label> <input class="form-control" value="${user.address}"
+												<label>Địa chỉ</label> <input class="form-control"
 																			  placeholder="Please enter address" name="address" id="address" />
 											</div>
 											<div class="form-group">
 												<label>Chức vụ</label>
 												<div class="checkbox">
-													<label> <input type="radio" value="1" name="role" class="roleid"/>Admin
-													</label> <br> <label> <input type="radio" value="0"
-														name="role" class="roleid" checked="checked"/>Client
+													<label> <input type="radio" value="1" name="role"  <c:if test="${user.role=='1'}"><c:out value="checked"></c:out></c:if>
+																   id="roleid1" class="roleid"/>Admin
+													</label> <br>
+													<label> <input type="radio" value="0"  <c:if test="${user.role=='0'}"><c:out value="checked"></c:out></c:if>
+														name="role" class="roleid" id="roleid0" />Client
+													</label>
+													<br>
+													<label> <input type="radio" value="2"  <c:if test="${user.role=='2'}"><c:out value="checked"></c:out></c:if>
+
+																   name="role" class="roleid" id="roleid2"  />Shipper
+													</label>
+													<br>
+													<label> <input type="radio" value="3"  <c:if test="${user.role=='3'}"><c:out value="checked"></c:out></c:if>
+
+																   name="role" class="roleid" id="roleid3"  />Employee
 													</label>
 												</div>
 
@@ -119,30 +137,36 @@
 		$('#btnEdit').click(function (e){
 			e.preventDefault();
 			var id =parseInt($('#id').val());
+			var fullname= $('#fullname').val();
 			var username= $('#username').val();
 			var password= $('#password').val();
 			var email= $('#email').val();
 			var phonenumber=$('#phonenumber').val();
 			var address=$('#address').val();
 			var avatar= $('#avatar').val();
-			if ($('.roleid').is(":checked"))
-			{
-				var roleId=parseInt($('.roleid').val());
+			var roleId="0";
+			if(document.getElementById('roleid1').checked) {
+				roleId="1";
+			}else if(document.getElementById('roleid2').checked) {
+				roleId="2";
+			} else if(document.getElementById('roleid0').checked) {
+				roleId="0";
+			} else if(document.getElementById('roleid3').checked) {
+				roleId="3";
 			}
-
-
 			console.log(roleId);
 			console.log(username);
 			var data={
 				"id":id,
+				"fullname":fullname,
 				"username":username,
-				"password":password,
+				"passWord":password,
 				"email":email,
 				//"id":id,
-				"avatar":avatar,
-				"roleId":roleId,
-				"phonenumber":phonenumber,
-				"address":address
+				// "avatar":avatar,
+				"role":roleId,
+				"phone_number":phonenumber,
+				// "address":address
 
 			}
 			updateProduct(data)

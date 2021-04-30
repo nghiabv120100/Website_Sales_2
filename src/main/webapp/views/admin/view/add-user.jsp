@@ -48,9 +48,13 @@
 										<form role="form" <%--action="api-admin-user"--%>  method="post" enctype="multipart/form-data">
 											<div class="form-group">
 												<label>Tên người dùng</label> <input class="form-control"
-													placeholder="Nhập tên người dùng" name="username" id="username" />
+													placeholder="Nhập tên người dùng" name="fullname" id="fullname" />
 											</div>
-
+											<div class="form-group">
+												<label>Tên đăng nhập</label> <input class="form-control"
+																			   placeholder="Tên đăng nhập"
+																			   name="username" id="username" />
+											</div>
 											<div class="form-group">
 												<label>Mật khẩu</label> <input class="form-control"
 													placeholder="Nhập mật khẩu" type="password"
@@ -71,10 +75,16 @@
 											<div class="form-group">
 												<label>Chức vụ</label>
 												<div class="checkbox">
-													<label> <input type="radio" value="1" name="role" id="roleid"/>Admin
+													<label> <input type="radio" value="1" name="role" id="roleid1" checked/>Admin
 													</label>
 													<br>
-													<label> <input type="radio" value="0" name="role" id="roleid2" checked/>Client
+													<label> <input type="radio" value="0" name="role" id="roleid0"/>Client
+													</label>
+													<br>
+													<label> <input type="radio" value="2" name="role" id="roleid2" />Shipper
+													</label>
+													<br>
+													<label> <input type="radio" value="3" name="role" id="roleid3" />Employee
 													</label>
 												</div>
 											</div>
@@ -110,30 +120,43 @@
 	<script>
 		$('#btnAdd').click(function (e){
 			e.preventDefault();
+			var fullname= $('#fullname').val();
 			var username= $('#username').val();
 			var password= $('#password').val();
 			var email= $('#email').val();
 			var phonenumber=$('#phonenumber').val();
 			var address=$('#address').val();
 			var avatar= $('#avatar').val();
-			var roleId=0;
-			if ($('#roleid').is(":checked"))
-			{
-				roleId=1;
+			var roleId="0";
+			if(document.getElementById('roleid1').checked) {
+				roleId="1";
+			}else if(document.getElementById('roleid2').checked) {
+				roleId="2";
+			} else if(document.getElementById('roleid0').checked) {
+				roleId="0";
+			} else if(document.getElementById('roleid3').checked) {
+				roleId="3";
 			}
 
-
+			// if ($('#roleid').is(":checked"))
+			// {
+			// 	roleId="1";
+			// } else if ($('#roleid3').is(":checked"))
+			// {
+			// 	roleId="2";
+			// }
 			//console.log(roleId);
 			console.log(username);
 			var data={
+				"fullname":fullname,
 				"username":username,
-				"password":password,
+				"passWord":password,
 				"email":email,
 				//"id":id,
-				"avatar":avatar,
-				"roleId":roleId,
-				"phonenumber":phonenumber,
-				"address":address
+				// "avatar":avatar,
+				"role":roleId,
+				"phone_number":phonenumber,
+				// "address":address
 
 			}
 			updateProduct(data)

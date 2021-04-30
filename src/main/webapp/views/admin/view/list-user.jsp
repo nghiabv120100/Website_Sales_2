@@ -58,6 +58,7 @@
 										<th>ID</th>
 										<th>Email</th>
 										<th>Tên người dùng</th>
+										<th>Tên đăng nhập</th>
 										<th>Mật khẩu</th>
 										<th>Trạng thái</th>
 										<th>Chức vụ</th>
@@ -65,26 +66,33 @@
 									</tr>
 									</thead>
 									<tbody>
-									<c:forEach items="${userList }" var="list">
+									<c:forEach items="${lstUser }" var="user">
 										<tr class="odd gradeX">
-											<td>${list.id}</td>
-											<td>${list.email }</td>
-											<td>${list.username }</td>
-											<td>${list.password }</td>
+											<td>${user.id}</td>
+											<td>${user.email }</td>
+											<td>${user.fullname }</td>
+											<td>${user.username }</td>
+											<td>${user.passWord }</td>
 											<td class="center">Active</td>
 											<td class="center"><c:choose>
-												<c:when test="${list.roleId ==1 }">
+												<c:when test="${user.role ==1 }">
 													Admin
+												</c:when>
+                                                <c:when test="${user.role ==2 }">
+                                                    Shipper
+                                                </c:when>
+												<c:when test="${user.role ==3 }">
+													Employee
 												</c:when>
 												<c:otherwise>Client</c:otherwise>
 											</c:choose></td>
 											<td>
 												<button style="width: 70px;">
-													<a href="<c:url value="/admin-user-list?type=edit&id=${list.id }"/>"
+													<a href="<c:url value="/admin-user-list?type=edit&id=${user.id }"/>"
 													   class="center">Xem/Sửa</a>
 												</button>
 												|
-												<button id="btnDelete" type ="button" onclick = "deleteUser(${list.id})"
+												<button id="btnDelete" type ="button" onclick = "deleteUser(${user.id})"
 														class="center">Xóa
 												</button>
 											</td>

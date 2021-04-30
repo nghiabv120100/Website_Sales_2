@@ -51,6 +51,7 @@ public class UserEntity {
     private List<CartEntity> cartEntity_clientList;
 
     public UserEntity() {
+        this.setStatus(1);
     }
 
     public Integer getId() {

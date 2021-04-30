@@ -32,7 +32,7 @@ public class CartEntity {
     @JoinColumn(name = "client_id")
     private UserEntity clientEntity;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cartEntity")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cartEntity")
     private List<Product_Cart_Entity> productCartEntityList;
 
     public CartEntity() {

@@ -56,8 +56,10 @@
 											<tr>
 												<th>index</th>
 												<th>ID</th>
-												<th>Người mua</th>
 												<th>Email</th>
+												<th>Người mua</th>
+												<th>Người bán</th>
+												<th>Shipper</th>
 												<th>Ngày mua</th>
 												<th>Tổng thanh toán</th>
 												<th>Hình thức thanh toán</th>
@@ -68,45 +70,38 @@
 										<tbody>
 											</a>
 											<%--xác ??nh gi? hàng --%>
-											<c:forEach items="${cartList}" var="cart">
+											<c:forEach items="${lstCart}" var="cart">
 												<c:url var="total_cart" value="${0}"></c:url>
 
 												<c:set var="index" value="${0}" />
-
-												<c:forEach items="${userList}" var="user">
-													<c:if test="${cart.userID==user.id}">
-														<c:set var="buyer" value="${user}" />
-													</c:if>
-												</c:forEach>
-
-												<c:forEach items="${customerList}" var="customer">
-													<c:if test="${cart.customerID==customer.id}">
-														<c:set var="buyer" value="${customer}" />
-													</c:if>
-												</c:forEach>
-
-<%--												Tính tổng tiền--%>
-												<c:forEach items="${cart.getItemModelList()}" var="item">
-													<c:set var = "total_cart" scope = "session"  value="${total_cart=total_cart+item.getUnitPrice()*item.getQuantity()}"></c:set>
-												</c:forEach>
-
+												<c:set var="buyer" value="${cart.clientEntity}"></c:set>
+												<c:set var="salesman" value="${cart.employeeEntity}"></c:set>
+												<c:set var="shipper" value="${cart.shipperEntity}"></c:set>
 												<tr>
 													<td>${index }</td>
 													<td>${cart.id }</td>
-													<td>${buyer.username }</td>
 													<td>${buyer.email }</td>
-													<td>${cart.buyDate }</td>
-													<td ><fmt:formatNumber type="number" value="${total_cart}" /> VNĐ</td>
+													<td>${buyer.fullname }</td>
+													<td>${salesman.fullname}</td>
+													<td>${shipper.fullname }</td>
+<%--													<td>${cart.buyDate }</td>--%>
+													<td></td>
+													<td ><fmt:formatNumber type="number" value="${cart.totalPrice}" /> VNĐ</td>
 
-<%--													<td>${total_cart}</td>--%>
-													<td>
+													<%--<td>
 														<c:if test="${cart.optionPay == 0}">Trả khi nhận hàng</c:if>
 														<c:if test="${cart.optionPay == 1}">Thanh toán online</c:if>
-													</td>
+													</td>--%>
+
+													<td></td>
+
 													<td class="center">
-														<c:if test="${cart.status == 0}">Chưa duyệt</c:if>
-														<c:if test="${cart.status == 1}">Đã duyệt</c:if>
-														<c:if test="${cart.status == 2}">Đã nhận</c:if>
+														<c:if test="${cart.status == 0}">Đã xoá</c:if>
+														<c:if test="${cart.status == 1}">Chưa duyệt</c:if>
+														<c:if test="${cart.status == 2}">Đã duyệt</c:if>
+														<c:if test="${cart.status == 3}">Đang giao</c:if>
+														<c:if test="${cart.status == 4}">Đã nhận</c:if>
+														<c:if test="${cart.status == 5}">Không nhận</c:if>
 													</td>
 													<td>
 														<a class="center" data-toggle="modal"  data-target="#oderlist${cart.id}">Chi tiết</a> |
@@ -124,7 +119,7 @@
 						<!--End Advanced Tables -->
 					</div>
 				</div>
-				<c:forEach items="${cartList}" var="cart">
+				<c:forEach items="${lstCart}" var="cart">
 					<div class="modal fade" id="oderlist${cart.id}">
 						<div class="modal-dialog modal-dialog-centered modal-lg">
 							<div class="modal-content">
@@ -134,7 +129,6 @@
 								<div class="modal-body">
 									<table class="table table-condensed">
 										<thead>
-
 										<tr class="cart_menu">
 											<td class="image">Ảnh</td>
 											<td class="description">Tên Sản Phẩm</td>
@@ -145,13 +139,14 @@
 										</thead>
 										<tbody>
 
-										<c:forEach items="${cart.getItemModelList()}" var="item">
+										<c:forEach items="${cart.getProductCartEntityList()}" var="item">
 											<tr>
-												<c:url value="/image/${item.getProduct().getImage()}" var="imgUrl"></c:url>
+												<%--<c:url value="/image/${item.getProduct().getImage()}" var="imgUrl"></c:url>
 												<td class="cart_product">
 													<img style="width: 50px;height: 50px;object-fit: cover" src="${imgUrl}" alt="#">
-												</td>
-												<td class="description">${item.getProduct().getProductName()}</td>
+												</td>--%>
+												<td></td>
+												<td class="description">${item.getProductEntity().getProName()}</td>
 <%--												<td class="price">${item.getUnitPrice()}<span>VNĐ</span></td>--%>
 												<td ><fmt:formatNumber type="number" value="${item.getUnitPrice()}" /> VNĐ</td>
 
@@ -160,7 +155,6 @@
 												<td ><fmt:formatNumber type="number" value="${item.getUnitPrice()*item.getQuantity()}" /> VNĐ</td>
 
 											</tr>
-
 										</c:forEach>
 										</tbody>
 									</table>
@@ -217,7 +211,7 @@
 		function updateCart(data){
 			$.ajax({
 				url: '${APIUrl}',
-				type: 'POST',
+				type: 'PUT',
 				enctype: 'multipart/form-data',
 				processData:false,
 				contentType: 'application/json',

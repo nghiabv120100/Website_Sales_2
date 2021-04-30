@@ -10,5 +10,16 @@ public class CartService {
     public List<CartEntity> findAll() {
         return cartDAO.findAll();
     }
+    public CartEntity findById(Integer id) {
+        return cartDAO.findById(id);
+    }
+    public CartEntity update(CartEntity cart) {
+        return cartDAO.update(cart);
+    }
+    public int delete(Integer id) {
+        CartEntity cart = findById(id);
+        cart.setStatus(0);
+        return cartDAO.delete(cart);
+    }
 
 }

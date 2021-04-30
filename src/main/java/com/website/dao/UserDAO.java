@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 
 import javax.servlet.http.HttpSession;
 
-public class UserDAO {
+public class UserDAO extends GenericDAO<Integer,UserEntity> {
     public UserEntity findbyusername_password(String username, String password){
         Transaction transaction = null;
         UserEntity userEntity = null;
