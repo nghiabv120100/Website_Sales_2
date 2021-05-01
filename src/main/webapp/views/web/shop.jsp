@@ -38,7 +38,7 @@
 							<div class="col" style="padding: 10px 0px;">
 								<div class="brands_slider_container">
 									<div class="owl-carousel owl-theme brands_slider">
-										<c:forEach var="brand" items="${brands}">
+										<c:forEach var="brand" items="${lstBrand}">
 										<div class="owl-item">
 											<div class="brands_item d-flex flex-column justify-content-center">
 												<a href="${pageContext.request.contextPath}/client-searchByProperties?brand_id=${brand.id}">
@@ -73,7 +73,7 @@
 					<div class="features_items" style="min-height: 300px"><!--features_items-->
 						<div class="row">
 							<hr>
-							<c:forEach var = "i" items="${proList}">
+							<c:forEach var = "i" items="${lstProduct}">
 								<c:url value="/image/${i.getImage()}" var="imgUrl"></c:url>
 								<div class="col-sm-4">
 									<div class="product-image-wrapper">
@@ -90,12 +90,12 @@
 														</div>
 													</div>
 												</a>
-<%--												<h2><c:out value="${i.getPrice().toFixed(2)}"></c:out>  VNĐ</h2>--%>
-												<h2><fmt:formatNumber type="number" value="${i.getPrice()}" /> VNĐ</h2>
-
-												<p>${i.getProductName()}</p>
+												<h2>${i.getPrice()}VNĐ</h2>
+<%--										ff		<h2><c:out value="${i.getPrice().toFixed(2)}"></c:out>  VNĐ</h2>--%>
+<%--												<h2><fmt:formatNumber type="number" value="${i.getPrice()}" /> VNĐ</h2>--%>
+<%--												<h2>${i.getPrice()}VNĐ</h2>&ndash;%&gt;--%>
+												<p>${i.getProName()}</p>
 												<a  <%--href="${APIurl}?id=${i.getId()}"--%> onclick="addToCart(${i.getId()})" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
-													<%--												<button onclick="addToCart(1)" class="btn btn-default add-to-cart"><i  class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>--%>
 											</div>
 										</div>
 									</div>

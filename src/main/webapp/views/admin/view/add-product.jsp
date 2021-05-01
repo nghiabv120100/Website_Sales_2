@@ -63,7 +63,7 @@
 											<div class="form-group">
 												<label>Mô tả sản phảm </label>
 												<br>
-												<textarea rows="4" cols="50" name="editer" id="editer" ></textarea>
+												<textarea rows="4" cols="50" name="ckeditor" id="ckeditor" ></textarea>
 
 											</div>
 
@@ -127,7 +127,7 @@
 			var productName= $('#productName').val();
 			var price= parseFloat($('#price').val());
 			var quantity = parseInt($('#quantity').val());
-			// var describePro= CKEDITOR.instances.editer.getData();
+			var describePro= CKEDITOR.instances["ckeditor"].getData();
 			var detailCateId=parseInt($('#detailCateId').val());
 			var image = $('input[type=file]').val().split('\\').pop();
 			var brandId=parseInt($('#brandId').val())
@@ -135,7 +135,7 @@
 				"proName":productName,
 				"price":price,
 				"quantity":quantity,
-				// "describePro":describePro,
+				"describePro":describePro,
 				"image":image,
 				"detailCategoryEntity": {
 					"id":detailCateId,

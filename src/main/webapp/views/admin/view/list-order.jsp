@@ -141,11 +141,10 @@
 
 										<c:forEach items="${cart.getProductCartEntityList()}" var="item">
 											<tr>
-												<%--<c:url value="/image/${item.getProduct().getImage()}" var="imgUrl"></c:url>
+												<c:url value="/image/${item.getProductEntity().getImage()}" var="imgUrl"></c:url>
 												<td class="cart_product">
 													<img style="width: 50px;height: 50px;object-fit: cover" src="${imgUrl}" alt="#">
-												</td>--%>
-												<td></td>
+												</td>
 												<td class="description">${item.getProductEntity().getProName()}</td>
 <%--												<td class="price">${item.getUnitPrice()}<span>VNĐ</span></td>--%>
 												<td ><fmt:formatNumber type="number" value="${item.getUnitPrice()}" /> VNĐ</td>

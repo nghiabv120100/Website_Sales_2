@@ -18,4 +18,4 @@ Cart thiếu ngày mua hàng
 --------------------------------------
 Lỗi đang gặp phải
 	- Chưa insert được ảnh vào project
-	- Chưa insert được describe xuống database (do ko lấy được dữ liệu từ CKEDITOR)
+	- Chưa insert được describe xuống database (do ko lấy được dữ liệu từ CKEDITOR)  (đã fix xog)

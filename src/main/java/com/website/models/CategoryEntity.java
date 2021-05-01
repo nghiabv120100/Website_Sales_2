@@ -22,7 +22,7 @@ public class CategoryEntity {
     private Integer status;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryEntity")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryEntity")
     private List<DetailCategoryEntity> detailCategoryEntityList;
 
     public CategoryEntity() {

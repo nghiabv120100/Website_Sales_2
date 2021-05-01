@@ -20,7 +20,7 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-12 text-center" style="padding-top: 20px;">
-                    <a href="${HomeUrl}?action=home" class="mt2" style=" color:#696763;"><i class="fas fa-home fa-4x"></i></a>
+                    <a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1" class="mt2" style=" color:#696763;"><i class="fas fa-home fa-4x"></i></a>
                 </div>
             </div>
             <div class="row" style=" margin-top: 100px;">

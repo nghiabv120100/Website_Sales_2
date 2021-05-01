@@ -50,61 +50,21 @@
 
 <nav>
     <ul>
-        <li><a href="${HomeUrl}?action=home">Trang chủ</a></li>
+        <li><a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1">Trang chủ</a></li>
       <%--      <li><a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1">Trang chủ</a>--%>
         <li><a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1">Danh mục sản phẩm</a>
             <ul>
-                <li><a href="${pageContext.request.contextPath }/client-product-list?type=category&cate_id=1&page=1">Laptop</a>
-                    <ul>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=1&page=1">Laptop Acer</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=2&page=1">Laptop Asus</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=3&page=1">Laptop Dell</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=4&page=1">Laptop Lenovo</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=5&page=1">Laptop HP</a></li>
-                    </ul>
-                </li>
-                <li><a href="${pageContext.request.contextPath }/client-product-list?type=category&cate_id=2&page=1">Màn Hình</a>
-                    <ul>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=6&page=1">Màn Hình Samsung </a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=7&page=1">Màn Hình ASUS</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=8&page=1">Màn Hình Acer</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=9&page=1">Màn Hình Gigabyte</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=10&page=1">Màn Hình MSI</a></li>
-                    </ul>
-                </li>
-                <li><a href="${pageContext.request.contextPath }/client-product-list?type=category&cate_id=3&page=1">Chuột chơi game</a>
-                    <ul>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=11&page=1">Logitech</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=12&page=1">Kingston HyperX</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=13&page=1">Razer</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=14&page=1">Asus</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=15&page=1">MSI</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=16&page=1">Hãng Khác</a></li>
+                <c:forEach items="${lstCategory}" var="category">
 
+                    <li><a href="${pageContext.request.contextPath }/client-product-list?type=category&cate_id=${category.id}&page=1">${category.cateName}</a>
+                        <ul>
+                             <c:forEach items="${category.getDetailCategoryEntityList()}" var="detailCategory">
+                                <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=${detailCategory.id}&page=1">${detailCategory.detailCateName}</a></li>
+                             </c:forEach>
+                        </ul>
+                    </li>
 
-                    </ul>
-                </li>
-                <li><a href="${pageContext.request.contextPath }/client-product-list?type=category&cate_id=4&page=1">Bàn phím</a>
-                    <ul>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=17&page=1">Logitech</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=18&page=1">Kingston HyperX</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=19&page=1">Razer</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=20&page=1">Asus</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=21&page=1">MSI</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=22&page=1">Hãng Khác</a></li>
-
-                    </ul>
-                </li>
-                <li><a href="${pageContext.request.contextPath }/client-product-list?type=category&cate_id=5&page=1">Tai nghe</a>
-                    <ul>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=23&page=1">Logitech</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=24&page=1">Kingston HyperX</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=25&page=1">Razer</a></li>
-                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=26&page=1">Asus</a></li>
-<%--                        <li><a href="${pageContext.request.contextPath}/client-product-list?type=detail_category&detail_cate_id=27&page=1">Corsier</a></li>&ndash;%&gt;--%>
-<%--                        <li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=28&page=1">Hãng Khác</a></li>--%>
-                    </ul>
-                </li>
+                </c:forEach>
             </ul>
         </li>
         <li><a href="${Pathurl}/salespolicy.jsp">Chính sách bán hàng</a></li>
