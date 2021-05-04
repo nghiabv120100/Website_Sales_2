@@ -31,10 +31,14 @@ public class ProductController extends HttpServlet {
         String url = "";
         int numberpage = 1;
         int pageSize = 9;
+        int category_id = -1;
+        int detail_cate_id = -1;
+        int start_price = -1;
+        int end_price = 900000000;
+        int brandId = -1;
 
         Long totalpage;
         Long totalProduct = productService.totalProduct();
-
         if (totalProduct % pageSize == 0){
             totalpage = totalProduct / pageSize;
             System.out.println(totalpage);
@@ -43,22 +47,48 @@ public class ProductController extends HttpServlet {
             System.out.println(totalpage);
         }
 
-        if (type.equals("list")) {
-/*            List<ProductEntity> lstProduct = productService.findAll();*/
-            List<ProductEntity> lstProduct = null;
-            numberpage  = Integer.parseInt(req.getParameter("page"));
-            lstProduct = productService.getProductEntity((numberpage - 1) * pageSize, pageSize);
-            List<CategoryEntity> lstCategory = categoryService.findAll();
-            List<BrandEntity> lstBrand = brandService.findAll();
-            req.setAttribute("lstProduct",lstProduct);
-            req.setAttribute("lstCategory",lstCategory);
-            req.setAttribute("lstBrand",lstBrand);
-            req.setAttribute("numOfPages",totalpage);
-            req.setAttribute("nextPages",numberpage + 1);
+        //chung
+        List<CategoryEntity> lstCategory = categoryService.findAll();
+        List<BrandEntity> lstBrand = brandService.findAll();
+        List<ProductEntity> lstProduct = null;
+        numberpage  = Integer.parseInt(req.getParameter("page"));
+
+        if(numberpage == 1){
+            req.setAttribute("lastPages", numberpage);
+        } else {
             req.setAttribute("lastPages", numberpage - 1);
+        }
+        if(numberpage == totalpage){
+            req.setAttribute("nextPages",numberpage);
+        } else {
+            req.setAttribute("nextPages",numberpage + 1);
+        }
+        req.setAttribute("numOfPages",totalpage);
+        req.setAttribute("lstCategory",lstCategory);
+        req.setAttribute("lstBrand",lstBrand);
+
+        //theo tung loai
+        if (type.equals("list")) {
+            lstProduct = productService.getProductEntity(brandId,detail_cate_id,start_price,end_price,(numberpage - 1) * pageSize, pageSize);
+            req.setAttribute("lstProduct",lstProduct);
+            url ="views/web/shop.jsp";
+        } else if(type.equals("detail_category")){
+            detail_cate_id = Integer.parseInt(req.getParameter("detail_cate_id"));
+            lstProduct = productService.getProductEntity(brandId,detail_cate_id,start_price,end_price,(numberpage - 1) * pageSize, pageSize);
+            req.setAttribute("lstProduct",lstProduct);
+            url ="views/web/shop.jsp";
+        } else if(type.equals("Price")){
+            start_price = Integer.parseInt(req.getParameter("startPrice"));
+            end_price = Integer.parseInt(req.getParameter("endPrice"));
+            lstProduct = productService.getProductEntity(brandId,detail_cate_id,start_price,end_price,(numberpage - 1) * pageSize, pageSize);
+            req.setAttribute("lstProduct",lstProduct);
+            url ="views/web/shop.jsp";
+        } else if(type.equals("Brand")){
+            brandId = Integer.parseInt(req.getParameter("brand_id"));
+            lstProduct = productService.getProductEntity(brandId,detail_cate_id,start_price,end_price,(numberpage - 1) * pageSize, pageSize);
+            req.setAttribute("lstProduct",lstProduct);
             url ="views/web/shop.jsp";
         }
-
         RequestDispatcher rd = req.getRequestDispatcher(url);
         rd.forward(req,resp);
     }

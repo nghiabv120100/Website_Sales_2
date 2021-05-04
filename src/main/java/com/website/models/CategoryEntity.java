@@ -25,6 +25,10 @@ public class CategoryEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryEntity")
     private List<DetailCategoryEntity> detailCategoryEntityList;
 
+
+
+
+
     public CategoryEntity() {
         this.setStatus(1);
     }
