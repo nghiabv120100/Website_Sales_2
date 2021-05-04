@@ -6,8 +6,5 @@
     <welcome-file-list>
         <welcome-file>views/web/login.jsp</welcome-file>
         <welcome-file>views/admin/view/list-product.jsp</welcome-file>
-
-
-
     </welcome-file-list>
 </web-app>

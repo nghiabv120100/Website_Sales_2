@@ -27,19 +27,22 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String type = req.getParameter("type");
         productService = new ProductService();
         String url="";
-        String type=req.getParameter("type");
         if (type.equals("list")) {
             List<ProductEntity> lstProduct =productService.findAll();
             req.setAttribute("lstProduct",lstProduct);
             url ="views/admin/view/list-product.jsp";
+
         } else if (type.equals("add")) {
             List<BrandEntity> lstBrand = brandService.findAll();
             List<DetailCategoryEntity> lstDetailCate = detailCategoryService.findAll();
             req.setAttribute("lstDetailCate",lstDetailCate);
             req.setAttribute("lstBrand",lstBrand);
             url ="views/admin/view/add-product.jsp";
+
         } else if (type.equals("edit")) {
             int id = Integer.parseInt(req.getParameter("id"));
             ProductEntity productEntity = productService.findById(id);

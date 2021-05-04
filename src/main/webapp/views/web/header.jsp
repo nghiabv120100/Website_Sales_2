@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url value="/views/web/static" var="url"> </c:url>
 <c:url value="/views/web" var="Pathurl"> </c:url>
-<c:url value="/trang-chu" var="HomeUrl"> </c:url>
+<%--<c:url value="/home" var="HomeUrl"> </c:url>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,9 +50,11 @@
 
 <nav>
     <ul>
-        <li><a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1">Trang chủ</a></li>
-      <%--      <li><a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1">Trang chủ</a>--%>
+        <li><a href="${pageContext.request.contextPath }/views/web/index.jsp">Trang chủ</a></li>
+
+
         <li><a href="${pageContext.request.contextPath }/client-product-list?type=list&page=1">Danh mục sản phẩm</a>
+
             <ul>
                 <c:forEach items="${lstCategory}" var="category">
 

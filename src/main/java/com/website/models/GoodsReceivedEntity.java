@@ -33,9 +33,6 @@ public class GoodsReceivedEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "goodsReceivedEntity")
     private List<Product_GoodReceived_Entity> productGoodReceivedEntityList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "goodsReceivedEntity")
-    private List<ImportGoodsEntity> importGoodsEntityList;
-
     public GoodsReceivedEntity() {
         this.setStatus(1);
     }

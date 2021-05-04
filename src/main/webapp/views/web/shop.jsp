@@ -1,10 +1,11 @@
+<%@ page import="java.net.http.HttpRequest" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <c:url value="/views/web/static" var="url"> </c:url>
-<c:url value="/api-user-cart" var="APIaurl"></c:url>
+<%--<c:url value="/api-user-cart" var="APIaurl"></c:url>--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -102,17 +103,17 @@
 								</div>
 							</c:forEach>
 						</div>
+
 						<div class="row text-center">
 								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="#">Trước</a></li>
+									<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/client-product-list?type=list&page=${lastPages}">Trước</a></li>
 									<c:forEach var="i" begin="1" end="${numOfPages}">
-<%--									<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/client-product-list?type=${type}&cate_id=${cate_id}&detail_cate_id=${detail_cate_id}&keyword=${keyword}&page=${i}">${i}</a></li>--%>
-										<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/client-searchByProperties?&page=${i}">${i}</a></li>
-
+										<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/client-product-list?type=list&page=${i}">${i}</a></li>
 									</c:forEach>
-									<li class="page-item"><a class="page-link" href="#">Sau</a></li>
+									<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/client-product-list?type=list&page=${nextPages}">Sau</a></li>
 								</ul>
 						</div>
+
 					</div><!--features_items-->
 				</div>
 			</div>

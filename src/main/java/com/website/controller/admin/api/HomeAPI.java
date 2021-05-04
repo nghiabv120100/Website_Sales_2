@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.rmi.server.ExportException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/validationlogin")
+@WebServlet(urlPatterns = {"/validationlogin"})
 public class HomeAPI extends HttpServlet {
 
     String msg;
@@ -44,7 +44,8 @@ public class HomeAPI extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("loginname",username);
             if (userEntity.getRole().equals("admin") || userEntity.getRole().equals("employee") || userEntity.getRole().equals("shipper")){
-                RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/view/index.jsp");
+/*                RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/view/index.jsp");*/
+                RequestDispatcher dispatcher = request.getRequestDispatcher("views/web/index.jsp");
                 dispatcher.forward(request, response);
             } else {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("views/web/index.jsp");

@@ -28,4 +28,12 @@ public class ProductService {
         product.setStatus(0);
         return productDAO.delete(product);
     }
+
+    public List<ProductEntity> getProductEntity(int postiton, int pageSize){
+        return productDAO.getProductEntity(postiton,pageSize);
+    }
+
+    public Long totalProduct(){
+        return productDAO.countTotalProduct();
+    }
 }

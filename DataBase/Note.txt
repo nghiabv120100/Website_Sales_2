@@ -11,6 +11,12 @@ Status Cart
     3:  Đang giao
     4:  Đã hoàn thành
     5:  Không nhận hàng
+ --------------------------------------
+ Role
+    0 : client
+    1 : Admin
+    2 : Shipper
+    3 : Employee
 --------------------------------------
 Cart thiếu ngày mua hàng
      thiếu hình thức thanh toán

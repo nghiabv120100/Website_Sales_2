@@ -29,13 +29,33 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String type = req.getParameter("type");
         String url = "";
+        int numberpage = 1;
+        int pageSize = 9;
+
+        Long totalpage;
+        Long totalProduct = productService.totalProduct();
+
+        if (totalProduct % pageSize == 0){
+            totalpage = totalProduct / pageSize;
+            System.out.println(totalpage);
+        } else {
+            totalpage = totalProduct / pageSize + 1;
+            System.out.println(totalpage);
+        }
+
         if (type.equals("list")) {
-            List<ProductEntity> lstProduct = productService.findAll();
+/*            List<ProductEntity> lstProduct = productService.findAll();*/
+            List<ProductEntity> lstProduct = null;
+            numberpage  = Integer.parseInt(req.getParameter("page"));
+            lstProduct = productService.getProductEntity((numberpage - 1) * pageSize, pageSize);
             List<CategoryEntity> lstCategory = categoryService.findAll();
             List<BrandEntity> lstBrand = brandService.findAll();
             req.setAttribute("lstProduct",lstProduct);
             req.setAttribute("lstCategory",lstCategory);
             req.setAttribute("lstBrand",lstBrand);
+            req.setAttribute("numOfPages",totalpage);
+            req.setAttribute("nextPages",numberpage + 1);
+            req.setAttribute("lastPages", numberpage - 1);
             url ="views/web/shop.jsp";
         }
 
