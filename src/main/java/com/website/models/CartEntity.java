@@ -1,6 +1,7 @@
 package com.website.models;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -34,6 +35,28 @@ public class CartEntity {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "cartEntity")
     private List<Product_Cart_Entity> productCartEntityList;
+
+    @Column(name = "payments")
+    private Integer payments;
+
+    @Column(name = "buyDate")
+    private Date buyDate;
+
+    public Integer getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Integer payments) {
+        this.payments = payments;
+    }
+
+    public Date getBuyDate() {
+        return buyDate;
+    }
+
+    public void setBuyDate(Date buyDate) {
+        this.buyDate = buyDate;
+    }
 
     public CartEntity() {
         this.setStatus(1);
