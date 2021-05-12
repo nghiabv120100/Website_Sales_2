@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<c:url value="/api-user-dangky" var ="APIurl"></c:url>
-<c:url value="/trang-chu" var="url"> </c:url>
+<c:url value="/api-admin-user" var ="APIurl"></c:url>
+<c:url value="/validationlogin" var="url"> </c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +26,12 @@
         </div>
 
         <div class="panel-body">
+            <div class="form-group">
+                <label for="fullname">Full Name:</label>
+                <input required="true" type="text" class="form-control" id="fullname"
+                       value="${accountRegister.username}" placeholder = "Nhập full name" />
+                <label style="color: red">${errUserName}</label>
+            </div>
             <div class="form-group">
                 <label for="username">User Name:</label>
                 <input required="true" type="text" class="form-control" id="username"
@@ -69,6 +75,7 @@
 <script>
     $('#btnRegister').click(function (e){
         e.preventDefault();
+        var fullname=$('#fullname').val();
         var username= $('#username').val();
         var email= $('#email').val();
         var phone= $('#phone').val();
@@ -76,14 +83,13 @@
         var confirmation_pwd= $('#confirmation_pwd').val();
         var address= $('#address').val();
         var data={
+            "fullname":fullname,
             "username":username,
             "email":email,
-            "phonenumber":phone,
+            "phone_number":phone,
             "password":pwd,
-            "confirmation_pwd":confirmation_pwd,
-            "avatar":'000.jpg',
             "address":address,
-            "roleId": 0
+            "role": "0"
         }
         registerAccount(data)
     });
@@ -99,12 +105,12 @@
 
             success: function (result){
                 console.log("Success");
-                window.location.href = "${url}?action=dangnhap";
+                window.location.href = "${url}?type=logout";
             },
             error: function (error){
                 console.log("Error");
 
-                window.location.href = "${url}?action=register";
+                window.location.href = "${url}?type=register";
 
             }
 

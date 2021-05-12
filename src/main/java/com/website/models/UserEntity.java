@@ -34,6 +34,17 @@ public class UserEntity {
     @Column(name ="status")
     private Integer status;
 
+    @Column(name = "address")
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity")
     private List<GoodsReceivedEntity> goodsReceivedEntityList ;

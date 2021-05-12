@@ -43,9 +43,9 @@
                             <button type="submit" class="btn btn-success btn-primary" style="margin-top: 10px; color: white; background-color: #696763; border: none;">Đăng nhập</button>
                             <input type="hidden" name="action" value="login">
                         </form>
-                        <form action="${pageContext.request.contextPath }/dang-ky?type=register" method="get ">
+                        <form action="${pageContext.request.contextPath }/register?type=register" method="get ">
                             <button type="submit" class="btn btn-link">Đăng kí</button>
-                            <input type="hidden" name="action" value="register">
+                            <input type="hidden" name="type" value="register">
                             <%--                <button type="button" class="btn btn-link" style="padding-left: 180px">Quên mật khẩu?</button>--%>
                         </form>
                     </div>

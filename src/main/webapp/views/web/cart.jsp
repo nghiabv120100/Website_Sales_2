@@ -89,13 +89,13 @@
 					<div class="shopper-info">
 						<p>Thông tin cá nhân</p>
 						<form>
-							<input id="fullname" type="text" placeholder="Tên" value="${accountModel.getUsername()}">
+							<input id="fullname" type="text" placeholder="Tên" value="${user.getFullname()}">
 							<label style="color: red">${errUserName}</label>
-							<input id="email" type="text" placeholder="Email" value="${accountModel.getEmail()}">
+							<input id="email" type="text" placeholder="Email" value="${user.getEmail()}">
 							<label style="color: red">${errEmail}</label>
-							<input id="address" type="text" placeholder="Địa chỉ" value="${accountModel.getAddress()}">
+							<input id="address" type="text" placeholder="Địa chỉ" value="${user.getAddress()}">
 							<label style="color: red">${errAddress}</label>
-							<input id="phonenumber" type="text" placeholder="Số điện thoại" value="${accountModel.getPhonenumber()}">
+							<input id="phonenumber" type="text" placeholder="Số điện thoại" value="${user.getPhone_number()}">
 							<label style="color: red">${errPhone}</label>
 						</form>
 					</div>

@@ -34,7 +34,7 @@ public class ProductEntity {
 /*    @Column(name = "detail_cate_id")
     private int detailCateId;*/
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productEntity")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "productEntity")
     private List<CommentEntity> commentEntityList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productEntity")
