@@ -68,7 +68,8 @@
                 <label style="color: red">${errAddress}</label>
             </div>
             <button type="button" class="btn btn-success" id="btnRegister">Register</button>
-            <button class="btn btn-success" onclick="document.location='${pageContext.request.contextPath}/trang-chu?action=home'">Cancel</button>
+            <button class="btn btn-success" onclick="document.location='${pageContext.request.contextPath}/views/web/login.jsp'">Cancel</button>
+      <%--      <button class="btn btn-success" onclick="document.location='${pageContext.request.contextPath}/trang-chu?action=home'">Cancel</button>--%>
         </div>
     </div>
 </div>
@@ -87,7 +88,7 @@
             "username":username,
             "email":email,
             "phone_number":phone,
-            "password":pwd,
+            "passWord":pwd,
             "address":address,
             "role": "0"
         }
@@ -109,7 +110,6 @@
             },
             error: function (error){
                 console.log("Error");
-
                 window.location.href = "${url}?type=register";
 
             }
