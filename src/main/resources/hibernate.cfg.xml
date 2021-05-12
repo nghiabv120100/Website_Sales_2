@@ -25,7 +25,6 @@
     <mapping class="com.website.models.CategoryEntity"/>
     <mapping class="com.website.models.CartEntity"/>
     <mapping class="com.website.models.BrandEntity"/>
-    <mapping class="com.website.models.ImportGoodsEntity"/>
 
 </session-factory>
 </hibernate-configuration>

@@ -42,10 +42,10 @@ public class HomeAPI extends HttpServlet {
         userEntity= loginDao.findbyusername_password(username, password);
         if(userEntity != null){
             HttpSession session = request.getSession();
-            session.setAttribute("loginname",username);
-            if (userEntity.getRole().equals("admin") || userEntity.getRole().equals("employee") || userEntity.getRole().equals("shipper")){
+            session.setAttribute("user",userEntity);
+            if (userEntity.getRole().equals("1") || userEntity.getRole().equals("2") || userEntity.getRole().equals("3")){
 /*                RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/view/index.jsp");*/
-                RequestDispatcher dispatcher = request.getRequestDispatcher("views/web/index.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/view/index.jsp");
                 dispatcher.forward(request, response);
             } else {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("views/web/index.jsp");

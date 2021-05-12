@@ -32,11 +32,11 @@
                         <ul class=" nav nav-pills nav-stacked ">
                             <li><a href="${pageContext.request.contextPath}/account-manager"><i class="fa fa-book" aria-hidden="true"></i>Tài khoản</a></li>
                             <li><a href="${pageContext.request.contextPath}/client-cart-list"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
-                            <c:if test="${not empty loginName}">
-                                <li><a href="#"><i class="fa fa-user"></i>Chào <c:out value="${loginName}"></c:out></a></li>
+                            <c:if test="${not empty user}">
+                                <li><a href="#"><i class="fa fa-user"></i>Chào <c:out value="${user.fullname}"></c:out></a></li>
                                 <li><a href="${pageContext.request.contextPath }/dang-nhap?action=logout">Đăng xuất</a></li>
                             </c:if>
-                            <c:if test="${empty loginName}">
+                            <c:if test="${empty user}">
                                 <li><a href="${Pathurl}/login.jsp"><i class="fa fa-lock"></i>Đăng nhập / Đăng kí </a></li>
                             </c:if>
 

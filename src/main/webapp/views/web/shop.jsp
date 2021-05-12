@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <c:url value="/views/web/static" var="url"> </c:url>
-<%--<c:url value="/api-user-cart" var="APIaurl"></c:url>--%>
+<c:url value="/api-user-cart" var="APIaurl"></c:url>
 
 <!DOCTYPE html>
 <html lang="en">
