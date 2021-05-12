@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.rmi.server.ExportException;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/validationlogin"})
+@WebServlet(urlPatterns = {"/validationlogin","/register","/logout"})
 public class HomeAPI extends HttpServlet {
 
     String msg;
@@ -27,7 +27,17 @@ public class HomeAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String type = request.getParameter("type");
+        if (type.equals("logout")) {
+            HttpSession session = request.getSession();
+            session.removeAttribute("user");
+            session.removeAttribute("order");
+            RequestDispatcher rd = request.getRequestDispatcher("views/web/login.jsp");
+            rd.forward(request,response);
+        } else if (type.equals("register")) {
+            RequestDispatcher rd = request.getRequestDispatcher("views/web/register.jsp");
+            rd.forward(request,response);
+        }
     }
 
     @Override

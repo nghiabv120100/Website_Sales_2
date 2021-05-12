@@ -2,6 +2,7 @@ package com.website.controller.web;
 
 import com.website.models.CartEntity;
 import com.website.models.Product_Cart_Entity;
+import com.website.models.UserEntity;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,10 +20,11 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         CartEntity cartEntity =  (CartEntity) session.getAttribute("order");
-        String userName =(String) session.getAttribute("loginName");
+        UserEntity user = (UserEntity) session.getAttribute("user");
         Integer totalPrice =0;
 
         req.setAttribute("totalPrice",totalPrice);
+        req.setAttribute("user",user);
         if (cartEntity != null) {
             List<Product_Cart_Entity> cartItemModelList = cartEntity.getProductCartEntityList();
             req.setAttribute("cartItemModelList",cartItemModelList);
@@ -31,6 +33,7 @@ public class CartController extends HttpServlet {
                 totalPrice += item.getUnitPrice() * item.getQuantity();
             }
             cartEntity.setTotalPrice(totalPrice);
+            req.setAttribute("totalPrice",totalPrice);
         }
         String url ="views/web/cart.jsp";
         RequestDispatcher rd = req.getRequestDispatcher(url);

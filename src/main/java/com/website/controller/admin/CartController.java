@@ -23,7 +23,7 @@ public class CartController extends HttpServlet {
         String url ="";
 
         HttpSession session = req.getSession();
-        UserEntity userEntity =(UserEntity) session.getAttribute("loginname");
+        UserEntity userEntity =(UserEntity) session.getAttribute("user");
 
         if (userEntity == null && !(userEntity.getRole().equals("1") || userEntity.getRole().equals("2"))) {
             url= "views/web/login.jsp";

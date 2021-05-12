@@ -16,6 +16,9 @@ public class CartService {
     public CartEntity update(CartEntity cart) {
         return cartDAO.update(cart);
     }
+    public void save(CartEntity cartEntity) {
+        cartDAO.save(cartEntity);
+    }
     public int delete(Integer id) {
         CartEntity cart = findById(id);
         cart.setStatus(0);

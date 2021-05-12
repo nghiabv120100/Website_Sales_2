@@ -39,8 +39,8 @@
                 <div class="col-10" style="padding: 15px 0px 0px 20px; border: solid 0.5px rgba(0,0,0,0.3); border-radius: 10px;">
                     <h5 style="margin-bottom: 0px;">Thông tin đơn hàng</h5>
                     <p style="padding: 10px 0px; margin: 0px;">Thông tin giao hàng</p>
-                    ${user.getUsername()}
-                    <br>${user.getPhonenumber()}
+                    ${user.getFullname()}
+                    <br>${user.getPhone_number()}
                     <br>${user.getEmail()}
                     <br>${user.getAddress()}</p>
                     <h5 style="margin-bottom: 0px; padding: 0px 0px 10px 0px;">Phương thức thanh toán</h5>
@@ -65,11 +65,11 @@
                     <th style="width: 100px">Thành Tiền</th>
                     </thead>
                     <tbody>
-                    <c:forEach var="item" items="${cart.getItemModelList()}">
+                    <c:forEach var="item" items="${cart.getProductCartEntityList()}">
                         <tr>
-                            <c:url value="/image/${item.getProduct().getImage()}" var="imgUrl"></c:url>
+                            <c:url value="/image/${item.getProductEntity().getImage()}" var="imgUrl"></c:url>
                             <td><img src="${imgUrl}" alt="" style="height: 50px; width: auto;"></td>
-                            <td>${item.getProduct().getProductName()}</td>
+                            <td>${item.getProductEntity().getProName()}</td>
                             <td>${item.getQuantity()}</td>
 <%--                            <td>${item.getQuantity()*item.getUnitPrice()}</td>--%>
                             <td ><fmt:formatNumber type="number" value="${item.getUnitPrice()*item.getQuantity()}" /> VNĐ</td>
