@@ -106,11 +106,98 @@
 
 						<div class="row text-center">
 								<ul class="pagination">
+								<%--	list--%>
+									<%
+										String theloai=(String) session.getAttribute("theloaicu");
+										if(theloai.equals("list") || theloai.equals("")){
+									%>
 									<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/client-product-list?type=list&page=${lastPages}">Trước</a></li>
 									<c:forEach var="i" begin="1" end="${numOfPages}">
 										<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/client-product-list?type=list&page=${i}">${i}</a></li>
 									</c:forEach>
+									<% } %>
+									<%--detail category--%>
+									<%
+										if(theloai.equals("detail_category")){
+									%>
+									<li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=${detail_cate_id}&page=${lastPages}">Trước</a></li>
+									<c:forEach var="i" begin="1" end="${numOfPages}">
+										<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=${detail_cate_id}&page=${i}">${i}</a></li>
+									</c:forEach>
+									<% } %>
+								<%--brand id--%>
+									<%
+										if(theloai.equals("Brand")){
+									%>
+									<li><a href="${pageContext.request.contextPath }/client-product-list?type=Brand&brand_id=${brand_id}&page=${lastPages}">Trước</a></li>
+									<c:forEach var="i" begin="1" end="${numOfPages}">
+										<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/client-product-list?type=Brand&brand_id=${brand_id}&page=${i}">${i}</a></li>
+									</c:forEach>
+									<% } %>
+								<%--price--%>
+									<%
+										if(theloai.equals("Price")){
+									%>
+									<li><a href="${pageContext.request.contextPath}/client-product-list?type=Price&startPrice=${start_price}&endPrice=${end_price}&page=${lastPages}">Trước</a></li>
+									<c:forEach var="i" begin="1" end="${numOfPages}">
+										<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/client-product-list?type=Price&startPrice=${start_price}&endPrice=${end_price}&page=${i}">${i}</a></li>
+									</c:forEach>
+									<% } %>
+									<%--keyWord--%>
+									<%
+										if(theloai.equals("searchByName")){
+									%>
+									<li><a href="${pageContext.request.contextPath}/client-product-list?keyword=${keyWord}&type=searchByName&page=${lastPages}">Trước</a></li>
+									<c:forEach var="i" begin="1" end="${numOfPages}">
+										<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/client-product-list?keyword=${keyWord}&type=searchByName&page=${i}">${i}</a></li>
+									</c:forEach>
+									<% } %>
+									<%--category--%>
+									<%
+										if(theloai.equals("category")){
+									%>
+									<li><a href="${pageContext.request.contextPath}/client-product-list?type=category&cate_id=${cate_id}&page=${lastPages}">Trước</a></li>
+									<c:forEach var="i" begin="1" end="${numOfPages}">
+										<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/client-product-list?type=category&cate_id=${cate_id}&page=${i}">${i}</a></li>
+									</c:forEach>
+									<% } %>
+
+								<%--list--%>
+									<%
+										if(theloai.equals("list")){
+									%>
 									<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/client-product-list?type=list&page=${nextPages}">Sau</a></li>
+									<% } %>
+									<%--detail_category--%>
+									<%
+										if(theloai.equals("detail_category")){
+									%>
+									<li><a href="${pageContext.request.contextPath }/client-product-list?type=detail_category&detail_cate_id=${detail_cate_id}&page=${nextPages}">Sau</a></li>
+									<% } %>
+									<%--brand_id--%>
+									<%
+										if(theloai.equals("Brand")){
+									%>
+									<li><a href="${pageContext.request.contextPath}/client-product-list?type=Brand&brand_id=${brand_id}&page=${nextPages}">Sau</a></li>
+									<% } %>
+									<%--price--%>
+									<%
+										if(theloai.equals("Price")){
+									%>
+									<li><a href="${pageContext.request.contextPath}/client-product-list?type=Price&startPrice=${start_price}&endPrice=${end_price}&page=${nextPages}">Sau</a></li>
+									<% } %>
+									<%--keyWord--%>
+									<%
+										if(theloai.equals("searchByName")){
+									%>
+									<li><a href="${pageContext.request.contextPath}/client-product-list?keyword=${keyWord}&type=searchByName&page=${nextPages}">Sau</a></li>
+									<% } %>
+									<%--category--%>
+									<%
+										if(theloai.equals("category")){
+									%>
+									<li><a href="${pageContext.request.contextPath}/client-product-list?type=category&cate_id=${cate_id}&page=${nextPages}">Sau</a></li>
+									<% } %>
 								</ul>
 						</div>
 
