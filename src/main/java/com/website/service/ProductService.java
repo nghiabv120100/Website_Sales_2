@@ -29,8 +29,8 @@ public class ProductService {
         return productDAO.delete(product);
     }
 
-    public List<ProductEntity> getProductEntity(int postiton, int pageSize){
-        return productDAO.getProductEntity(postiton,pageSize);
+    public List<ProductEntity> getProductEntity(int brand_id,int detail_cate_id,int start_price,int end_price,int postiton, int pageSize){
+        return productDAO.getProductEntity(brand_id,detail_cate_id,start_price,end_price,postiton,pageSize);
     }
 
     public Long totalProduct(){

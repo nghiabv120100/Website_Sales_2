@@ -42,8 +42,8 @@
 										<c:forEach var="brand" items="${lstBrand}">
 										<div class="owl-item">
 											<div class="brands_item d-flex flex-column justify-content-center">
-												<a href="${pageContext.request.contextPath}/client-searchByProperties?brand_id=${brand.id}">
-													<img style="height: 40px; width: auto;" src="${url}/images/${brand.image}" alt="">
+												<a href="${pageContext.request.contextPath}/client-product-list?type=Brand&brand_id=${brand.id}&page=1">
+													<img style="height: 40px; width: auto;" src="${pageContext.request.contextPath}/image/${brand.image}" alt="">
 												</a>
 											</div>
 										</div>
@@ -59,13 +59,13 @@
 			<div class="row">
 				<ul style="display: inline;">
 					<li style="flex:left; padding: 0px 15px; color: black; font-size: 17px;"> Chọn giá sản phẩm:</li>
-					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-searchByProperties?startPrice=0&endPrice=500000"> Dưới 500.000</a></li>
-					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-searchByProperties?startPrice=500000&endPrice=1000000"> 500.000-1.000.000</a></li>
-					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-searchByProperties?startPrice=1000000&endPrice=5000000"> 1.000.0000-5.000.000</a></li>
-					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-searchByProperties?startPrice=5000000&endPrice=10000000"> 5.000.0000-10.000.000</a></li>
-					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-searchByProperties?startPrice=10000000&endPrice=15000000"> 10.000.0000-15.000.000</a></li>
-					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-searchByProperties?startPrice=15000000&endPrice=20000000"> 15.000.0000-20.000.000</a></li>
-					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-searchByProperties?startPrice=20000000&endPrice=990000000"> Trên 20.000.000</a></li>
+					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-product-list?type=Price&startPrice=0&endPrice=500000&page=1"> Dưới 500.000</a></li>
+					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-product-list?type=Price&startPrice=500000&endPrice=1000000&page=1"> 500.000-1.000.000</a></li>
+					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-product-list?type=Price&startPrice=1000000&endPrice=5000000&page=1"> 1.000.0000-5.000.000</a></li>
+					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-product-list?type=Price&startPrice=5000000&endPrice=10000000&page=1"> 5.000.0000-10.000.000</a></li>
+					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-product-list?type=Price&startPrice=10000000&endPrice=15000000&page=1"> 10.000.0000-15.000.000</a></li>
+					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-product-list?type=Price&startPrice=15000000&endPrice=20000000&page=1"> 15.000.0000-20.000.000</a></li>
+					<li> <a style="float:left; padding: 0px 15px; color: blue; font-size: 15px;" href="${pageContext.request.contextPath}/client-product-list?type=Price&startPrice=20000000&endPrice=990000000&page=1"> Trên 20.000.000</a></li>
 
 				</ul>
 			</div>

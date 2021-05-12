@@ -57,7 +57,6 @@
 
             <ul>
                 <c:forEach items="${lstCategory}" var="category">
-
                     <li><a href="${pageContext.request.contextPath }/client-product-list?type=category&cate_id=${category.id}&page=1">${category.cateName}</a>
                         <ul>
                              <c:forEach items="${category.getDetailCategoryEntityList()}" var="detailCategory">
@@ -65,7 +64,6 @@
                              </c:forEach>
                         </ul>
                     </li>
-
                 </c:forEach>
             </ul>
         </li>

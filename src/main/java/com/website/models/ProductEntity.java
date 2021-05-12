@@ -47,10 +47,11 @@ public class ProductEntity {
     @JoinColumn(name = "brand_id")
     private BrandEntity brandEntity;
 
-
     @ManyToOne
     @JoinColumn(name = "detail_category_id")
     private DetailCategoryEntity detailCategoryEntity;
+
+
 
     public ProductEntity() {
         this.setStatus(1);
@@ -80,7 +81,7 @@ public class ProductEntity {
         this.quantity = quantity;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 
