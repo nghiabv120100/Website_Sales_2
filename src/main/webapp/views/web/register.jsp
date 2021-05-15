@@ -25,51 +25,51 @@
             <h2 class="text-center">Đăng ký tài khoản</h2>
         </div>
 
-        <div class="panel-body">
+        <form class="panel-body" id="register-form">
             <div class="form-group">
                 <label for="fullname">Full Name:</label>
                 <input required="true" type="text" class="form-control" id="fullname"
-                       value="${accountRegister.username}" placeholder = "Nhập full name" />
-                <label style="color: red">${errUserName}</label>
+                       value="${user.fullname}" placeholder = "Nhập full name" />
+                <span class="form-message"></span>
             </div>
             <div class="form-group">
                 <label for="username">User Name:</label>
                 <input required="true" type="text" class="form-control" id="username"
-                       value="${accountRegister.username}" placeholder = "Nhập User" />
-                <label style="color: red">${errUserName}</label>
+                       value="${user.username}" placeholder = "Nhập User" />
+                <span class="form-message"></span>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input required="true" type="email" class="form-control" id="email"
-                value="${accountRegister.email}">
-                    <label style="color: red">${errEmail}</label>
-                <label></label>
+                <input required="true" type="email" class="form-control" id="email" placeholder="Nhập email"
+                value="${user.email}">
+                <span class="form-message"></span>
             </div>
             <div class="form-group">
                 <label for="phone">Phone number:</label>
-                <input required="true" type="phone" class="form-control" id="phone"
-                       value="${accountRegister.phonenumber}">
-                <label style="color: red">${errPhone}</label>
+                <input required="true" type="phone" class="form-control" id="phone" placeholder="Nhập số điện thoại"
+                       value="${user.phonenumber}">
+                <span class="form-message"></span>
             </div>
             <div class="form-group">
                 <label for="pwd">Password:</label>
-                <input required="true" type="password" class="form-control" id="pwd"
-                       value="${accountRegister.password}">
-                <label style="color: red">${errPassword}</label>
+                <input required="true" type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu"
+                       value="${user.passWord}">
+                <span class="form-message"></span>
             </div>
             <div class="form-group">
                 <label for="confirmation_pwd">Confirmation Password:</label>
-                <input required="true" type="password" class="form-control" id="confirmation_pwd">
+                <input required="true" type="password" class="form-control" placeholder="Xác nhận mật khẩu" id="confirmation_pwd">
+                <span class="form-message"></span>
             </div>
             <div class="form-group">
                 <label for="address">Address:</label>
-                <input type="text" class="form-control" id="address"
-                       value="${accountRegister.address}">
-                <label style="color: red">${errAddress}</label>
+                <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ"
+                       value="${user.address}">
+                <span class="form-message"></span>
             </div>
             <button type="button" class="btn btn-success" id="btnRegister">Register</button>
             <button class="btn btn-success" onclick="document.location='${pageContext.request.contextPath}/trang-chu?action=home'">Cancel</button>
-        </div>
+        </form>
     </div>
 </div>
 <script>
@@ -80,14 +80,13 @@
         var email= $('#email').val();
         var phone= $('#phone').val();
         var pwd= $('#pwd').val();
-        var confirmation_pwd= $('#confirmation_pwd').val();
         var address= $('#address').val();
         var data={
             "fullname":fullname,
             "username":username,
             "email":email,
             "phone_number":phone,
-            "password":pwd,
+            "passWord":pwd,
             "address":address,
             "role": "0"
         }
@@ -116,6 +115,32 @@
 
         })
     }
+</script>
+
+<script src='${pageContext.request.contextPath }/Validation.js'></script>
+<script>
+    Validator({
+        form: '#register-form',
+        formGroupSelector: '.form-group',
+        errorSelector : '.form-message',
+        rules: [
+            Validator.isRequired('#fullname'),
+            Validator.isRequired('#username'),
+            Validator.minLength('#username','6'),
+            Validator.isRequired('#email'),
+            Validator.isEmail('#email'),
+            Validator.isRequired('#phone'),
+            Validator.minLength('#pwd', '6'),
+            Validator.minLength('#confirmation_pwd','6'),
+            Validator.isRequired('#pwd'),
+            Validator.isRequired('#comfirmation_pwd'),
+            Validator.isConfirmed('#confirmation_pwd',function () {
+                return document.querySelector('#register-form #pwd').value;
+            }),
+            Validator.isRequired('#address')
+        ]
+    });
+
 </script>
 </body>
 </html>

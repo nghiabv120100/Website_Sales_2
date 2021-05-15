@@ -36,7 +36,7 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Danh sách thương hiệu</h2>
+                    <h2>Danh sách loại hàng</h2>
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div>
-                        <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value="/admin-category-list?type=add"/>' style="color: white">Thêm thương hiệu</a></button>
+                        <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value="/admin-category-list?type=add"/>' style="color: white">Thêm loại hàng</a></button>
                     </div>
 
                     <!-- Advanced Tables -->
@@ -57,8 +57,8 @@
                                     <thead>
                                     <tr>
                                         <th>ID </th>
-                                        <th>Ảnh thương hiệu</th>
-                                        <th>Tên thương hiệu</th>
+                                        <th>Ảnh loại hàng</th>
+                                        <th>Tên loại hàng</th>
                                         <th></th>
                                     </tr>
                                     </thead>

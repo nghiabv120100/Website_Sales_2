@@ -24,5 +24,8 @@ public class CartService {
         cart.setStatus(0);
         return cartDAO.delete(cart);
     }
+    public List<CartEntity> findByUserID(Integer id) {
+        return cartDAO.findByUserId(id);
+    }
 
 }

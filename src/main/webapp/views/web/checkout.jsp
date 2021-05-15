@@ -31,18 +31,18 @@
 				<div class="col-sm-6">
 					<div class="shopper-info">
 						<p>Thông tin tài khoản</p>
-						<form action="${pageContext.request.contextPath}/api-user-change-Inf" method="get">
-							<input readonly id="name" type="text" placeholder="Tên" name="userName"
-								   value="${accountModel.getUsername()}">
+						<form action="${pageContext.request.contextPath}/api-user-change-Inf" method="get" id="info" >
+							<input readonly id="fullname" type="text" placeholder="Tên" name="fullname"
+								   value="${user.getFullname()}">
 							<label style="color: red">${errUserName}</label>
 							<input id="email" type="text" placeholder="Email" name="email"
-								   value="${accountModel.getEmail()}">
+								   value="${user.getEmail()}">
 							<label style="color: red">${errEmail}</label>
 							<input id="address" type="text" placeholder="Địa chỉ" name="address"
-								   value="${accountModel.getAddress()}">
+								   value="${user.getAddress()}">
 							<label style="color: red">${errAddress}</label>
 							<input id="phonenumber" type="text" placeholder="Số điện thoại" name="phoneNumber"
-								   value="${accountModel.getPhonenumber()}">
+								   value="${user.getPhone_number()}">
 							<label style="color: red">${errPhone}</label>
 							<button type="submit" class="btn btn-primary">Thay đổi thông tin</button>
 						</form>
@@ -78,7 +78,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				<c:forEach var="cart" items="${carts}">
+				<c:forEach var="cart" items="${lstCart}">
 					<tr>
 						<td class="cart_product">
 							<h4>#${cart.id}</h4>
@@ -95,8 +95,8 @@
 
 						</td>
 						<td>
-							<c:if test="${cart.getOptionPay()==0}">Trả tiền khi nhận hàng</c:if>
-							<c:if test="${cart.getOptionPay()==1}">Thanh toán online</c:if>
+							<c:if test="${cart.payments==0}">Trả tiền khi nhận hàng</c:if>
+							<c:if test="${cart.payments==1}">Thanh toán online</c:if>
 						</td>
 						<td class="cart_description">
 						<a class="center" data-toggle="modal"   data-target="#oderlist${cart.id}">Xem chi tiết</a>
@@ -106,7 +106,7 @@
 				</tbody>
 			</table>
 		</div>
-		<c:forEach items="${carts}" var="cart">
+		<c:forEach items="${lstCart}" var="cart">
 			<div class="modal fade" id="oderlist${cart.id}">
 				<div class="modal-dialog modal-dialog-centered modal-lg" style="width: 50%;">
 					<div class="modal-content" >
@@ -125,14 +125,14 @@
 								</tr>
 								</thead>
 								<tbody>
-								<c:forEach items="${cart.getItemModelList()}" var="item">
+								<c:forEach items="${cart.getProductCartEntityList()}" var="item">
 									<tr>
-										<c:url value="/image/${item.getProduct().getImage()}" var="imgUrl"></c:url>
+										<c:url value="/image/${item.getProductEntity().getImage()}" var="imgUrl"></c:url>
 										<td class="cart_product" style="margin: 0px;	">
 
 											<img width="50px" height="50px" src="${imgUrl}" alt="#">
 										</td>
-										<td class="description">${item.getProduct().getProductName()}</td>
+										<td class="description">${item.getProductEntity().getProName()}</td>
 <%--										<td class="price">${item.getUnitPrice()}<span>VNĐ</span></td>--%>
 										<td class="price"><fmt:formatNumber type="number" value="${item.getUnitPrice()}" /> VNĐ</td>
 
@@ -189,6 +189,33 @@
 		})
 
 	}
+</script>
+
+
+<script src='${pageContext.request.contextPath }/Validation.js'></script>
+<script>
+	Validator({
+		form: '#info',
+		formGroupSelector: '.form-group',
+		errorSelector : '.form-message',
+		rules: [
+			Validator.isRequired('#fullname'),
+			Validator.isRequired('#username'),
+			Validator.minLength('#username','6'),
+			Validator.isRequired('#email'),
+			Validator.isEmail('#email'),
+			Validator.isRequired('#phone'),
+			Validator.minLength('#pwd', '6'),
+			Validator.minLength('#confirmation_pwd','6'),
+			Validator.isRequired('#pwd'),
+			Validator.isRequired('#comfirmation_pwd'),
+			Validator.isConfirmed('#confirmation_pwd',function () {
+				return document.querySelector('#register-form #pwd').value;
+			}),
+			Validator.isRequired('#address')
+		]
+	});
+
 </script>
 
 </body>
