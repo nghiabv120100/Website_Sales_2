@@ -56,15 +56,15 @@ insert into brand (id,brand_name,image,status)
 values (15,'Other','logo15.PNG',1);
 
 -- ==============================
-insert into user( email, fullname, password, phone_number, role,status,username)
-values('haductrung392000@gmail.com'   ,"Hà Đức"      ,'duc123'	,'9410250036',	    1,1,'ducadmin'),
-      ('thanhlong120098@gmail.com'    ,"Hà Đức"      ,'duc123'	,'856352694',		0,0,'ducuser'),
-      ('bvnghia0000@gmail.com'        ,"Văn Nghĩa"   ,'nghia123','124536824',		1,1,'nghiaadmin'),
-      ('bvnghiauu@gmail.com' 		  ,"Văn Nghĩa"   ,'nghia123','147253689',		0,0,'nghiauser'),
-      ('nd1@gmail.com'                ,"Dương Hùng"  ,'hung123'	,'9410250036',	    1,1,'hungadmin'),
-      ('nd2@gmail.com'                ,"Dương Hùng"  ,'hung123'	,'856352694',		0,0,'hunguser'),
-      ('nd3@gmail.com'                ,"Quốc Huy"    ,'huy123'	,'124536824',		1,1,'huyadmin'),
-      ('nd4@gmail.com'                ,"Quốc Huy"    ,'huy123'	,'147253689',		0,0,'huyuser');
+insert into user( email, fullname, password, phone_number, role,status,username,address)
+values('haductrung392000@gmail.com'   ,"Hà Đức"      ,'duc123'	,'9410250036',	    1,1,'ducadmin',	'Obere Str. 0123'),
+      ('thanhlong120098@gmail.com'    ,"Hà Đức"      ,'duc123'	,'856352694',		0,1,'ducuser',	'Avda. de la Constitución 5678'),
+      ('bvnghia0000@gmail.com'        ,"Văn Nghĩa"   ,'nghia123','124536824',		1,1,'nghiaadmin','Mataderos  7890'),
+      ('bvnghiauu@gmail.com' 		  ,"Văn Nghĩa"   ,'nghia123','147253689',		0,1,'nghiauser',	'7890 Hanover Sq.'),
+      ('nd1@gmail.com'                ,"Dương Hùng"  ,'hung123'	,'9410250036',	    1,1,'hungadmin',	'Obere Str. 0123'),
+      ('nd2@gmail.com'                ,"Dương Hùng"  ,'hung123'	,'856352694',		0,1,'hunguser',	'Avda. de la Constitución 5678'),
+      ('nd3@gmail.com'                ,"Quốc Huy"    ,'huy123'	,'124536824',		1,1,'huyadmin',	'Mataderos  7890'),
+      ('nd4@gmail.com'                ,"Quốc Huy"    ,'huy123'	,'147253689',		0,1,'huyuser',	'6210 Hanover po.');
      
 -- 'Bảo hành 3S1 siêu nhanh: bảo hành nhanh, trong vòng 3 ngày kể cả thứ 7 và chủ nhật' 
 -- #---------------Laptop 

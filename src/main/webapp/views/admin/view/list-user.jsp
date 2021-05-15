@@ -58,6 +58,7 @@
 										<th>ID</th>
 										<th>Email</th>
 										<th>Tên người dùng</th>
+										<th>Địa chỉ</th>
 										<th>Tên đăng nhập</th>
 										<th>Mật khẩu</th>
 										<th>Trạng thái</th>
@@ -71,6 +72,7 @@
 											<td>${user.id}</td>
 											<td>${user.email }</td>
 											<td>${user.fullname }</td>
+											<td>${user.address }</td>
 											<td>${user.username }</td>
 											<td>${user.passWord }</td>
 											<td class="center">Active</td>

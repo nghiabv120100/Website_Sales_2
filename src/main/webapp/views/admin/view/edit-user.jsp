@@ -97,10 +97,6 @@
 
 											</div>
 
-											<div class="form-group">
-												<label>Chọn Avatar</label> <input type="file"
-													name="avatar" />
-											</div>
 											<button type="button" class="btn btn-default" id="btnEdit">Cập nhật</button>
 											<button type="reset" class="btn btn-primary">Reset</button>
 										</form>
