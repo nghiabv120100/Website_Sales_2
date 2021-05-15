@@ -68,8 +68,10 @@
                 <span class="form-message"></span>
             </div>
             <button type="button" class="btn btn-success" id="btnRegister">Register</button>
-            <button class="btn btn-success" onclick="document.location='${pageContext.request.contextPath}/trang-chu?action=home'">Cancel</button>
         </form>
+            <button class="btn btn-success" onclick="document.location='${pageContext.request.contextPath}/views/web/login.jsp'">Cancel</button>
+      <%--      <button class="btn btn-success" onclick="document.location='${pageContext.request.contextPath}/trang-chu?action=home'">Cancel</button>--%>
+        </div>
     </div>
 </div>
 <script>
@@ -108,7 +110,6 @@
             },
             error: function (error){
                 console.log("Error");
-
                 window.location.href = "${url}?type=register";
 
             }
