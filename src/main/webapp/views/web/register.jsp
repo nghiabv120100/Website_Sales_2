@@ -20,81 +20,101 @@
 </head>
 <body>
 <div class="container">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h2 class="text-center">Đăng ký tài khoản</h2>
-        </div>
-
+    <div class="register-form">
         <form class="panel-body" id="register-form">
+            <div class="panel-heading">
+                <h2 class="text-center">Đăng ký tài khoản</h2>
+            </div>
+
             <div class="form-group">
                 <label for="fullname">Full Name:</label>
-                <input required="true" type="text" class="form-control" id="fullname"
-                       value="${user.fullname}" placeholder = "Nhập full name" />
+                <input required="true" type="text" value="${user.fullname}" class="form-control" id="fullname" name="fullname" placeholder = "Nhập full name" />
                 <span class="form-message"></span>
             </div>
+
             <div class="form-group">
                 <label for="username">User Name:</label>
-                <input required="true" type="text" class="form-control" id="username"
-                       value="${user.username}" placeholder = "Nhập User" />
+                <input required="true" type="text" value="${user.username}" class="form-control" id="username" name="username" placeholder = "Nhập User" />
                 <span class="form-message"></span>
             </div>
+
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input required="true" type="email" class="form-control" id="email" placeholder="Nhập email"
-                value="${user.email}">
+                <input required="true" type="email" value="${user.email}" class="form-control" id="email" name="email" placeholder="Nhập email" />
                 <span class="form-message"></span>
             </div>
+
             <div class="form-group">
                 <label for="phone">Phone number:</label>
-                <input required="true" type="phone" class="form-control" id="phone" placeholder="Nhập số điện thoại"
-                       value="${user.phonenumber}">
+                <input required="true" type="phone" class="form-control" value="${user.phonenumber}" id="phone" placeholder="Nhập số điện thoại"/>
                 <span class="form-message"></span>
             </div>
             <div class="form-group">
                 <label for="pwd">Password:</label>
-                <input required="true" type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu"
-                       value="${user.passWord}">
+                <input required="true" type="password" value="${user.passWord}" class="form-control" id="pwd" placeholder="Nhập mật khẩu"/>
                 <span class="form-message"></span>
             </div>
+
             <div class="form-group">
                 <label for="confirmation_pwd">Confirmation Password:</label>
                 <input required="true" type="password" class="form-control" placeholder="Xác nhận mật khẩu" id="confirmation_pwd">
                 <span class="form-message"></span>
             </div>
+
             <div class="form-group">
                 <label for="address">Address:</label>
-                <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ"
-                       value="${user.address}">
+                <input type="text" class="form-control" value="${user.address}" id="address" placeholder="Nhập địa chỉ" />
                 <span class="form-message"></span>
             </div>
-            <button type="button" class="btn btn-success" id="btnRegister">Register</button>
-        </form>
+
+            <button type="submit" class="btn btn-success" id="btnRegister">Register</button>
             <button class="btn btn-success" onclick="document.location='${pageContext.request.contextPath}/views/web/login.jsp'">Cancel</button>
-      <%--      <button class="btn btn-success" onclick="document.location='${pageContext.request.contextPath}/trang-chu?action=home'">Cancel</button>--%>
-        </div>
+        </form>
     </div>
 </div>
+<script src='${pageContext.request.contextPath }/Validation.js'></script>
 <script>
-    $('#btnRegister').click(function (e){
-        e.preventDefault();
-        var fullname=$('#fullname').val();
-        var username= $('#username').val();
-        var email= $('#email').val();
-        var phone= $('#phone').val();
-        var pwd= $('#pwd').val();
-        var address= $('#address').val();
-        var data={
-            "fullname":fullname,
-            "username":username,
-            "email":email,
-            "phone_number":phone,
-            "passWord":pwd,
-            "address":address,
-            "role": "0"
+    ///Mong muon cua chung ta khi su dung thu vien nay
+    Validator({
+        form: '#register-form',
+        formGroupSelector: '.form-group',
+        errorSelector : '.form-message',
+        rules: [
+            Validator.isRequired('#fullname'),
+            Validator.isRequired('#username'),
+            Validator.minLength('#username','6'),
+            Validator.isRequired('#email'),
+            Validator.isEmail('#email'),
+            Validator.isRequired('#phone'),
+            Validator.minLength('#pwd', '6'),
+            Validator.isRequired('#address'),
+            Validator.minLength('#confirmation_pwd','6'),
+            Validator.isConfirmed('#confirmation_pwd',function () {
+                return document.querySelector('#register-form #pwd').value;
+            })
+        ],
+        onSubmit: function (data) {
+            ///call API
+            var fullname=$('#fullname').val();
+            var username= $('#username').val();
+            var email= $('#email').val();
+            var phone= $('#phone').val();
+            var pwd= $('#pwd').val();
+            var address= $('#address').val();
+            var data={
+                "fullname":fullname,
+                "username":username,
+                "email":email,
+                "phone_number":phone,
+                "passWord":pwd,
+                "address":address,
+                "role": "0"
+            }
+            registerAccount(data)
         }
-        registerAccount(data)
     });
     function registerAccount(data){
+        console.log(data);
         $.ajax({
             url: '${APIurl}',
             type: 'POST',
@@ -111,37 +131,10 @@
             error: function (error){
                 console.log("Error");
                 window.location.href = "${url}?type=register";
-
             }
-
         })
     }
 </script>
-
-<script src='${pageContext.request.contextPath }/Validation.js'></script>
-<script>
-    Validator({
-        form: '#register-form',
-        formGroupSelector: '.form-group',
-        errorSelector : '.form-message',
-        rules: [
-            Validator.isRequired('#fullname'),
-            Validator.isRequired('#username'),
-            Validator.minLength('#username','6'),
-            Validator.isRequired('#email'),
-            Validator.isEmail('#email'),
-            Validator.isRequired('#phone'),
-            Validator.minLength('#pwd', '6'),
-            Validator.minLength('#confirmation_pwd','6'),
-            Validator.isRequired('#pwd'),
-            Validator.isRequired('#comfirmation_pwd'),
-            Validator.isConfirmed('#confirmation_pwd',function () {
-                return document.querySelector('#register-form #pwd').value;
-            }),
-            Validator.isRequired('#address')
-        ]
-    });
-
-</script>
 </body>
+
 </html>
