@@ -17,6 +17,10 @@ Status Cart
     1 : Admin
     2 : Shipper
     3 : Employee
+  ------------------------------------
+  Payment
+    0 : off
+    1 : onl
 --------------------------------------
 Cart thiếu ngày mua hàng
      thiếu hình thức thanh toán

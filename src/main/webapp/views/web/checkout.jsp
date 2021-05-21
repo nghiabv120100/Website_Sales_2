@@ -32,10 +32,12 @@
 					<div class="shopper-info">
 						<p>Thông tin tài khoản</p>
 						<form action="${pageContext.request.contextPath}/api-user-change-Inf" method="get" id="info" >
-							<input readonly id="fullname" type="text" placeholder="Tên" name="fullname"
+
+							<input class="form-one" readonly id="fullname" type="text" placeholder="Tên" name="fullname"
 								   value="${user.getFullname()}">
 							<label style="color: red">${errUserName}</label>
-							<input id="email" type="text" placeholder="Email" name="email"
+
+							<input style="" id="email" type="text" placeholder="Email" name="email"
 								   value="${user.getEmail()}">
 							<label style="color: red">${errEmail}</label>
 							<input id="address" type="text" placeholder="Địa chỉ" name="address"
@@ -43,8 +45,10 @@
 							<label style="color: red">${errAddress}</label>
 							<input id="phonenumber" type="text" placeholder="Số điện thoại" name="phoneNumber"
 								   value="${user.getPhone_number()}">
-							<label style="color: red">${errPhone}</label>
+							<span class="form-message"></span>
+							<%--							<label style="color: red">${errPhone}</label>--%>
 							<button type="submit" class="btn btn-primary">Thay đổi thông tin</button>
+
 						</form>
 					</div>
 				</div>
@@ -89,7 +93,7 @@
 						<td class="cart_description">
 							<h4>${cart.buyDate}</h4>
 						</td>
-						<td class="cart_d	escription">
+						<td class="cart_description">
 <%--						<h4>${cart.totalPrice} VNĐ</h4>--%>
 						<h4><fmt:formatNumber type="number" value="${cart.totalPrice}" /> VNĐ</h4>
 
@@ -189,6 +193,7 @@
 		})
 
 	}
+
 </script>
 
 
@@ -196,23 +201,13 @@
 <script>
 	Validator({
 		form: '#info',
-		formGroupSelector: '.form-group',
+		formGroupSelector: '.',
 		errorSelector : '.form-message',
 		rules: [
 			Validator.isRequired('#fullname'),
-			Validator.isRequired('#username'),
-			Validator.minLength('#username','6'),
 			Validator.isRequired('#email'),
-			Validator.isEmail('#email'),
-			Validator.isRequired('#phone'),
-			Validator.minLength('#pwd', '6'),
-			Validator.minLength('#confirmation_pwd','6'),
-			Validator.isRequired('#pwd'),
-			Validator.isRequired('#comfirmation_pwd'),
-			Validator.isConfirmed('#confirmation_pwd',function () {
-				return document.querySelector('#register-form #pwd').value;
-			}),
-			Validator.isRequired('#address')
+			Validator.isRequired('#address'),
+
 		]
 	});
 

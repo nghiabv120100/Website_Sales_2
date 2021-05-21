@@ -79,8 +79,8 @@
 							<div class="tab-content">
 								<div class="tab-pane fade active in" id="tshirt" >
 									<c:choose>
-										<c:when test="${!empty proList1}">
-											<c:forEach var = "i" items="${proList1}">
+										<c:when test="${!empty lstDELL}">
+											<c:forEach var = "i" items="${lstDELL}">
 												<c:url value="/image/${i.getImage()}" var="imgUrl"></c:url>
 												<div class="col-sm-4">
 													<div class="product-image-wrapper">
@@ -100,7 +100,7 @@
 																</a>
 																<%--<h2>${i.getPrice()} ₫</h2>--%>
 																<h2><fmt:formatNumber type="number" value="${i.getPrice()}" /></h2>
-																<p>${i.getProductName()}</p>
+																<p>${i.getProName()}</p>
 																<a onclick="addToCart(${i.getId()})" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
 															</div>
 														</div>
@@ -129,8 +129,8 @@
 							<div class="tab-content">
 								<div class="tab-pane fade active in" id="tshirt" >
 									<c:choose>
-										<c:when test="${!empty proList2}">
-											<c:forEach var = "i" items="${proList2}">
+										<c:when test="${!empty lstASUS}">
+											<c:forEach var = "i" items="${lstASUS}">
 												<c:url value="/image/${i.getImage()}" var="imgUrl"></c:url>
 												<div class="col-sm-4">
 													<div class="product-image-wrapper">
@@ -150,7 +150,7 @@
 																</a>
 																<%--<h2>${i.getPrice()} ₫</h2>--%>
 																<h2><fmt:formatNumber type="number" value="${i.getPrice()}" /></h2>
-																<p>${i.getProductName()}</p>
+																<p>${i.getProName()}</p>
 																<a  <%--href="${APIurl}?id=${i.getId()}"--%> onclick="addToCart(${i.getId()})" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
 																	<%--												<button onclick="addToCart(1)" class="btn btn-default add-to-cart"><i  class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>--%>
 															</div>
@@ -186,8 +186,8 @@
 							<div class="tab-content">
 								<div class="tab-pane fade active in" id="tshirt" >
 									<c:choose>
-										<c:when test="${!empty proList3}">
-											<c:forEach var = "i" items="${proList3}">
+										<c:when test="${!empty lstMSI}">
+											<c:forEach var = "i" items="${lstMSI}">
 												<c:url value="/image/${i.getImage()}" var="imgUrl"></c:url>
 												<div class="col-sm-4">
 													<div class="product-image-wrapper">
@@ -207,7 +207,7 @@
 																</a>
 																<%--<h2>${i.getPrice()} ₫</h2>--%>
 																<h2><fmt:formatNumber type="number" value="${i.getPrice()}" /></h2>
-																<p>${i.getProductName()}</p>
+																<p>${i.getProName()}</p>
 																<a  <%--href="${APIurl}?id=${i.getId()}"--%> onclick="addToCart(${i.getId()})" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
 																	<%--												<button onclick="addToCart(1)" class="btn btn-default add-to-cart"><i  class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>--%>
 															</div>

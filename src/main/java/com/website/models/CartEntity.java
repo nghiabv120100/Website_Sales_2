@@ -4,12 +4,17 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.List;
 
 
 @Entity
 @Table(name = "Cart")
 public class CartEntity {
+
 
     @Id
     @Column(name = "id")
@@ -62,7 +67,12 @@ public class CartEntity {
     }
 
     public CartEntity() {
+
+        Calendar calendar = Calendar.getInstance();
+        java.util.Date currentDate = calendar.getTime();
+        java.sql.Date date = new java.sql.Date(currentDate.getTime());
         this.setStatus(1);
+        this.setBuyDate(date);
     }
 
     public Integer getId() {

@@ -84,8 +84,8 @@
 													<td>${buyer.fullname }</td>
 													<td>${salesman.fullname}</td>
 													<td>${shipper.fullname }</td>
-<%--													<td>${cart.buyDate }</td>--%>
-													<td></td>
+													<td>${cart.buyDate }</td>
+<%--													<td></td>--%>
 													<td ><fmt:formatNumber type="number" value="${cart.totalPrice}" /> VNĐ</td>
 
 													<%--<td>

@@ -1,6 +1,7 @@
 package com.website.dao;
 
 import com.website.models.ProductEntity;
+import com.website.utils.HibernateUtil;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.MatchMode;
@@ -12,6 +13,25 @@ import java.util.List;
 
 public class ProductDAO extends GenericDAO<Integer, ProductEntity> {
     SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+
+    public List<ProductEntity> findByDetailCategory(int id) {
+        List<ProductEntity> list = new ArrayList<ProductEntity>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            StringBuilder sql = new StringBuilder("from ProductEntity");
+            sql.append(" where detail_category_id:=id");
+            org.hibernate.Query query1 = session.createQuery(sql.toString());
+            list = query1.list();
+        }catch (HibernateException e) {
+            transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+        return list;
+
+    }
 
     public List<ProductEntity> getProductEntity (int brand_id,int detail_cate_id,int start_price, int end_price,String keyWord,int category_id,int postition, int pageSize){
         Session session = sessionFactory.openSession();
