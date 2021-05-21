@@ -30,7 +30,7 @@
 				<div class="product-details"><!--product-details-->
 					<div class="col-sm-5">
 						<div class="view-product">
-							<c:url var="imgUrl" value="/image/${productModel.getImage()}"></c:url>
+							<c:url var="imgUrl" value="/image/${productEntity.getImage()}"></c:url>
 							<img height="250" width="200" src="${imgUrl}" alt="" />
 						</div>
 						<div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -53,14 +53,14 @@
 					</div>
 					<div class="col-sm-7">
 						<div class="product-information"><!--/product-information-->
-							<h2>${productModel.getProductName()}</h2>
+							<h2>${productEntity.getProName()}</h2>
 							<span>
 
-<%--									<span>${productModel.getPrice()} ₫</span>--%>
-									<h2><fmt:formatNumber type="number" value="${productModel.getPrice()}" /> VNĐ</h2>
+<%--									<span>${productEntity.getPrice()} ₫</span>--%>
+									<h2><fmt:formatNumber type="number" value="${productEntity.getPrice()}" /> VNĐ</h2>
 
 									<br>
-									<button style="margin: 0;" type="button"  class="btn btn-fefault cart" onclick="addToCart(${productModel.getId()})"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+									<button style="margin: 0;" type="button"  class="btn btn-fefault cart" onclick="addToCart(${productEntity.getId()})"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
 								</span>
 							<p><b>Mô tả sản phẩm:</b></p>
 							<p>Ngày nay, khi người dùng lựa chọn cho mình một chiếc laptop để sử dụng luôn quan tâm đến nhu cầu sử dụng vừa để làm việc vừa để giải trí chơi game. Vì vậy lựa chọn cho mình một chiếc laptop gaming là một giải pháp phù hợp cho mọi nhu cầu sử dụng của bạn. Acer Nitro 5 là chiếc laptop đến từ thương hiệu Acer sẽ mang đến một cách nhìn hoàn toàn mới về các nhu cầu sử dụng trên dòng laptop gaming có thể mang lại cho người dùng.</p>

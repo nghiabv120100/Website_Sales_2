@@ -21,7 +21,7 @@ public class HomeController extends HttpServlet {
 
     String url="";
     List<ProductEntity> lstMSI;
-    List<ProductEntity> lstDELL;
+    List<ProductEntity> lstACER;
     List<ProductEntity> lstASUS;
 
 
@@ -31,20 +31,25 @@ public class HomeController extends HttpServlet {
         List<ProductEntity> lstProduct = productService.findAll();
 
         lstMSI = new ArrayList<>();
-        lstDELL = new ArrayList<>();
+        lstACER = new ArrayList<>();
         lstASUS = new ArrayList<>();
 
         for (int i=0;i<lstProduct.size();i++) {
-            if (lstProduct.get(i).getDetailCategoryEntity().getId()==3) {
-                lstDELL.add(lstProduct.get(i));
-            } else if (lstProduct.get(i).getDetailCategoryEntity().getId()==2) {
-                lstASUS.add(lstProduct.get(i));
+            if (lstProduct.get(i).getDetailCategoryEntity().getId()==1) {
+                if(lstACER.size() <3) {
+                    lstACER.add(lstProduct.get(i));
+                }
+
             } else if (lstProduct.get(i).getDetailCategoryEntity().getId()==7) {
-                lstMSI.add(lstProduct.get(i));
+                if (lstASUS.size() < 3)
+                    lstASUS.add(lstProduct.get(i));
+            } else if (lstProduct.get(i).getDetailCategoryEntity().getId()==10) {
+                if (lstMSI.size() < 3)
+                    lstMSI.add(lstProduct.get(i));
             }
         }
 
-        req.setAttribute("lstDELL",lstDELL);
+        req.setAttribute("lstACER",lstACER);
         req.setAttribute("lstMSI",lstMSI);
         req.setAttribute("lstASUS",lstASUS);
         RequestDispatcher rd = req.getRequestDispatcher(url);

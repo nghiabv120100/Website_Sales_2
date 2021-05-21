@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Locale;
 
 @WebServlet(urlPatterns = {"/api-admin-category"})
 public class CategoryAPI extends HttpServlet {
@@ -35,6 +36,19 @@ public class CategoryAPI extends HttpServlet {
 
         CategoryEntity category = HttpUtil.of(req.getReader()).toModel(CategoryEntity.class);
         CategoryEntity cate= categoryService.update(category);
+        mapper.writeValue(resp.getOutputStream(),cate);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+
+        Integer id =Integer.parseInt(req.getReader().readLine());
+        CategoryEntity categoryEntity = categoryService.findById(id);
+        categoryEntity.setStatus(0);
+        CategoryEntity cate= categoryService.update(categoryEntity);
         mapper.writeValue(resp.getOutputStream(),cate);
     }
 }

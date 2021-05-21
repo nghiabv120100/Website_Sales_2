@@ -99,7 +99,7 @@
 
 											</div>
 											<div class="form-group">
-												<label>Ảnh sản phẩm</label> <input type="file" name="image" value="${product.image }" />
+												<label>Ảnh sản phẩm</label> <input type="file" name="image" value="${product.getImage()}" />
 											</div>
 											<button id="btnEdit"  class="btn btn-default">Cập nhật</button>
 											<button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=edit&id=${product.id}'">Reset</button>
@@ -138,7 +138,7 @@
 			var productName= $('#productName').val();
 			var price= parseFloat($('#price').val());
 			var quantity = parseInt($('#quantity').val());
-			// var describePro= CKEDITOR.instances.editer.getData();
+			var describePro= CKEDITOR.instances.editer.getData();
 			var id= parseInt($('#id').val()) ;
 			var detailCateId=parseInt($('#detailCateId').val());
 			// var image= $('#image').val();
@@ -149,8 +149,8 @@
 				"proName":productName,
 				"price":price,
 				"quantity":quantity,
-				// "describePro":describePro,
-				"image":image,
+				"describePro":describePro,
+				// "image":image,
 				"detailCategoryEntity": {
 					"id":detailCateId,
 				},

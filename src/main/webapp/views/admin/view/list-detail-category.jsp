@@ -57,7 +57,7 @@
                                     <thead>
                                     <tr>
                                         <th>ID </th>
-                                        <th>Ảnh chi tiết danh mục</th>
+<%--                                        <th>Ảnh chi tiết danh mục</th>--%>
                                         <th>Tên chi tiết danh mục</th>
                                         <th>Tên danh mục</th>
                                         <th></th>
@@ -68,7 +68,7 @@
                                         <tr class="odd gradeX">
                                             <td>${detailcategory.id }</td>
                                             <c:url value="/views/web/static/images/${detailcategory.image}" var="imgUrl"></c:url>
-                                            <td><img style="width: 50px;height: 50px;object-fit: cover" src="${imgUrl}" /></td>
+<%--                                            <td><img style="width: 50px;height: 50px;object-fit: cover" src="${imgUrl}" /></td>--%>
 
                                             <td>${detailcategory.detailCateName }</td>
                                             <td>${detailcategory.categoryEntity.cateName}</td>

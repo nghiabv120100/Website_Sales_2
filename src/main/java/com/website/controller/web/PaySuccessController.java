@@ -79,7 +79,7 @@ public class PaySuccessController extends HttpServlet {
         }
         req.setAttribute("user",user);
         req.setAttribute("cart",cartEntity);
-        req.setAttribute("totalPrice",10);
+        req.setAttribute("totalPrice",cartEntity.getTotalPrice());
         session.removeAttribute("isOnline");
         session.removeAttribute("order");
 

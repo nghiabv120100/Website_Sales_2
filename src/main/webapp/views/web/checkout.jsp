@@ -88,7 +88,10 @@
 							<h4>#${cart.id}</h4>
 						</td>
 						<td class="cart_description">
-							<h4>Đã giao</h4>
+							<c:if test="${cart.status==1}"><h4>Chưa duyệt</h4></c:if>
+							<c:if test="${cart.status==2}"><h4>Đã duyệt</h4></c:if>
+							<c:if test="${cart.status==3}"><h4>Đang giao</h4></c:if>
+							<c:if test="${cart.status==4}"><h4>Đã hoàn thành</h4></c:if>
 						</td>
 						<td class="cart_description">
 							<h4>${cart.buyDate}</h4>

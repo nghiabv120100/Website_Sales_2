@@ -54,12 +54,11 @@
 										id="dataTables-example">
 										<thead>
 											<tr>
-												<th>index</th>
 												<th>ID</th>
 												<th>Email</th>
 												<th>Người mua</th>
-												<th>Người bán</th>
-												<th>Shipper</th>
+												<<%--th>Người bán</th>
+												<th>Shipper</th>--%>
 												<th>Ngày mua</th>
 												<th>Tổng thanh toán</th>
 												<th>Hình thức thanh toán</th>
@@ -73,27 +72,24 @@
 											<c:forEach items="${lstCart}" var="cart">
 												<c:url var="total_cart" value="${0}"></c:url>
 
-												<c:set var="index" value="${0}" />
 												<c:set var="buyer" value="${cart.clientEntity}"></c:set>
 												<c:set var="salesman" value="${cart.employeeEntity}"></c:set>
 												<c:set var="shipper" value="${cart.shipperEntity}"></c:set>
 												<tr>
-													<td>${index }</td>
-													<td>${cart.id }</td>
+													<td>#${cart.id }</td>
 													<td>${buyer.email }</td>
 													<td>${buyer.fullname }</td>
-													<td>${salesman.fullname}</td>
-													<td>${shipper.fullname }</td>
+													<%--<td>${salesman.fullname}</td>
+													<td>${shipper.fullname }</td>--%>
 													<td>${cart.buyDate }</td>
 <%--													<td></td>--%>
 													<td ><fmt:formatNumber type="number" value="${cart.totalPrice}" /> VNĐ</td>
 
-													<%--<td>
-														<c:if test="${cart.optionPay == 0}">Trả khi nhận hàng</c:if>
-														<c:if test="${cart.optionPay == 1}">Thanh toán online</c:if>
-													</td>--%>
+													<td>
+														<c:if test="${cart.payments == 0}">Trả khi nhận hàng</c:if>
+														<c:if test="${cart.payments == 1}">Thanh toán online</c:if>
+													</td>
 
-													<td></td>
 
 													<td class="center">
 														<c:if test="${cart.status == 0}">Đã xoá</c:if>

@@ -22,6 +22,7 @@ public class CartController extends HttpServlet {
         CartEntity cartEntity =  (CartEntity) session.getAttribute("order");
         UserEntity user = (UserEntity) session.getAttribute("user");
         Integer totalPrice =0;
+        String url ="";
 
         req.setAttribute("totalPrice",totalPrice);
         req.setAttribute("user",user);
@@ -35,7 +36,12 @@ public class CartController extends HttpServlet {
             cartEntity.setTotalPrice(totalPrice);
             req.setAttribute("totalPrice",totalPrice);
         }
-        String url ="views/web/cart.jsp";
+        if (user!=null) {
+            url ="views/web/cart.jsp";
+        } else {
+            url="views/web/login.jsp";
+        }
+        ;
         RequestDispatcher rd = req.getRequestDispatcher(url);
         rd.forward(req,resp);
     }

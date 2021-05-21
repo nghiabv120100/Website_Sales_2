@@ -58,8 +58,9 @@ public class HomeAPI extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/view/index.jsp");
                 dispatcher.forward(request, response);
             } else {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("views/web/index.jsp");
-                dispatcher.forward(request, response);
+                response.sendRedirect(request.getContextPath()+"/home");
+         /*       RequestDispatcher dispatcher = request.getRequestDispatcher();
+                dispatcher.forward(request, response);*/
             }
         } else {
             msg="Tên đăng nhập hoặc mật khẩu không chính xác.";

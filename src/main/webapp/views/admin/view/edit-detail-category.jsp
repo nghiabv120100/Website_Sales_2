@@ -103,7 +103,6 @@
 		$('#btnAdd').click(function (e){
 			e.preventDefault();
 			var id=$('#id').val();
-			console.log('Hello'+id);
 			updateProduct(id);
 		});
 		function updateProduct(data){

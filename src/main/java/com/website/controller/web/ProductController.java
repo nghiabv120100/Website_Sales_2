@@ -9,6 +9,7 @@ import com.website.service.CategoryService;
 import com.website.service.DetailCategoryService;
 import com.website.service.ProductService;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -210,6 +211,11 @@ public class ProductController extends HttpServlet {
                 req.setAttribute("nextPages",numberpage + 1);
             }
             req.setAttribute("numOfPages",totalpage);
+        } else if (type.equals("detail_product")) {
+            Integer id =Integer.parseInt(req.getParameter("id"));
+            ProductEntity productEntity = productService.findById(id);
+            req.setAttribute("productEntity",productEntity);
+            url ="views/web/product-details.jsp";
         }
 
         req.setAttribute("type",type);

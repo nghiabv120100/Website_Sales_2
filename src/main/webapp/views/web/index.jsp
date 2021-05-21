@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:url value="/views/web/static" var="url"> </c:url>
-<%--<c:url value="/api-user-cart" var="APIaurl"></c:url>--%>
+<c:url value="/api-user-cart" var="APIaurl"></c:url>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,8 +79,8 @@
 							<div class="tab-content">
 								<div class="tab-pane fade active in" id="tshirt" >
 									<c:choose>
-										<c:when test="${!empty lstDELL}">
-											<c:forEach var = "i" items="${lstDELL}">
+										<c:when test="${!empty lstACER}">
+											<c:forEach var = "i" items="${lstACER}">
 												<c:url value="/image/${i.getImage()}" var="imgUrl"></c:url>
 												<div class="col-sm-4">
 													<div class="product-image-wrapper">
@@ -92,14 +92,14 @@
 																		<img height="250" width="200" class="c2" src="${imgUrl}" alt="Fail" style="width: 300px;height: 200px;padding-left: 40px;"/>
 																		<div class="c3">
 																			<a  <%--href="${APIurl}?id=${i.getId()}"--%>
-																					href="${pageContext.request.contextPath }/list-laptop?type=detail_product&id=${i.getId()}&quantity=1"
+																					href="${pageContext.request.contextPath }/client-product-list?type=detail_product&id=${i.getId()}&quantity=1"
 																					class="btn btn-default add-to-cart"><i
 																					class="fa fa-shopping-cart"></i>Chi tiết sản phẩm</a>
 																		</div>
 																	</div>
 																</a>
 																<%--<h2>${i.getPrice()} ₫</h2>--%>
-																<h2><fmt:formatNumber type="number" value="${i.getPrice()}" /></h2>
+																<h2><fmt:formatNumber type="number" value="${i.getPrice()}" /> VNĐ</h2>
 																<p>${i.getProName()}</p>
 																<a onclick="addToCart(${i.getId()})" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
 															</div>

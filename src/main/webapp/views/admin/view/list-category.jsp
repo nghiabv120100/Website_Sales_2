@@ -57,7 +57,7 @@
                                     <thead>
                                     <tr>
                                         <th>ID </th>
-                                        <th>Ảnh loại hàng</th>
+<%--                                        <th>Ảnh loại hàng</th>--%>
                                         <th>Tên loại hàng</th>
                                         <th></th>
                                     </tr>
@@ -67,7 +67,7 @@
                                         <tr class="odd gradeX">
                                             <td>${category.id }</td>
                                             <c:url value="/views/web/static/images/${category.image}" var="imgUrl"></c:url>
-                                            <td><img style="width: 50px;height: 50px;object-fit: cover" src="${imgUrl}" /></td>
+<%--                                            <td><img style="width: 50px;height: 50px;object-fit: cover" src="${imgUrl}" /></td>--%>
 
                                             <td>${category.cateName }</td>
                                             <td>

@@ -31,7 +31,7 @@
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Thêm loại hàng</h2>
+						<h2>Cập nhật loại hàng</h2>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -55,7 +55,7 @@
 											<div class="form-group">
 												<label>Ảnh sản phẩm</label> <input  value="${category.image}" type="file" name="image" id="image"/>
 											</div>
-											<button type="button" id="btnAdd" class="btn btn-default">Thêm</button>
+											<button type="button" id="btnAdd" class="btn btn-default">Cập nhật</button>
 											<button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=add'">Reset</button>
 										</form>
 
@@ -87,9 +87,11 @@
 	<script>
 		$('#btnAdd').click(function (e){
 			e.preventDefault();
+			var id = $('#id').val();
 			var cateName= $('#cateName').val();
 			var image = $('input[type=file]').val().split('\\').pop();
 			var data={
+				"id":id,
 				"cateName":cateName,
 				"image":image
 			}
@@ -99,7 +101,7 @@
 		function updateProduct(data){
 			$.ajax({
 				url: '${APIurl}',
-				type: 'POST',
+				type: 'PUT',
 				enctype: 'multipart/form-data',
 				processData:false,
 				contentType: 'application/json',
