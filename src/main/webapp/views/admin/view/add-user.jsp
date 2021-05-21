@@ -70,7 +70,7 @@
 											</div>
 											<div class="form-group">
 												<label>Địa chỉ</label> <input class="form-control"
-																			 placeholder="Nhập mật khẩu" name="address" id="address" />
+																			 placeholder="Nhập địa chỉ" name="address" id="address" />
 											</div>
 											<div class="form-group">
 												<label>Chức vụ</label>
@@ -88,9 +88,7 @@
 													</label>
 												</div>
 											</div>
-											<div class="form-group">
-												<label>Avatar</label> <input type="file" name="avatar" id="avatar" />
-											</div>
+
 											<button type="submit" class="btn btn-default" id="btnAdd">Thêm</button>
 											<button type="reset" class="btn btn-primary">Reset</button>
 										</form>
