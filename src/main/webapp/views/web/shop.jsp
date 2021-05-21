@@ -43,7 +43,7 @@
 										<div class="owl-item">
 											<div class="brands_item d-flex flex-column justify-content-center">
 												<a href="${pageContext.request.contextPath}/client-product-list?type=Brand&brand_id=${brand.id}&page=1">
-													<img style="height: 40px; width: auto;" src="${pageContext.request.contextPath}/image/${brand.image}" alt="">
+													<img style="height: 40px; width: auto;" src="${pageContext.request.contextPath}/views/web/static/images/${brand.image}" alt="">
 												</a>
 											</div>
 										</div>
