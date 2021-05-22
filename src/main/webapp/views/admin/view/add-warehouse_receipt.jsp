@@ -9,8 +9,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <c:url value="/api-admin-product" var="APIurl"></c:url>
-<c:url value="/views/admin/static" var="url"></c:url>
 <c:url value="/admin-warehouse_receipt-list" var="PCurl"></c:url>
+<c:url value="/views/admin/static" var="url"></c:url>
+<c:url value="/add_goodreceived" var="path1"></c:url>
+<c:url value="/add_pro_good" var="path2"></c:url>
+
 <script src="./Validation.js"></script>
 <!DOCTYPE html>
 <html>
@@ -53,7 +56,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h3>Nhập thông tin phiếu nhập hàng</h3>
-                                    <form role="form" action="api-admin-product" method="post" enctype="multipart/form-data">
+                                    <form role="form" action="add_goodreceived" method="post" enctype="multipart/form-data">
 
                                         <div class="form-group" style="display:inline;">
                                             <div class="col-md-6">
@@ -77,33 +80,40 @@
                                             <table class="table table-striped table-bordered table-hover" id="data-table">
                                                 <thead>
                                                 <tr>
-                                                    <th>Mã sản phẩm </th>
+                                                    <%--                                                    <th style="display:none;">Mã sản phẩm </th>--%>
                                                     <th>Tên sản phẩm</th>
                                                     <th>Số lượng</th>
                                                     <th>Giá sản phẩm (vnđ)</th>
-                                                    <th>Tổng đơn hàng (vnđ)</th>
+                                                    <th>Tổng giá trị (vnđ)</th>
                                                     <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-<%--                                                <c:forEach items="${hangnhaps}" var="hangnhap">--%>
-<%--                                                    <tr>--%>
-<%--                                                        <td>2</td>--%>
-<%--                                                        <td>${hangnhap.getMaMatHang()}</td>--%>
-<%--                                                        <td>${hangnhap.getTenMatHang()}</td>--%>
-<%--                                                        <td>${hangnhap.getSoluong()}</td>--%>
-<%--                                                        <td>${hangnhap.getGiaTri()}</td>--%>
-<%--                                                        <td><button type="button" class="btn btn-primary float-right" onclick="DeleteRow()">Xóa</button></td>--%>
-<%--                                                    </tr>--%>
-<%--                                                </c:forEach>--%>
+                                                <%--                                                <c:forEach items="${hangnhaps}" var="hangnhap">--%>
+                                                <%--                                                    <tr>--%>
+                                                <%--                                                        <td>2</td>--%>
+                                                <%--                                                        <td>${hangnhap.getMaMatHang()}</td>--%>
+                                                <%--                                                        <td>${hangnhap.getTenMatHang()}</td>--%>
+                                                <%--                                                        <td>${hangnhap.getSoluong()}</td>--%>
+                                                <%--                                                        <td>${hangnhap.getGiaTri()}</td>--%>
+                                                <%--                                                        <td><button type="button" class="btn btn-primary float-right" onclick="DeleteRow()">Xóa</button></td>--%>
+                                                <%--                                                    </tr>--%>
+                                                <%--                                                </c:forEach>--%>
                                                 <tr>
-                                                    <td><input type="text" class="form-control" id="idsanpham" readonly></td>
-                                                    <td><input type="text" class="form-control" id="tensanpham"></td>
-                                                    <td><input type="text" class="form-control" id="soluong"></td>
-                                                    <td><input type="text" class="form-control" id="giasanpham"></td>
-                                                    <td><input type="text" class="form-control" id="tongdonhang" readonly></td>
+                                                    <%--                                                    <td style="display:none;" ><input type="text" class="form-control" id="idsanpham" readonly></td>--%>
                                                     <td>
-                                                        <button id="addRow" type="button" style="border-radius: 5px; border: none; background-color: white; color: black" class="btn btn-primary float-right" onclick="AddRow()">Thêm</button>
+                                                        <select name="proId" id="proId" style="width: 290px;">
+                                                            <c:forEach items="${lstProduct}" var="c">
+                                                                <option value="${c.id}+${c.proName}+${c.quantity}+${c.price}">${c.proName}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </td>
+                                                    <%--                                                    <td><input type="text" class="form-control" id="tensanpham"></td>--%>
+                                                    <td><input type="text" class="form-control" id="soluong"></td>
+                                                    <td><input type="text" class="form-control" id="giasanpham" readonly></td>
+                                                    <td><input type="text" class="form-control" id="tongiatri" readonly></td>
+                                                    <td>
+                                                        <button id="addRow" type="button" style="border-radius: 5px; border: none; background-color: white; color: black" class="btn btn-primary float-right">Thêm</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -143,14 +153,48 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
-    $('#addRow').click(function (e){
-        var tensanpham = document.getElementById("tensanpham").value;
-        var soluong = document.getElementById("soluong").value;
-        var giasanpham = document.getElementById("giasanpham").value;
-        var maphieu = null;
-        var myVar = JSON.stringify({nameProduct: tensanpham, price: giasanpham, total: soluong, goodsReceivedEntity: maphieu});
+    $('#btnAdd').click(function (e){
+        e.preventDefault();
+        var content_editter = document.getElementById("editer").value;
+        var supplierId = document.getElementById("supplierId").value;
+        var myVar = JSON.stringify({
+            supplierEntity:{
+                id:supplierId
+            },
+            note:content_editter
+        });
         $.ajax({
-            url: 'addImportGoods',
+            url: '${path1}',
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            processData:false,
+            contentType: 'application/json',
+            data: myVar,
+            dataType: 'json',
+            success: function (result){
+                console.log("Luu thanh cong");
+                window.location.href = "/Website_Sales_2_war/admin-warehouse_receipt-list?type=list";
+            },
+            errMode: function (error){
+                console.log("Error");
+            }
+        });
+    });
+    $('#addRow').click(function (e){
+
+        //Lay gia tri hang duoc chon
+        var sanpham = document.getElementById("proId").value;
+        var arr_data = sanpham.split('+',4);
+        var soluong = document.getElementById("soluong").value;
+
+        var myVar = JSON.stringify({
+            productEntity:{
+                id: arr_data[0],
+            },
+            quantity: soluong});
+
+        $.ajax({
+            url: '${path2}',
             type: 'POST',
             enctype: 'multipart/form-data',
             processData:false,
@@ -167,17 +211,12 @@
                 cell3 = row.insertCell(2);
                 cell4 = row.insertCell(3);
                 cell5 = row.insertCell(4);
-                cell6 = row.insertCell(5);
 
-                cell1.innerHTML = result.id;
-                cell2.innerHTML = tensanpham;
-                cell3.innerHTML = soluong;
-                cell4.innerHTML = giasanpham;
-                cell5.innerHTML = giasanpham * soluong ;
-                cell6.innerHTML = '<button type="button" class="btn btn-primary float-right" onclick="DeleteRow()">Xóa</button>';
-                document.getElementById("idsanpham").value = "";
-                document.getElementById("tensanpham").value = "";
-                document.getElementById("giasanpham").value = "";
+                cell1.innerHTML = arr_data[1];
+                cell2.innerHTML = soluong;
+                cell3.innerHTML = arr_data[3];
+                cell4.innerHTML = arr_data[3] * soluong;
+                cell5.innerHTML = '<button type="button" class="btn btn-primary float-right" onclick="DeleteRow()">Xóa</button>';
                 document.getElementById("soluong").value = "";
             },
             errMode: function (error){
