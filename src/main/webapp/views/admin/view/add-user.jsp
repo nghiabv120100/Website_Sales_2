@@ -154,7 +154,7 @@
 				// "avatar":avatar,
 				"role":roleId,
 				"phone_number":phonenumber,
-				// "address":address
+				"address":address
 
 			}
 			updateProduct(data)
