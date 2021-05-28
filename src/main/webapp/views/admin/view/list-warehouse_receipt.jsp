@@ -11,6 +11,7 @@
 <c:url var="APIurl" value="/api-admin-product"/>
 <c:url value="/views/admin/static" var="url"></c:url>
 <c:url value="/admin-product-list" var="PCurl"></c:url>
+<c:url value="/admin-warehouse_receipt-list" var="dUrl"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,15 +79,13 @@
                                             <td>${received.getUserEntity().getFullname()}</td>
                                             <td>${received.getDate_Goods_Received()}</td>
                                             <td>${received.getNote()}</td>
-                                            <td>0đ</td>
+                                            <td>${received.getTotal_price()}</td>
                                             <td>
                                                 <button style="width: 70px;">
                                                     <a href="<c:url value="/admin-product-list?type=edit&id=${pro.id }"/>"
                                                        class="center">Xem/Sửa</a>
                                                 </button>
-                                                <button id="btnDelete" type ="button" onclick = "deleteProduct(${pro.id})"
-                                                        class="center">Xóa
-                                                </button>
+                                                <button  type ="button" class="center" value="${received.getId()}">Xóa</button>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -106,12 +105,48 @@
 <!-- DATA TABLE SCRIPTS -->
 <script src="${url}/js/dataTables/jquery.dataTables.js"></script>
 <script src="${url}/js/dataTables/dataTables.bootstrap.js"></script>
-<script>
+<%--<script>
     $(document).ready(function() {
         $('#dataTables-example').dataTable();
+
     });
-</script>
+</script>--%>
+
 <!-- CUSTOM SCRIPTS -->
 <script src="${url}/js/custom.js"></script>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    $('.center').click(function(e){
+        e.preventDefault();
+        var el = this;
+        var deleteId = el.value;
+        var myVar = {id : deleteId}
+        $.ajax({
+            url: '${dUrl}',
+            type: 'Delete',
+            enctype: 'multipart/form-data',
+            processData:false,
+            contentType: 'application/json',
+            data: JSON.stringify(myVar),
+            dataType: 'json',
+            success: function (result){
+                alert("Bạn đã xóa thành công.");
+                $(el).closest('tr').css('background','tomato');
+                $(el).closest('tr').fadeOut(800,function(){
+                    $(this).remove();
+                });
+            },
+            errMode: function (error){
+                alert("Xóa thất bại !");
+            }
+        });
+
+    });
+</script>
+
+
 </body>
 </html>

@@ -36,10 +36,15 @@ public class AddGoodReceived extends HttpServlet {
         String note = goodsReceivedEntity_model.getNote();
         SupplierEntity supplierEntity = supplierService.findById(supplier_id);
         GoodsReceivedEntity goodsReceivedEntity = (GoodsReceivedEntity) session.getAttribute("ss_GoodsReceived");
+        int total_price = 0;
+        for (Product_GoodReceived_Entity item: goodsReceivedEntity.getProductGoodReceivedEntityList()) {
+            total_price += item.getQuantity() * item.getProductEntity().getPrice();
+        }
         goodsReceivedEntity.setSupplierEntity(supplierEntity);
         goodsReceivedEntity.setNote(note);
         goodsReceivedEntity.setDate_Goods_Received(date);
         goodsReceivedEntity.setUserEntity(user);
+        goodsReceivedEntity.setTotal_price(total_price);
         Warehouse_ReceiptService warehouse_receiptService = new Warehouse_ReceiptService();
         warehouse_receiptService.save(goodsReceivedEntity);
         for (Product_GoodReceived_Entity item: goodsReceivedEntity.getProductGoodReceivedEntityList()) {

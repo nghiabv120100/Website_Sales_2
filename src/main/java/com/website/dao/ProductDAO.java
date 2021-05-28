@@ -36,7 +36,7 @@ public class ProductDAO extends GenericDAO<Integer, ProductEntity> {
     public List<ProductEntity> getProductEntity (int brand_id,int detail_cate_id,int start_price, int end_price,String keyWord,int category_id,int postition, int pageSize){
         Session session = sessionFactory.openSession();
         Criteria criteria =session.createCriteria(ProductEntity.class);
-
+        criteria.add(Restrictions.eq("status",1));
         if (detail_cate_id != -1){
             criteria.createCriteria("detailCategoryEntity").add(Restrictions.eq("id",detail_cate_id));
         }
@@ -61,48 +61,54 @@ public class ProductDAO extends GenericDAO<Integer, ProductEntity> {
 
     public Long countTotalProduct(){
         Session session = sessionFactory.openSession();
-        String countQ = "Select count (c.id) from ProductEntity c";
+        String countQ = "Select count (c.id) from ProductEntity c where c.status=:status";
         Query countQuery = session.createQuery(countQ);
+        countQuery.setParameter("status",1);
         return (Long) countQuery.uniqueResult();
     }
 
     public Long countTotalProduct_detail_category(int id){
         Session session = sessionFactory.openSession();
-        String countQ = "Select count (c.id) from ProductEntity  c where c.detailCategoryEntity.id=:id";
+        String countQ = "Select count (c.id) from ProductEntity  c where c.detailCategoryEntity.id=:id and c.status=: status";
         Query countQuery = session.createQuery(countQ);
         countQuery.setParameter("id",id);
+        countQuery.setParameter("status",1);
         return (Long) countQuery.uniqueResult();
     }
 
     public Long countTotalProduct_brand(int id){
         Session session = sessionFactory.openSession();
-        String countQ = "Select count (c.id) from ProductEntity  c where c.brandEntity.id=:id";
+        String countQ = "Select count (c.id) from ProductEntity  c where c.brandEntity.id=:id and c.status=: status";
         Query countQuery = session.createQuery(countQ);
         countQuery.setParameter("id",id);
+        countQuery.setParameter("status",1);
         return (Long) countQuery.uniqueResult();
     }
 
     public Long countTotalProduct_price(int start_price, int end_price){
         Session session = sessionFactory.openSession();
-        String countQ = "Select count (c.id) from ProductEntity  c where c.price>=:start_price and c.price<=:end_price";
+        String countQ = "Select count (c.id) from ProductEntity  c where c.price>=:start_price and c.price<=:end_price and c.status=: status";
         Query countQuery = session.createQuery(countQ);
         countQuery.setParameter("start_price",start_price);
         countQuery.setParameter("end_price",end_price);
+        countQuery.setParameter("status",1);
         return (Long) countQuery.uniqueResult();
     }
 
     public Long countTotalProduct_keyWord(String keyWord){
         Session session = sessionFactory.openSession();
-        String countQ = "Select count (c.id) from ProductEntity c WHERE c.proName like concat('%',:keyWord,'%')";
+        String countQ = "Select count (c.id) from ProductEntity c WHERE c.proName like concat('%',:keyWord,'%') and c.status=: status";
         Query countQuery = session.createQuery(countQ);
         countQuery.setParameter("keyWord",keyWord);
+        countQuery.setParameter("status",1);
         return (Long) countQuery.uniqueResult();
     }
 
     public Long countTotalProduct_cate(int id){
         Session session = sessionFactory.openSession();
-        String countQ = "Select count (c.id) from ProductEntity  c where c.detailCategoryEntity.categoryEntity.id=:id";
+        String countQ = "Select count (c.id) from ProductEntity  c where c.detailCategoryEntity.categoryEntity.id=:id and c.status=: status";
         Query countQuery = session.createQuery(countQ);
+        countQuery.setParameter("status",1);
         countQuery.setParameter("id",id);
         return (Long) countQuery.uniqueResult();
     }

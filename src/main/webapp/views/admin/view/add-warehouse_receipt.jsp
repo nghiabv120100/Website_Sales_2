@@ -190,6 +190,7 @@
         var myVar = JSON.stringify({
             productEntity:{
                 id: arr_data[0],
+                price : arr_data[3]
             },
             quantity: soluong});
 

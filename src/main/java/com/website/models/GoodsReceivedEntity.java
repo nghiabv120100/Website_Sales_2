@@ -22,6 +22,17 @@ public class GoodsReceivedEntity {
     @Column(name = "status")
     private Integer status;
 
+    @Column(name = "total_price")
+    private Integer total_price;
+
+    public Integer getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(Integer total_price) {
+        this.total_price = total_price;
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
