@@ -25,6 +25,9 @@ public class GoodsReceivedEntity {
     @Column(name = "total_price")
     private Integer total_price;
 
+    @Column(name = "hoanthanh")
+    private Integer hoanthanh;
+
     public Integer getTotal_price() {
         return total_price;
     }
@@ -44,8 +47,17 @@ public class GoodsReceivedEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "goodsReceivedEntity")
     private List<Product_GoodReceived_Entity> productGoodReceivedEntityList;
 
+    public Integer getHoanthanh() {
+        return hoanthanh;
+    }
+
+    public void setHoanthanh(Integer hoanthanh) {
+        this.hoanthanh = hoanthanh;
+    }
+
     public GoodsReceivedEntity() {
         this.setStatus(1);
+        this.setHoanthanh(0);
     }
 
     public Integer getId() {

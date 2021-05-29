@@ -4,6 +4,7 @@ import com.website.dao.Warehouse_ReceiptDAO;
 import com.website.models.CartEntity;
 import com.website.models.GoodsReceivedEntity;
 import com.website.models.ProductEntity;
+import com.website.models.UserEntity;
 
 import java.util.List;
 
@@ -29,5 +30,9 @@ public class Warehouse_ReceiptService {
         GoodsReceivedEntity goodsReceivedEntity = findById(id);
         goodsReceivedEntity.setStatus(0);
         return warehouse_receiptDAO.delete(goodsReceivedEntity);
+    }
+
+    public void update(GoodsReceivedEntity goodsReceivedEntity) {
+        warehouse_receiptDAO.update(goodsReceivedEntity);
     }
 }

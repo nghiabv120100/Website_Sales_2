@@ -68,6 +68,7 @@
                                         <th>Ngày nhập</th>
                                         <th>Mô tả</th>
                                         <th>Giá trị đơn hàng</th>
+                                        <th>Tình trạng</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -81,11 +82,18 @@
                                             <td>${received.getNote()}</td>
                                             <td>${received.getTotal_price()}</td>
                                             <td>
-                                                <button style="width: 70px;">
-                                                    <a href="<c:url value="/admin-product-list?type=edit&id=${pro.id }"/>"
-                                                       class="center">Xem/Sửa</a>
+                                                <c:if test="${received.getHoanthanh() == 0}">
+                                                    <c:out value="Chưa nhập xong" />
+                                                </c:if>
+                                                <c:if test="${received.getHoanthanh() == 1}">
+                                                    <c:out value="Đã nhập xong" />
+                                                </c:if>
+                                            </td>
+                                            <td>
+                                                <button style="width: 100px;">
+                                                    <a href="<c:url value="/detail_goodreceived?type=edit&id=${received.getId()}"/>">Chi tiết</a>
                                                 </button>
-                                                <button  type ="button" class="center" value="${received.getId()}">Xóa</button>
+                                                <button style="width: 100px;" type ="button" class="center" value="${received.getId()}">Xóa</button>
                                             </td>
                                         </tr>
                                     </c:forEach>

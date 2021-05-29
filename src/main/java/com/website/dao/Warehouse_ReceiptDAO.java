@@ -21,4 +21,5 @@ public class Warehouse_ReceiptDAO extends GenericDAO<Integer, GoodsReceivedEntit
         List<GoodsReceivedEntity> result = criteria.list();
         return result;
     }
+
 }
