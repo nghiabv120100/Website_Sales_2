@@ -19,11 +19,16 @@ public class ProductGoodReceivedService {
         return goodReceivedItemDAO.productGoodReceivedEntityList(id);
     }
 
+
     public List<Product_GoodReceived_Entity> find_delete (int id_phieunhap,int id_pro, int quantity){
         return  goodReceivedItemDAO.productGoodReceivedEntityList(id_phieunhap,id_pro,quantity);
     }
 
     public void update(Product_GoodReceived_Entity product_goodReceived_entity) {
          goodReceivedItemDAO.update(product_goodReceived_entity);
+    }
+
+    public Product_GoodReceived_Entity productGoodReceivedEntity (int id_phieunhaphang, int id_pro, int quantity){
+        return goodReceivedItemDAO.product_goodReceived_entity(id_phieunhaphang,id_pro,quantity);
     }
 }

@@ -87,6 +87,7 @@
                                                     <th>Giá sản phẩm (vnđ)</th>
                                                     <th>Tổng giá trị (vnđ)</th>
                                                     <th>Tình trạng</th>
+                                                        <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -96,12 +97,18 @@
                                                         <td style="width: 160px;"> ${hangnhap.getQuantity()} </td>
                                                         <td>${hangnhap.getProductEntity().getPrice()}</td>
                                                         <td>${hangnhap.getQuantity() * hangnhap.getProductEntity().getPrice()}</td>
-                                                        <td style="width: 160px;">
+                                                        <td style="width: 105px;">
                                                             <c:if test="${hangnhap.getStatus() == 1}">
                                                                 <c:out value="Chưa nhập" />
                                                             </c:if>
                                                             <c:if test="${hangnhap.getStatus() == 0}">
                                                                 <c:out value="Đã nhập" />
+                                                            </c:if>
+                                                        </td>
+                                                        <td style="width: 118px">
+                                                            <c:if test="${hangnhap.getStatus() == 1}">
+                                                                <button type="button" class="center" onclick="NhapHang(this,${phieunhap.getId()},${hangnhap.getProductEntity().getId()},${hangnhap.getQuantity()})">
+                                                                    Nhập hàng</button>
                                                             </c:if>
                                                         </td>
                                                         <%--<td>
@@ -133,7 +140,7 @@
                                         </div>
 
                                         <%--<button type="button" id="btnAdd" class="btn btn-default">Cập nhật</button>--%>
-                                        <button type="button" class="btn btn-primary" onclick="Back()">Quay lại trang trước</button>
+                                        <a href='<c:url value="/admin-warehouse_receipt-list?type=list"/>'><button type="button" class="btn btn-primary">Quay lại trang trước</button></a>
                                         <button type="reset" class="btn btn-primary">Reset</button>
                                     </form>
                                 </div>
@@ -166,8 +173,38 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
-    function Back(){
-        history.back();
+
+    function NhapHang(r,id_phieunhap, id_sanpham, quantity){
+        var row = r.parentElement.parentElement;
+        var id_phieunhap = id_phieunhap;
+        var id_sanpham = id_sanpham;
+        var quantity = quantity;
+        var myVar = {
+            goodsReceivedEntity : {
+                id : id_phieunhap
+            },
+            productEntity : {
+                id : id_sanpham
+            },
+            quantity : quantity
+        }
+        $.ajax({
+            url: '${path3}',
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            processData:false,
+            contentType: 'application/json',
+            data: JSON.stringify(myVar),
+            dataType: 'json',
+            success: function (result){
+                alert(result);
+                row.cells[4].innerHTML = "Đã nhập"
+                row.cells[5].innerHTML = "";
+            },
+            errMode: function (error){
+                alert("Nhập hàng thất bại !");
+            }
+        });
     }
 
     function DeleteRow(r,id_phieu,id_hangnhap,price,quantity) {

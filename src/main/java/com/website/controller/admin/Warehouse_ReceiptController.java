@@ -2,10 +2,7 @@ package com.website.controller.admin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.website.models.GoodsReceivedEntity;
-import com.website.models.ProductEntity;
-import com.website.models.Product_GoodReceived_Entity;
-import com.website.models.SupplierEntity;
+import com.website.models.*;
 import com.website.service.ProductService;
 import com.website.service.SupplierService;
 import com.website.service.Warehouse_ReceiptService;
@@ -37,7 +34,7 @@ public class Warehouse_ReceiptController extends HttpServlet {
             url="views/admin/view/list-warehouse_receipt.jsp";
         } else if (type.equals("add")){
             HttpSession session = request.getSession();
-
+            UserEntity user = (UserEntity) session.getAttribute("user");
             GoodsReceivedEntity goodsReceivedEntity = new GoodsReceivedEntity();
             ArrayList pro_good_list = new ArrayList<Product_GoodReceived_Entity>();
             goodsReceivedEntity.setProductGoodReceivedEntityList(pro_good_list);

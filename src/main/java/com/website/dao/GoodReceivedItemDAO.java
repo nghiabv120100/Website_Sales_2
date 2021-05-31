@@ -31,4 +31,21 @@ public class GoodReceivedItemDAO extends GenericDAO<Integer, Product_GoodReceive
         criteria.createCriteria("goodsReceivedEntity").add(Restrictions.eq("id",id_phieunhap));
         return criteria.list();
     }
+
+    public Product_GoodReceived_Entity product_goodReceived_entity (int id_phieunhap, int id_pro, int quantity){
+        Session session = sessionFactory.openSession();
+        Criteria criteria =session.createCriteria(Product_GoodReceived_Entity.class);
+        criteria.createCriteria("goodsReceivedEntity").add(Restrictions.eq("id",id_phieunhap));
+        criteria.createCriteria("productEntity").add(Restrictions.eq("id",id_pro));
+        criteria.add(Restrictions.eq("quantity",quantity));
+        Product_GoodReceived_Entity product_goodReceived_entity = (Product_GoodReceived_Entity) criteria.list().get(0);
+        return product_goodReceived_entity;
+    }
+
+   /* public List<Product_GoodReceived_Entity> find_item_goods (int id_phieunhap){
+        Session session = sessionFactory.openSession();
+        Criteria criteria =session.createCriteria(Product_GoodReceived_Entity.class);
+        criteria.createCriteria("goodsReceivedEntity").add(Restrictions.eq("id",id_phieunhap));
+        return criteria.list();
+    }*/
 }

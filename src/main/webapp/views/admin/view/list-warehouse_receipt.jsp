@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.website.models.UserEntity" %><%--
   Created by IntelliJ IDEA.
   User: hungd
   Date: 4/21/2021
@@ -50,7 +50,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div>
+                        <%
+                            UserEntity user = (UserEntity) session.getAttribute("user");
+                            if (user.getRole().equals("1")){
+                        %>
                         <button class="btn btn-danger square-btn-adjust" style="margin-bottom: 5px"><a href='<c:url value="/admin-warehouse_receipt-list?type=add"/>' style="color: white">Thêm phiếu nhập hàng</a></button>
+                        <%
+                            }
+                        %>
                     </div>
 
                     <!-- Advanced Tables -->
@@ -93,7 +100,13 @@
                                                 <button style="width: 100px;">
                                                     <a href="<c:url value="/detail_goodreceived?type=edit&id=${received.getId()}"/>">Chi tiết</a>
                                                 </button>
+                                                <%
+                                                    if (user.getRole().equals("1")){
+                                                %>
                                                 <button style="width: 100px;" type ="button" class="center" value="${received.getId()}">Xóa</button>
+                                                <%
+                                                    }
+                                                %>
                                             </td>
                                         </tr>
                                     </c:forEach>

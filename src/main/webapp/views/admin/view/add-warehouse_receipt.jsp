@@ -6,8 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <c:url value="/api-admin-product" var="APIurl"></c:url>
 <c:url value="/admin-warehouse_receipt-list" var="PCurl"></c:url>
 <c:url value="/views/admin/static" var="url"></c:url>
@@ -119,8 +118,8 @@
                                                 </tbody>
                                             </table>
                                         </div>
-
-                                        <button type="button" id="btnAdd" class="btn btn-default">Thêm</button>
+                                        <button type="button" class="btn btn-primary" onclick="Back()">Quay lại trang trước</button>
+                                        <button type="button" id="btnAdd" class="btn btn-primary">Thêm</button>
                                         <button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=add'">Reset</button>
                                     </form>
                                 </div>
@@ -153,6 +152,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
+
+    function Back(){
+        history.back();
+    }
+
     $('#btnAdd').click(function (e){
         e.preventDefault();
         var content_editter = document.getElementById("editer").value;
@@ -181,11 +185,14 @@
         });
     });
     $('#addRow').click(function (e){
-
         //Lay gia tri hang duoc chon
         var sanpham = document.getElementById("proId").value;
         var arr_data = sanpham.split('+',4);
         var soluong = document.getElementById("soluong").value;
+        if (soluong <= 0 ){
+            alert("yêu cầu nhập số lượng sản phẩm lớn hơn 0 !");
+            return false;
+        }
 
         var myVar = JSON.stringify({
             productEntity:{

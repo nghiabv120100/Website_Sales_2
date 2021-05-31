@@ -26,6 +26,7 @@ import java.util.List;
 @WebServlet(urlPatterns = "/detail_goodreceived")
 public class DetailGoodReceived extends HttpServlet {
 
+    ProductEntity productEntity = new ProductEntity();
     SupplierService supplierService = new SupplierService();
     ProductService productService = new ProductService();
     Warehouse_ReceiptService warehouse_receiptService = new Warehouse_ReceiptService();
@@ -79,5 +80,49 @@ public class DetailGoodReceived extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         mapper.writeValue(resp.getOutputStream(),"Thành công");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        BufferedReader reader = req.getReader();
+        Gson gson = new Gson();
+        Product_GoodReceived_Entity product_goodReceived_entity = gson.fromJson(reader, Product_GoodReceived_Entity.class);
+        int id_phieunhaphang= product_goodReceived_entity.getGoodsReceivedEntity().getId();
+        int id_pro = product_goodReceived_entity.getProductEntity().getId();
+        int quantity = product_goodReceived_entity.getQuantity();
+
+        ///Tim phieu nhap hang
+        goodsReceivedEntity = warehouse_receiptService.findById(id_phieunhaphang);
+
+        //Tim pro_goods_rece
+        product_goodReceived_entity = productGoodReceivedService.productGoodReceivedEntity(id_phieunhaphang, id_pro, quantity);
+
+        ///Tim san pham va cong so luong vao
+        productEntity = productService.findById(id_pro);
+        productEntity.setQuantity(quantity + productEntity.getQuantity());
+        productService.update(productEntity);
+
+        //Cap nhat pro_goods_rece
+        product_goodReceived_entity.setStatus(0);
+        productGoodReceivedService.update(product_goodReceived_entity);
+
+        ///Kiem tra hang cua phieu da nhap het chua
+        productGoodReceivedEntityList = productGoodReceivedService.productGoodReceivedEntityList(id_phieunhaphang);
+        int check = 0;
+        for (Product_GoodReceived_Entity productGoodReceivedEntity : productGoodReceivedEntityList){
+            if (productGoodReceivedEntity.getStatus() == 0){
+                check += 1;
+            }
+        }
+        if (check == productGoodReceivedEntityList.size()){
+            goodsReceivedEntity.setHoanthanh(1);
+        }
+        warehouse_receiptService.update(goodsReceivedEntity);
+
+        ////Tra ve jsp
+        ObjectMapper mapper = new ObjectMapper();
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        mapper.writeValue(resp.getOutputStream(),"Bạn đã nhập hàng thành công. ");
     }
 }
