@@ -26,6 +26,14 @@ Cart thiếu ngày mua hàng
      thiếu hình thức thanh toán
 
 --------------------------------------
+Phiếu nhập hàng
+Hoàn thành : 0 -- > Chưa nhập xong
+             1 ---> Đã nhập xong
+ ----------------------------------------
+ Hàng hóa của phiếu nhập hàng :
+    status : 0 ----> đã nhập
+    status : 1 ----> chưa nhập
+
 Lỗi đang gặp phải
 	- Chưa insert được ảnh vào project
 	- Chưa insert được describe xuống database (do ko lấy được dữ liệu từ CKEDITOR)  (đã fix xog)

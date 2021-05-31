@@ -1,17 +1,19 @@
 <%--
   Created by IntelliJ IDEA.
   User: hungd
-  Date: 4/21/2021
-  Time: 4:26 PM
+  Date: 5/29/2021
+  Time: 7:11 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <c:url value="/api-admin-product" var="APIurl"></c:url>
 <c:url value="/admin-warehouse_receipt-list" var="PCurl"></c:url>
 <c:url value="/views/admin/static" var="url"></c:url>
 <c:url value="/add_goodreceived" var="path1"></c:url>
 <c:url value="/add_pro_good" var="path2"></c:url>
+<c:url value="/detail_goodreceived" var="path3"></c:url>
 
 <script src="./Validation.js"></script>
 <!DOCTYPE html>
@@ -20,7 +22,7 @@
     <script src="<c:url value="/ckeditor/ckeditor.js" />"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thêm phiếu nhập hàng</title>
+    <title>Chỉnh sửa phiếu nhập hàng</title>
     <!-- BOOTSTRAP STYLES-->
     <link href="${url}/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
@@ -41,7 +43,7 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Thêm phiếu nhập hàng</h2>
+                    <h2>Chỉnh sửa phiếu nhập hàng</h2>
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -54,7 +56,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3>Nhập thông tin phiếu nhập hàng</h3>
+                                    <h3>Thông tin phiếu nhập hàng</h3>
                                     <form role="form" action="add_goodreceived" method="post" enctype="multipart/form-data">
 
                                         <div class="form-group" style="display:inline;">
@@ -63,7 +65,7 @@
                                                 <div class="checkbox">
                                                     <select name="supplierId" id="supplierId">
                                                         <c:forEach items="${lstSupplier}" var="c">
-                                                            <option value='${c.id}'>${c.nameSupplier}</option>
+                                                            <option value='${c.id}' ${phieunhap.getSupplierEntity().getId() == c.id ? "selected" : ""}>${c.nameSupplier}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
@@ -71,7 +73,7 @@
                                             <div class="col-md-6">
                                                 <label >Mô tả đơn hàng </label>
                                                 <br>
-                                                <textarea rows="4" cols="50" name="editer" id="editer" ></textarea>
+                                                <textarea rows="4" cols="50" name="editer" id="editer" >${phieunhap.getNote()}</textarea>
                                             </div>
                                         </div>
 
@@ -84,22 +86,41 @@
                                                     <th>Số lượng</th>
                                                     <th>Giá sản phẩm (vnđ)</th>
                                                     <th>Tổng giá trị (vnđ)</th>
-                                                    <th></th>
+                                                    <th>Tình trạng</th>
+                                                        <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <%--                                                <c:forEach items="${hangnhaps}" var="hangnhap">--%>
-                                                <%--                                                    <tr>--%>
-                                                <%--                                                        <td>2</td>--%>
-                                                <%--                                                        <td>${hangnhap.getMaMatHang()}</td>--%>
-                                                <%--                                                        <td>${hangnhap.getTenMatHang()}</td>--%>
-                                                <%--                                                        <td>${hangnhap.getSoluong()}</td>--%>
-                                                <%--                                                        <td>${hangnhap.getGiaTri()}</td>--%>
-                                                <%--                                                        <td><button type="button" class="btn btn-primary float-right" onclick="DeleteRow()">Xóa</button></td>--%>
-                                                <%--                                                    </tr>--%>
-                                                <%--                                                </c:forEach>--%>
-                                                <tr>
-                                                    <%--                                                    <td style="display:none;" ><input type="text" class="form-control" id="idsanpham" readonly></td>--%>
+                                                <c:forEach items="${listhangnhap}" var="hangnhap">
+                                                    <tr>
+                                                        <td <%--width="310px"--%>>${hangnhap.getProductEntity().getProName()}</td>
+                                                        <td style="width: 160px;"> ${hangnhap.getQuantity()} </td>
+                                                        <td>${hangnhap.getProductEntity().getPrice()}</td>
+                                                        <td>${hangnhap.getQuantity() * hangnhap.getProductEntity().getPrice()}</td>
+                                                        <td style="width: 105px;">
+                                                            <c:if test="${hangnhap.getStatus() == 1}">
+                                                                <c:out value="Chưa nhập" />
+                                                            </c:if>
+                                                            <c:if test="${hangnhap.getStatus() == 0}">
+                                                                <c:out value="Đã nhập" />
+                                                            </c:if>
+                                                        </td>
+                                                        <td style="width: 118px">
+                                                            <c:if test="${hangnhap.getStatus() == 1}">
+                                                                <button type="button" class="center" onclick="NhapHang(this,${phieunhap.getId()},${hangnhap.getProductEntity().getId()},${hangnhap.getQuantity()})">
+                                                                    Nhập hàng</button>
+                                                            </c:if>
+                                                        </td>
+                                                        <%--<td>
+                                                            <button  type ="button" onclick="Update(this,${phieunhap.getId()},${hangnhap.getProductEntity().getId()},${hangnhap.getProductEntity().getPrice()}
+                                                                    ,${hangnhap.getQuantity()})" class="center">Cập nhật</button>
+
+                                                            <button  type ="button" onclick="DeleteRow(this,${phieunhap.getId()},${hangnhap.getProductEntity().getId()},${hangnhap.getProductEntity().getPrice()}
+                                                                     ,${hangnhap.getQuantity()})" class="center">Xóa</button>
+                                                        </td>--%>
+                                                    </tr>
+                                                </c:forEach>
+                                                <%--<tr>
                                                     <td>
                                                         <select name="proId" id="proId" style="width: 290px;">
                                                             <c:forEach items="${lstProduct}" var="c">
@@ -107,20 +128,20 @@
                                                             </c:forEach>
                                                         </select>
                                                     </td>
-                                                    <%--                                                    <td><input type="text" class="form-control" id="tensanpham"></td>--%>
                                                     <td><input type="text" class="form-control" id="soluong"></td>
                                                     <td><input type="text" class="form-control" id="giasanpham" readonly></td>
                                                     <td><input type="text" class="form-control" id="tongiatri" readonly></td>
                                                     <td>
                                                         <button id="addRow" type="button" style="border-radius: 5px; border: none; background-color: white; color: black" class="btn btn-primary float-right">Thêm</button>
                                                     </td>
-                                                </tr>
+                                                </tr>--%>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <button type="button" class="btn btn-primary" onclick="Back()">Quay lại trang trước</button>
-                                        <button type="button" id="btnAdd" class="btn btn-primary">Thêm</button>
-                                        <button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=add'">Reset</button>
+
+                                        <%--<button type="button" id="btnAdd" class="btn btn-default">Cập nhật</button>--%>
+                                        <a href='<c:url value="/admin-warehouse_receipt-list?type=list"/>'><button type="button" class="btn btn-primary">Quay lại trang trước</button></a>
+                                        <button type="reset" class="btn btn-primary">Reset</button>
                                     </form>
                                 </div>
                             </div>
@@ -153,98 +174,52 @@
 
 <script>
 
-    function Back(){
-        history.back();
+    function NhapHang(r,id_phieunhap, id_sanpham, quantity){
+        var row = r.parentElement.parentElement;
+        var id_phieunhap = id_phieunhap;
+        var id_sanpham = id_sanpham;
+        var quantity = quantity;
+        var myVar = {
+            goodsReceivedEntity : {
+                id : id_phieunhap
+            },
+            productEntity : {
+                id : id_sanpham
+            },
+            quantity : quantity
+        }
+        $.ajax({
+            url: '${path3}',
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            processData:false,
+            contentType: 'application/json',
+            data: JSON.stringify(myVar),
+            dataType: 'json',
+            success: function (result){
+                alert(result);
+                row.cells[4].innerHTML = "Đã nhập"
+                row.cells[5].innerHTML = "";
+            },
+            errMode: function (error){
+                alert("Nhập hàng thất bại !");
+            }
+        });
     }
 
-    $('#btnAdd').click(function (e){
-        e.preventDefault();
-        var content_editter = document.getElementById("editer").value;
-        var supplierId = document.getElementById("supplierId").value;
-        var myVar = JSON.stringify({
-            supplierEntity:{
-                id:supplierId
-            },
-            note:content_editter
-        });
-        $.ajax({
-            url: '${path1}',
-            type: 'POST',
-            enctype: 'multipart/form-data',
-            processData:false,
-            contentType: 'application/json',
-            data: myVar,
-            dataType: 'json',
-            success: function (result){
-                console.log("Luu thanh cong");
-                window.location.href = "/Website_Sales_2_war/admin-warehouse_receipt-list?type=list";
-            },
-            errMode: function (error){
-                console.log("Error");
-            }
-        });
-    });
-    $('#addRow').click(function (e){
-        //Lay gia tri hang duoc chon
-        var sanpham = document.getElementById("proId").value;
-        var arr_data = sanpham.split('+',4);
-        var soluong = document.getElementById("soluong").value;
-        if (soluong <= 0 ){
-            alert("yêu cầu nhập số lượng sản phẩm lớn hơn 0 !");
-            return false;
-        }
-
-        var myVar = JSON.stringify({
-            productEntity:{
-                id: arr_data[0],
-                proName: arr_data[1],
-                price : arr_data[3]
-            },
-            quantity: soluong});
-
-        $.ajax({
-            url: '${path2}',
-            type: 'POST',
-            enctype: 'multipart/form-data',
-            processData:false,
-            contentType: 'application/json',
-            data: myVar,
-            dataType: 'json',
-            success: function (result){
-                var table = document.getElementById("data-table");
-                var index = table.rows.length - 1;
-
-                row = table.insertRow(index);
-                cell1 = row.insertCell(0);
-                cell2 = row.insertCell(1);
-                cell3 = row.insertCell(2);
-                cell4 = row.insertCell(3);
-                cell5 = row.insertCell(4);
-
-                cell1.innerHTML = arr_data[1];
-                cell2.innerHTML = soluong;
-                cell3.innerHTML = arr_data[3];
-                cell4.innerHTML = arr_data[3] * soluong;
-                cell5.innerHTML = '<button type="button" class="btn btn-primary float-right" onclick="DeleteRow(this)">Xóa</button>';
-                document.getElementById("soluong").value = "";
-            },
-            errMode: function (error){
-                console.log("Error");
-            }
-        });
-    });
-    function DeleteRow(r) {
+    function DeleteRow(r,id_phieu,id_hangnhap,price,quantity) {
         var row = r.parentElement.parentElement;
-        var quantity = row.childNodes[1].innerText;
-        var proName = row.childNodes[0].innerText;
         var myVar = JSON.stringify({
-            productEntity:{
-                proName : proName
+            goodsReceivedEntity:{
+                id : id_phieu
+            },productEntity : {
+                id : id_hangnhap,
+                price : price,
             },
-            quantity: quantity});
-
+            quantity : quantity
+        });
         $.ajax({
-            url: '${path2}',
+            url: '${path3}',
             type: 'Delete',
             enctype: 'multipart/form-data',
             processData:false,
@@ -262,7 +237,3 @@
 </script>
 </body>
 </html>
-
-
-
-

@@ -71,7 +71,7 @@
 																					placeholder="Please enter phone number" name="phonenumber" id="phonenumber" />
 											</div>
 											<div class="form-group">
-												<label>Địa chỉ</label> <input class="form-control"
+												<label>Địa chỉ</label> <input class="form-control" value="${user.address}"
 																			  placeholder="Please enter address" name="address" id="address" />
 											</div>
 											<div class="form-group">
@@ -162,7 +162,7 @@
 				// "avatar":avatar,
 				"role":roleId,
 				"phone_number":phonenumber,
-				// "address":address
+				"address":address
 
 			}
 			updateProduct(data)

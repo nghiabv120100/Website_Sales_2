@@ -22,6 +22,20 @@ public class GoodsReceivedEntity {
     @Column(name = "status")
     private Integer status;
 
+    @Column(name = "total_price")
+    private Integer total_price;
+
+    @Column(name = "hoanthanh")
+    private Integer hoanthanh;
+
+    public Integer getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(Integer total_price) {
+        this.total_price = total_price;
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
@@ -33,8 +47,17 @@ public class GoodsReceivedEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "goodsReceivedEntity")
     private List<Product_GoodReceived_Entity> productGoodReceivedEntityList;
 
+    public Integer getHoanthanh() {
+        return hoanthanh;
+    }
+
+    public void setHoanthanh(Integer hoanthanh) {
+        this.hoanthanh = hoanthanh;
+    }
+
     public GoodsReceivedEntity() {
         this.setStatus(1);
+        this.setHoanthanh(0);
     }
 
     public Integer getId() {
