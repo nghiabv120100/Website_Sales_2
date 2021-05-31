@@ -6,6 +6,7 @@
 <c:url value="/api-user-cart" var="APIaurl"></c:url>
 <c:url value="/api-user-product" var="ProductUrl"></c:url>
 <c:url value="/client-product-list" var ="PCUrl" ></c:url>
+<c:url value="/api-user-comment" var ="APIcomment" ></c:url>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,7 @@
 	<link href="${url}/css/main.css" rel="stylesheet">
 	<link href="${url}/css/responsive.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 </head>
 
 <body>
@@ -29,6 +31,7 @@
 			<div class="col-sm-12 padding-right">
 				<div class="product-details"><!--product-details-->
 					<div class="col-sm-5">
+						<input type="hidden" id="id" value="${productEntity.id}">
 						<div class="view-product">
 							<c:url var="imgUrl" value="/image/${productEntity.getImage()}"></c:url>
 							<img height="250" width="200" src="${imgUrl}" alt="" />
@@ -70,6 +73,41 @@
 			</div>
 		</div>
 	</div>
+
+
+	<div class="category-tab shop-details-tab"><!--category-tab-->
+		<div class="col-sm-12">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#reviews" data-toggle="tab">Đánh giá</a></li>
+			</ul>
+		</div>
+		<div class="tab-content">
+
+			<div class="tab-pane fade active in" id="reviews" >
+				<div class="col-sm-12">
+					<ul>
+						<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
+						<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
+						<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+					</ul>
+					<p><b>Write Your Review</b></p>
+
+<%--					<form action="#">--%>
+										<span>
+											<input id="nameuser" type="text" placeholder="Your Name"/>
+<%--											<input type="email" placeholder="Email Address"/>--%>
+										</span>
+						<textarea id="content" name="" ></textarea>
+<%--						<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />--%>
+						<button id="btnSubmit"  type="button" class="btn btn-default pull-right"  onclick="sendComment()">
+							Submit
+						</button>
+<%--					</form>--%>
+				</div>
+			</div>
+
+		</div>
+	</div><!--/category-tab-->
 </section>
 <jsp:include page="footer.jsp"></jsp:include>
 <script>
@@ -124,7 +162,42 @@
 			}
 		})
 	};
+
+
 </script>
+
+<script>
+	// document.getElementById('btnSubmit').addEventListener('click', sendComment);
+	function sendComment(){
+		var id = parseInt($('#id').val());
+		var content =$('#content').val();
+		var data ={
+			"productEntity": {
+				"id":id
+			},
+			"content":content
+		};
+		console.log(id);
+		$.ajax({
+			url: '${APIcomment}',
+			type: 'POST',
+			enctype: 'multipart/form-data',
+			processData:false,
+			contentType: 'application/json',
+			data:JSON.stringify(data),
+			dataType: 'json',
+
+			success: function (result){
+				console.log("Success");
+				window.location.href="/client-product-list?type=detail_product";
+			},
+			errMode: function (error){
+				console.log("Error");
+			}
+		})
+	};
+</script>
+
 
 
 <script src="${url}/js/jquery.js"></script>

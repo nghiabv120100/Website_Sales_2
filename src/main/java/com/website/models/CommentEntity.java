@@ -1,5 +1,7 @@
 package com.website.models;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -31,6 +33,7 @@ public class CommentEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity productEntity;
 
+    /*
     @OneToOne
     @JoinColumn(name = "parent_id")
     private CommentEntity commentEntity;
@@ -41,7 +44,7 @@ public class CommentEntity {
 
     public void setCommentEntity(CommentEntity commentEntity) {
         this.commentEntity = commentEntity;
-    }
+    }*/
 
     public CommentEntity() {
         this.setStatus(1);
