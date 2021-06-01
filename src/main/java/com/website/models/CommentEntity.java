@@ -3,6 +3,7 @@ package com.website.models;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -47,6 +48,10 @@ public class CommentEntity {
 
     public CommentEntity() {
         this.setStatus(1);
+        Calendar calendar = Calendar.getInstance();
+        java.util.Date currentDate = calendar.getTime();
+        java.sql.Date date = new java.sql.Date(currentDate.getTime());
+        this.setWriteDate(date);
     }
 
     public Integer getId() {

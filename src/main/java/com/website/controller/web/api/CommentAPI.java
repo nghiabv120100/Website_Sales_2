@@ -35,12 +35,15 @@ public class CommentAPI extends HttpServlet {
 
         HttpSession session = req.getSession();
         UserEntity user = (UserEntity) session.getAttribute("user");
+        if (user == null) {
+            return;
+        }
         ProductEntity product = productService.findById(comment.getProductEntity().getId());
         comment.setUserEntity(user);
         comment.setStatus(1);
         comment.setId(1);
         comment.setProductEntity(product);
         commentService.save(comment);
-        mapper.writeValue(resp.getOutputStream(),"Bạn đã nhập comment thành công");
+        mapper.writeValue(resp.getOutputStream(),comment.getUserEntity().getFullname());
     }
 }

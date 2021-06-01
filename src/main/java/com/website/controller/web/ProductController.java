@@ -209,7 +209,7 @@ public class ProductController extends HttpServlet {
         } else if (type.equals("detail_product")) {
             Integer id =Integer.parseInt(req.getParameter("id"));
             ProductEntity productEntity = productService.findById(id);
-            List<CommentEntity> lstComment = commentService.findAll();
+            List<CommentEntity> lstComment = commentService.findByProductID(id);
             req.setAttribute("lstComment",lstComment);
             req.setAttribute("productEntity",productEntity);
             url ="views/web/product-details.jsp";

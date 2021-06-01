@@ -7,6 +7,7 @@
 <c:url value="/api-user-product" var="ProductUrl"></c:url>
 <c:url value="/client-product-list" var ="PCUrl" ></c:url>
 <c:url value="/api-user-comment" var ="APIcomment" ></c:url>
+<c:url var="imgPerson" value="/image/person.png"></c:url>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +62,6 @@
 
 <%--									<span>${productEntity.getPrice()} ₫</span>--%>
 									<h2><fmt:formatNumber type="number" value="${productEntity.getPrice()}" /> VNĐ</h2>
-
 									<br>
 									<button style="margin: 0;" type="button"  class="btn btn-fefault cart" onclick="addToCart(${productEntity.getId()})"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
 								</span>
@@ -90,27 +90,30 @@
 						<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
 						<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
 					</ul>
+					<div class="comment">
 					<c:forEach var="row_comment" items="${lstComment}">
 						<div class="row style_comment">
-							<div class="col-md-2">
-								<img width="100%" src="${imgUrl}"
+							<div class="col-md-1">
+								<img width="100%" src="${imgPerson}"
 									 class="img img-responsive img-thumbnail">
 							</div>
 							<div class="col-md-10">
 								<p style="color:green;"> ${row_comment.userEntity.fullname}</p>
-								<p style="color: #000;">${row_comment.getWriteDate()}</p>
+								<fmt:formatDate  value = "${row_comment.getWriteDate()}" var = "parsedMyDate" dateStyle="short" type="both" pattern = "MM-dd-yyyy hh:mm:ss a"  />
+								<p style="color: #000;"><c:out value = "${parsedMyDate}" /></p>
 								<p> ${row_comment.content}</p>
 							</div>
 						</div>
 					</c:forEach>
+					</div>
 					<p><b>Write Your Review</b></p>
 
 <%--					<form action="#">--%>
-										<span>
-											<input id="nameuser" type="text" placeholder="Your Name"/>
+<%--										<span>--%>
+<%--											<input id="nameuser" type="text" placeholder="Your Name"/>--%>
 <%--											<input type="email" placeholder="Email Address"/>--%>
-										</span>
-						<textarea id="content" name="" ></textarea>
+<%--										</span>--%>
+						<textarea id="content" name="" placeholder="Để lại bình luạn ở đây"></textarea>
 <%--						<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />--%>
 						<button id="btnSubmit"  type="button" class="btn btn-default pull-right"  onclick="sendComment()">
 							Submit
@@ -190,7 +193,7 @@
 			},
 			"content":content
 		};
-		console.log(id);
+		let date = new Date().toLocaleString();
 		$.ajax({
 			url: '${APIcomment}',
 			type: 'POST',
@@ -201,11 +204,27 @@
 			dataType: 'json',
 
 			success: function (result){
+				// console.log(result.toString())
+				var new_comment = document.querySelector('.comment');
+				new_comment.innerHTML=new_comment.innerHTML+'<div class="row style_comment">\n' +
+						'\t\t\t\t\t\t\t<div class="col-md-1">\n' +
+						'\t\t\t\t\t\t\t\t<img width="100%" src="${imgPerson}"\n' +
+						'\t\t\t\t\t\t\t\t\t class="img img-responsive img-thumbnail">\n' +
+						'\t\t\t\t\t\t\t</div>\n' +
+						'\t\t\t\t\t\t\t<div class="col-md-10">\n' +
+						'\t\t\t\t\t\t\t\t<p style="color:green;">'+result +'</p>\n' +
+						'<p style="color: #000;">'+date+'</p>' +
+						'\t\t\t\t\t\t\t\t<p>'+content+'</p>\n'
+						'\t\t\t\t\t\t\t</div>\n' +
+						'\t\t\t\t\t\t</div>';
 				console.log("Success");
-				alert("Success")
-				window.location.href="/client-product-list?type=detail_product";
+
+				document.getElementById("content").value = "";
+				contenValue.setAttribute()
+				// window.location.href="/client-product-list?type=detail_product";
 			},
-			errMode: function (error){
+			error: function (error){
+				alert("Vui lòng đăng nhập để bình luạn")
 				console.log("Error");
 			}
 		})

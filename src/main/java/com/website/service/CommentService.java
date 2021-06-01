@@ -13,4 +13,7 @@ public class CommentService {
     public List<CommentEntity> findAll() {
         return commentDAO.findAll();
     }
+    public List<CommentEntity> findByProductID(Integer id) {
+        return commentDAO.findByProductID(id);
+    }
 }
