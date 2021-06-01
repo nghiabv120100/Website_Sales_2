@@ -181,7 +181,7 @@ Validator.isQuantity = function (selector, message) {
     return { 
         selector : selector,
         test: function (value) {
-            return value > 0 ? undefined : 'Yêu cầu nhập số sản phẩm cần mua';
+            return value > 0 ? undefined : message || 'Yêu cầu nhập số sản phẩm cần mua';
         }
     };
 }

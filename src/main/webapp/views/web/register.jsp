@@ -46,7 +46,7 @@
 
             <div class="form-group">
                 <label for="phone">Phone number:</label>
-                <input required="true" type="phone" class="form-control" value="${user.phonenumber}" id="phone" placeholder="Nhập số điện thoại"/>
+                <input required="true" type="number" min="0" class="form-control" value="${user.phonenumber}" id="phone" placeholder="Nhập số điện thoại"/>
                 <span class="form-message"></span>
             </div>
             <div class="form-group">

@@ -53,11 +53,11 @@
 													placeholder="Nhập tên sản phẩm" name="productName" id="productName" />
 											</div>
 											<div class="form-group">
-												<label>Giá (VNĐ)</label> <input class="form-control"
+												<label>Giá (VNĐ)</label> <input class="form-control" min="0"
 													placeholder="Nhập giá sản phẩm" type="number" name="price" id="price" />
 											</div>
 											<div class="form-group">
-												<label>Số lượng</label> <input class="form-control"
+												<label>Số lượng</label> <input class="form-control" min="0"
 																				placeholder="Nhập số lượng sản phẩm" type="number" name="quantity" id="quantity" />
 											</div>
 											<div class="form-group">
@@ -127,6 +127,14 @@
 			var productName= $('#productName').val();
 			var price= parseFloat($('#price').val());
 			var quantity = parseInt($('#quantity').val());
+			if (price < 0){
+				alert("Yêu cầu nhập giá sản phẩm không âm !");
+				return false;
+			}
+			if (quantity < 0){
+				alert("Yêu cầu nhập số lượng sản phẩm không âm !");
+				return false;
+			}
 			var describePro= CKEDITOR.instances["ckeditor"].getData();
 			var detailCateId=parseInt($('#detailCateId').val());
 			var image = $('input[type=file]').val().split('\\').pop();
@@ -172,13 +180,10 @@
 			formGroupSelector: '.form-group',
 			errorSelector: '.form-message',
 			rule: [
-					Validator.isRequired('productName')
+					Validator.isRequired('#productName'),
 			]
 		})
 	</script>
-
-
-
 	<script type="text/javascript" language="javascript">
    CKEDITOR.replace('ckeditor', {width: '700px',height: '300px'});
 </script>

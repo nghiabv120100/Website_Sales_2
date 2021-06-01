@@ -67,7 +67,7 @@
 													value="${user.email }" name="email" id="email"/>
 											</div>
 											<div class="form-group">
-												<label>Số điện thoại</label> <input class="form-control" value="${user.phone_number}"
+												<label>Số điện thoại</label> <input class="form-control" value="${user.phone_number}" type="number" min="0"
 																					placeholder="Please enter phone number" name="phonenumber" id="phonenumber" />
 											</div>
 											<div class="form-group">
