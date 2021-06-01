@@ -52,21 +52,30 @@ public class AddProGoodController extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        ///Chuyen thanh model
         BufferedReader reader = req.getReader();
         Gson gson = new Gson();
         Product_GoodReceived_Entity product_goodReceived_entity = gson.fromJson(reader, Product_GoodReceived_Entity.class);
         HttpSession session = req.getSession();
+
+        ///Lay du lieu session
         GoodsReceivedEntity goodsReceivedEntity = (GoodsReceivedEntity) session.getAttribute("ss_GoodsReceived");
         List<Product_GoodReceived_Entity> lst_pro = goodsReceivedEntity.getProductGoodReceivedEntityList();
         String proName = product_goodReceived_entity.getProductEntity().getProName().toString().trim();
         int quantity = Integer.parseInt(product_goodReceived_entity.getQuantity().toString().trim());
+
         for(Product_GoodReceived_Entity item : lst_pro) {
             if ((item.getProductEntity().getProName().equals(proName)) && (item.getQuantity().equals(quantity)))
             {
                 lst_pro.remove(item);
+            } else if ((item.getProductEntity().getProName().equals(proName)) && item.getQuantity() > quantity){
+                item.setQuantity(item.getQuantity() - quantity);
             }
         }
+
         goodsReceivedEntity.setProductGoodReceivedEntityList(lst_pro);
+        session.setAttribute("ss_GoodsReceived",goodsReceivedEntity);
 
         ////Tra ve jsp
         ObjectMapper mapper = new ObjectMapper();

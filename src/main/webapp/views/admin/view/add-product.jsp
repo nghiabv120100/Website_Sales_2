@@ -127,8 +127,20 @@
 			var productName= $('#productName').val();
 			var price= parseFloat($('#price').val());
 			var quantity = parseInt($('#quantity').val());
-			if (price < 0){
+			if (productName == ""){
+				alert("Yêu cầu nhập tên sản phẩm !");
+				return false;
+			}
+			if ($('#price').val() == ""){
+				alert("Yêu cầu nhập giá sản phẩm !");
+				return false;
+			}
+			if (price < 0 ){
 				alert("Yêu cầu nhập giá sản phẩm không âm !");
+				return false;
+			}
+			if ($('#quantity').val() == ""){
+				alert("Yêu cầu nhập số lượng sản phẩm !");
 				return false;
 			}
 			if (quantity < 0){
