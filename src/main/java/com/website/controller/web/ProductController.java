@@ -1,13 +1,7 @@
 package com.website.controller.web;
 
-import com.website.models.BrandEntity;
-import com.website.models.CategoryEntity;
-import com.website.models.DetailCategoryEntity;
-import com.website.models.ProductEntity;
-import com.website.service.BrandService;
-import com.website.service.CategoryService;
-import com.website.service.DetailCategoryService;
-import com.website.service.ProductService;
+import com.website.models.*;
+import com.website.service.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.RequestDispatcher;
@@ -25,6 +19,7 @@ public class ProductController extends HttpServlet {
     ProductService productService = new ProductService();
     CategoryService categoryService = new CategoryService();
     DetailCategoryService detailCategoryService = new DetailCategoryService();
+    CommentService commentService = new CommentService();
     BrandService brandService = new BrandService();
 
     @Override
@@ -214,6 +209,8 @@ public class ProductController extends HttpServlet {
         } else if (type.equals("detail_product")) {
             Integer id =Integer.parseInt(req.getParameter("id"));
             ProductEntity productEntity = productService.findById(id);
+            List<CommentEntity> lstComment = commentService.findAll();
+            req.setAttribute("lstComment",lstComment);
             req.setAttribute("productEntity",productEntity);
             url ="views/web/product-details.jsp";
         }

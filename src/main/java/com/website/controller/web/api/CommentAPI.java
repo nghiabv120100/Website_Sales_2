@@ -13,11 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/api-user-comment"})
 public class CommentAPI extends HttpServlet {
     CommentService commentService = new CommentService();
     ProductService productService = new ProductService();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
@@ -34,6 +41,6 @@ public class CommentAPI extends HttpServlet {
         comment.setId(1);
         comment.setProductEntity(product);
         commentService.save(comment);
-        mapper.writeValue(resp.getOutputStream(),comment);
+        mapper.writeValue(resp.getOutputStream(),"Bạn đã nhập comment thành công");
     }
 }

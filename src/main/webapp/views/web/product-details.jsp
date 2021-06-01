@@ -90,6 +90,19 @@
 						<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
 						<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
 					</ul>
+					<c:forEach var="row_comment" items="${lstComment}">
+						<div class="row style_comment">
+							<div class="col-md-2">
+								<img width="100%" src="${imgUrl}"
+									 class="img img-responsive img-thumbnail">
+							</div>
+							<div class="col-md-10">
+								<p style="color:green;"> ${row_comment.userEntity.fullname}</p>
+								<p style="color: #000;">${row_comment.getWriteDate()}</p>
+								<p> ${row_comment.content}</p>
+							</div>
+						</div>
+					</c:forEach>
 					<p><b>Write Your Review</b></p>
 
 <%--					<form action="#">--%>
@@ -189,6 +202,7 @@
 
 			success: function (result){
 				console.log("Success");
+				alert("Success")
 				window.location.href="/client-product-list?type=detail_product";
 			},
 			errMode: function (error){
