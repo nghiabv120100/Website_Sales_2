@@ -70,6 +70,7 @@
 											<tr class="odd gradeX">
 												<td>${pro.getId() }</td>
 												<c:url value="/image/${pro.getImage()}" var="imgUrl"></c:url>
+											<%--	<td><img width="100" height="70" style="object-fit: cover" src="image/${imgUrl}"/></td>--%>
 												<td><img style="width: 100px;height: 100px;object-fit: cover" src="${imgUrl}" /></td>
 
 												<td>${pro.getProName() }</td>
