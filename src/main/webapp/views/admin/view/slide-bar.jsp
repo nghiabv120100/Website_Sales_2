@@ -27,6 +27,7 @@
 							class="fa fa-bar-chart-o fa-3x"></i> Quản lí phiếu nhập hàng</a></li>
 					<li><a href='<c:url value="/admin-comment-list?type=list"/>'><i
 							class="fa fa-bar-chart-o fa-3x"></i> Quản lí bình luận</a></li>
+					<li><a href="${pageContext.request.contextPath }/views/admin/view/statistical.jsp"><i class="fa fa-bar-chart-o fa-3x"></i>Thống kê</a></li>
 				</ul>
 			</div>
 		</nav>
