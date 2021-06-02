@@ -8,9 +8,7 @@ import com.website.service.BrandService;
 import com.website.service.DetailCategoryService;
 import com.website.service.ProductService;
 import com.website.utils.HttpUtil;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
