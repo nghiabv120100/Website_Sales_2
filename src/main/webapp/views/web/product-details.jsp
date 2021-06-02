@@ -24,7 +24,7 @@
 
 </head>
 
-<body>
+<body onload="checkReply()">
 <jsp:include page="header.jsp"></jsp:include>
 <section>
 	<div class="container">
@@ -84,6 +84,7 @@
 		<div class="tab-content">
 
 			<div class="tab-pane fade active in" id="reviews" >
+				<input id="parent" type="hidden" value="0">
 				<div class="col-sm-12">
 					<ul>
 						<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
@@ -91,17 +92,22 @@
 						<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
 					</ul>
 					<div class="comment">
+
 					<c:forEach var="row_comment" items="${lstComment}">
 						<div class="row style_comment">
 							<div class="col-md-1">
 								<img width="100%" src="${imgPerson}"
 									 class="img img-responsive img-thumbnail">
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-10 panel-footer">
 								<p style="color:green;"> ${row_comment.userEntity.fullname}</p>
 								<fmt:formatDate  value = "${row_comment.getWriteDate()}" var = "parsedMyDate" dateStyle="short" type="both" pattern = "MM-dd-yyyy hh:mm:ss a"  />
 								<p style="color: #000;"><c:out value = "${parsedMyDate}" /></p>
 								<p> ${row_comment.content}</p>
+							</div>
+							<div class="col-md-1 panel-footer" align="right">
+								<p>.</p>
+								<button type="button" class="btn btn-default reply" onclick="replyClicked('${row_comment.getUserEntity().getFullname()}',${row_comment.getId()})" >Reply</button>
 							</div>
 						</div>
 					</c:forEach>
@@ -185,15 +191,27 @@
 <script>
 	// document.getElementById('btnSubmit').addEventListener('click', sendComment);
 	function sendComment(){
-		var id = parseInt($('#id').val());
+
 		var content =$('#content').val();
+		if (content.charAt(0) != '@') {
+			document.getElementById("parent").value = 0;
+		}
+		var id = parseInt($('#id').val());
+		var parent_id = $('#parent').val();
+
 		var data ={
 			"productEntity": {
 				"id":id
 			},
+			"commentEntity": {
+				"id":parent_id
+			},
 			"content":content
 		};
 		let date = new Date().toLocaleString();
+
+
+
 		$.ajax({
 			url: '${APIcomment}',
 			type: 'POST',
@@ -206,17 +224,24 @@
 			success: function (result){
 				// console.log(result.toString())
 				var new_comment = document.querySelector('.comment');
+				var fullname =result;
 				new_comment.innerHTML=new_comment.innerHTML+'<div class="row style_comment">\n' +
 						'\t\t\t\t\t\t\t<div class="col-md-1">\n' +
 						'\t\t\t\t\t\t\t\t<img width="100%" src="${imgPerson}"\n' +
 						'\t\t\t\t\t\t\t\t\t class="img img-responsive img-thumbnail">\n' +
 						'\t\t\t\t\t\t\t</div>\n' +
-						'\t\t\t\t\t\t\t<div class="col-md-10">\n' +
-						'\t\t\t\t\t\t\t\t<p style="color:green;">'+result +'</p>\n' +
+						'\t\t\t\t\t\t\t<div class="col-md-10 panel-footer">\n' +
+						'\t\t\t\t\t\t\t\t<p style="color:green;"> '+result +'</p>\n' +
+						'\t\t\t\t\t\t\t\t<fmt:formatDate  value = "${row_comment.getWriteDate()}" var = "parsedMyDate" dateStyle="short" type="both" pattern = "MM-dd-yyyy hh:mm:ss a"  />\n' +
 						'<p style="color: #000;">'+date+'</p>' +
-						'\t\t\t\t\t\t\t\t<p>'+content+'</p>\n'
+						'\t\t\t\t\t\t\t\t<p>'+content+'</p>\n'+
 						'\t\t\t\t\t\t\t</div>\n' +
-						'\t\t\t\t\t\t</div>';
+						'\t\t\t\t\t\t\t<div class="col-md-1 panel-footer" align="right">\n' +
+						'\t\t\t\t\t\t\t\t<p>.</p>\n' +
+						'\t\t\t\t\t\t\t\t<button type="button" class="btn btn-default reply" onclick="replyClicked(\''+ fullname + '\' ,'+parent_id+')" >Reply</button>\n' +
+						'\t\t\t\t\t\t\t</div>\n' +
+						'\t\t\t\t\t\t</div>'
+
 				console.log("Success");
 
 				document.getElementById("content").value = "";
@@ -229,6 +254,39 @@
 			}
 		})
 	};
+</script>
+
+<script>
+
+	function checkReply() {
+
+		const queryString = window.location.search;
+
+		const urlParams = new URLSearchParams(queryString);
+
+		const page_type = urlParams.get('page_type')
+		const name =urlParams.get('name')
+		const parent_id =urlParams.get('parent_id')
+
+		if (page_type == 'adminReply') {
+			replyClicked(name,parent_id);
+
+		}
+	}
+
+	function replyClicked(name,parent_id) {
+
+		console.log("Hlll");
+		<%--console.log(typeof(${row_comment}));--%>
+
+		// var comment_id = $(this).attr("id");
+		// $('#comment_id').val(comment_id);
+
+		document.getElementById("content").value = "@"+name+": ";
+		$('#content').focus();
+		document.getElementById("parent").value = parent_id;
+	}
+
 </script>
 
 

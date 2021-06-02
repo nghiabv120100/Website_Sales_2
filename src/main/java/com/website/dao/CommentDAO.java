@@ -16,7 +16,8 @@ public class CommentDAO extends GenericDAO<Integer, CommentEntity> {
         Transaction transaction = session.beginTransaction();
         try {
             StringBuilder sql = new StringBuilder("from CommentEntity");
-            sql.append(" where product_id =: id");
+            sql.append(" where status !=0");
+            sql.append(" and product_id =: id");
 
             Query query = session.createQuery(sql.toString());
 

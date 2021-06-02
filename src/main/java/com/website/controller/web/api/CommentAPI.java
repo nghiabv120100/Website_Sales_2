@@ -38,6 +38,9 @@ public class CommentAPI extends HttpServlet {
         if (user == null) {
             return;
         }
+        if (comment.getCommentEntity().getId() == 0) {
+            comment.setCommentEntity(null);
+        }
         ProductEntity product = productService.findById(comment.getProductEntity().getId());
         comment.setUserEntity(user);
         comment.setStatus(1);
