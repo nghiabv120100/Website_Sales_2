@@ -43,7 +43,7 @@
 							<input id="address" type="text" placeholder="Địa chỉ" name="address"
 								   value="${user.getAddress()}">
 							<label style="color: red">${errAddress}</label>
-							<input id="phonenumber" type="text" placeholder="Số điện thoại" name="phoneNumber"
+							<input id="phonenumber" type="number" placeholder="Số điện thoại" name="phoneNumber" min="0"
 								   value="${user.getPhone_number()}">
 							<span class="form-message"></span>
 							<%--							<label style="color: red">${errPhone}</label>--%>

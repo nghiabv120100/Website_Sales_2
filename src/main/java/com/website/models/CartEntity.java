@@ -130,4 +130,6 @@ public class CartEntity {
     public void setProductCartEntityList(List<Product_Cart_Entity> productCartEntityList) {
         this.productCartEntityList = productCartEntityList;
     }
+
+    
 }

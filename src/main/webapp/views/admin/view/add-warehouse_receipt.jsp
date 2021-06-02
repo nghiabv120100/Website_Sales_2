@@ -56,7 +56,6 @@
                                 <div class="col-md-6">
                                     <h3>Nhập thông tin phiếu nhập hàng</h3>
                                     <form role="form" action="add_goodreceived" method="post" enctype="multipart/form-data">
-
                                         <div class="form-group" style="display:inline;">
                                             <div class="col-md-6">
                                                 <label>Tên nhà cung cấp</label>
@@ -77,6 +76,7 @@
 
                                         <div class="table-responsive" style="width: max-content; margin-top: 20px">
                                             <table class="table table-striped table-bordered table-hover" id="data-table">
+                                                <input hidden value="0" id="sl_sanpham">
                                                 <thead>
                                                 <tr>
                                                     <%--                                                    <th style="display:none;">Mã sản phẩm </th>--%>
@@ -119,7 +119,7 @@
                                             </table>
                                         </div>
                                         <button type="button" class="btn btn-primary" onclick="Back()">Quay lại trang trước</button>
-                                        <button type="button" id="btnAdd" class="btn btn-primary">Thêm</button>
+                                        <button type="button" id="btnAdd" class="btn btn-primary" >Thêm</button>
                                         <button type="reset" class="btn btn-primary" onclick="window.location.href ='${PCurl}?type=add'">Reset</button>
                                     </form>
                                 </div>
@@ -159,6 +159,10 @@
 
     $('#btnAdd').click(function (e){
         e.preventDefault();
+        if (parseInt(document.getElementById("sl_sanpham").value) <= 0){
+            alert("Yêu cầu chọn sản phẩm cho phiếu nhập !");
+            return false;
+        }
         var content_editter = document.getElementById("editer").value;
         var supplierId = document.getElementById("supplierId").value;
         var myVar = JSON.stringify({
@@ -189,6 +193,10 @@
         var sanpham = document.getElementById("proId").value;
         var arr_data = sanpham.split('+',4);
         var soluong = document.getElementById("soluong").value;
+        if (soluong == ""){
+            alert("yêu cầu nhập số lượng sản phẩm !");
+            return false;
+        }
         if (soluong <= 0 ){
             alert("yêu cầu nhập số lượng sản phẩm lớn hơn 0 !");
             return false;
@@ -211,6 +219,8 @@
             data: myVar,
             dataType: 'json',
             success: function (result){
+                var sl_hientai = parseInt(document.getElementById("sl_sanpham").value);
+                document.getElementById("sl_sanpham").value= sl_hientai + 1;
                 var table = document.getElementById("data-table");
                 var index = table.rows.length - 1;
 
@@ -225,7 +235,7 @@
                 cell2.innerHTML = soluong;
                 cell3.innerHTML = arr_data[3];
                 cell4.innerHTML = arr_data[3] * soluong;
-                cell5.innerHTML = '<button type="button" class="btn btn-primary float-right" onclick="DeleteRow(this)">Xóa</button>';
+                cell5.innerHTML = '<button type="button" class="btn btn-primary float-right" onclick="DeleteRow(this);">Xóa</button>';
                 document.getElementById("soluong").value = "";
             },
             errMode: function (error){
@@ -233,6 +243,7 @@
             }
         });
     });
+
     function DeleteRow(r) {
         var row = r.parentElement.parentElement;
         var quantity = row.childNodes[1].innerText;
@@ -252,6 +263,8 @@
             data: myVar,
             dataType: 'json',
             success: function (result){
+                var sl_hientai = parseInt(document.getElementById("sl_sanpham").value);
+                document.getElementById("sl_sanpham").value= sl_hientai - 1;
                 document.getElementById("data-table").deleteRow(row.rowIndex);
             },
             errMode: function (error){

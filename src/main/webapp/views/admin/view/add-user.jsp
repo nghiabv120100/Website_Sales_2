@@ -65,7 +65,7 @@
 													placeholder="Nhập email" name="email" id="email" />
 											</div>
 											<div class="form-group">
-												<label>Số điện thoại</label> <input class="form-control"
+												<label>Số điện thoại</label> <input class="form-control" type="number" min="0"
 																			 placeholder="Nhập số điện thoại" name="phonenumber" id="phonenumber" />
 											</div>
 											<div class="form-group">
