@@ -5,6 +5,8 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/view/add-product.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/view" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/view/doanhthubanhang.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/view" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/view/doanhthubanhang_nam.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/view" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/view/excelreport.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/view" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/view/list-category.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/view" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/view/list-order.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/view" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/admin/view/list-warehouse_receipt.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/admin/view" />

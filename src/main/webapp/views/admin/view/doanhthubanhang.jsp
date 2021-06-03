@@ -17,14 +17,18 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Doanh thu bán hàng</title>
+    <title>Doanh thu bán hàng theo tháng</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 </head>
 <body>
-<form style="margin-left: 25px; margin-bottom: 50px; margin-top: 50px" action="DT_ThangController" method="get" enctype='multipart/form-data'>
-    <label style="size: 20px" >Năm : </label>   &emsp;  <input name="n" id="n" type="number" min="2018" style="display: inline"/>
+<form style="margin-left: 25px; margin-bottom: 25px; margin-top: 50px" action="DT_ThangController" method="get" enctype='multipart/form-data'>
+    <label style="size: 20px" >Năm : </label>   &emsp;  <input name="n" id="n" type="number" min="2015" value="${year}" style="display: inline"/>
     <Button type="submit">Tìm kiếm</Button>
+</form>
+<button style="margin-left: 90px" onclick="location.href='${pageContext.request.contextPath }/views/admin/view/statistical.jsp'"/>Quay về</button>
+<form style="margin-left: 90px; margin-bottom: 50px; margin-top: 25px" action="DT_ThangController" method="post" enctype='multipart/form-data'>
+    <input hidden name="year" id="year" value="${year}">
+    <Button type="submit" name="year" value="${year}">Xuất ra excel</Button>
 </form>
 <div id="chartContainer" style="height: 400px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -45,12 +49,12 @@
                 title: "Tháng"
             },
             axisY: {
-                title: "Doanh số bán được (triệu đồng)",
+                title: "Doanh số bán được (vnđ)",
                 includeZero: true
             },
             data: [{
                 type: "line",
-                yValueFormatString: " #,##0 triệu (vnđ)",
+                yValueFormatString: " #,##0 (vnđ)",
                 dataPoints : <%out.print(dataPoints);%>
             }]
         });

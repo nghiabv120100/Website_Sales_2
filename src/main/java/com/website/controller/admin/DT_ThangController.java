@@ -3,6 +3,7 @@ package com.website.controller.admin;
 import com.google.gson.Gson;
 import com.website.models.CartEntity;
 import com.website.models.UserEntity;
+import com.website.models.view.DT_ThangView;
 import com.website.service.CartService;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -24,6 +25,7 @@ public class DT_ThangController extends HttpServlet {
 
     private CartService cartService = new CartService();
     private List<CartEntity> cartEntityList = new ArrayList<CartEntity>();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -128,12 +130,43 @@ public class DT_ThangController extends HttpServlet {
 
         ///Gan du lieu va tra ve
         session.setAttribute("dataPoints",dataPoints);
-        request.setAttribute("year",year);
+        session.setAttribute("year",year);
+/*        request.setAttribute("year",year);*/
         request.getRequestDispatcher("views/admin/view/doanhthubanhang.jsp").forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        Integer year = (Integer) session.getAttribute("year");
+        cartEntityList = cartService.findByYear(year);
+
+
+        ///Gan list khoi tao gia tri tung thang
+        HashMap<Integer, Integer> map_doanhthu = new HashMap<Integer, Integer>();
+        for (int i=1; i<13; i++){
+            map_doanhthu.put(i,0);
+        }
+
+
+        for(CartEntity cartEntity : cartEntityList){
+            LocalDate localDate = cartEntity.getBuyDate().toLocalDate();
+            map_doanhthu.put(localDate.getMonthValue(), map_doanhthu.get(localDate.getMonthValue()) + cartEntity.getTotalPrice());
+        }
+
+
+        ///Gan du lieu tra ve excel
+        List<DT_ThangView> dt_thangViews = new ArrayList<DT_ThangView>();
+        String name = "";
+        for(int i=1; i<13 ; i++){
+            name = /*"Tháng " + " " + */Integer.toString(i);
+            dt_thangViews.add(new DT_ThangView(name,map_doanhthu.get(i)));
+        }
+        request.setAttribute("dt_thangViews", dt_thangViews);
+        RequestDispatcher rd = request.getRequestDispatcher("views/admin/view/excelreport.jsp");
+        rd.forward(request, response);
     }
 }
