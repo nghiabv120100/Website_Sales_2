@@ -1,11 +1,17 @@
 package com.website.dao;
 
+import com.website.models.GoodsReceivedEntity;
 import com.website.models.UserEntity;
 import com.website.utils.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public class UserDAO extends GenericDAO<Integer,UserEntity> {
     public UserEntity findbyusername_password(String username, String password){
@@ -29,5 +35,13 @@ public class UserDAO extends GenericDAO<Integer,UserEntity> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    Session session = sessionFactory.openSession();
+    public int test_user (String username){
+        Criteria criteria = session.createCriteria(UserEntity.class);
+        criteria.add(Restrictions.eq("username",username));
+        return criteria.list().size();
     }
 }

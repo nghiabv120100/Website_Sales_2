@@ -23,8 +23,14 @@ public class UserAPI extends HttpServlet {
         resp.setContentType("application/json");
 
         UserEntity userEntity = HttpUtil.of(req.getReader()).toModel(UserEntity.class);
-        userService.save(userEntity);
-        mapper.writeValue(resp.getOutputStream(),1);
+
+        int kiemtra = userService.test_user(userEntity.getUsername());
+        if(kiemtra > 0){
+            mapper.writeValue(resp.getOutputStream(),0);
+        } else {
+            userService.save(userEntity);
+            mapper.writeValue(resp.getOutputStream(),1);
+        }
     }
 
     @Override
@@ -32,12 +38,16 @@ public class UserAPI extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-
         UserEntity newUserEntity = HttpUtil.of(req.getReader()).toModel(UserEntity.class);
 
-        UserEntity user = userService.update(newUserEntity);
-
-        mapper.writeValue(resp.getOutputStream(),user);
+        ///Kiem tra user da ton tai chua
+        int kiemtra = userService.test_user(newUserEntity.getUsername());
+        if(kiemtra > 0){
+            mapper.writeValue(resp.getOutputStream(),0);
+        } else {
+            UserEntity user = userService.update(newUserEntity);
+            mapper.writeValue(resp.getOutputStream(),1);
+        }
     }
 
     @Override

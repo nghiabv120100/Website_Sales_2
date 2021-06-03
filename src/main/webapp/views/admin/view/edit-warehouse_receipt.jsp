@@ -22,7 +22,7 @@
     <script src="<c:url value="/ckeditor/ckeditor.js" />"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chỉnh sửa phiếu nhập hàng</title>
+    <title>Thông tin phiếu nhập hàng</title>
     <!-- BOOTSTRAP STYLES-->
     <link href="${url}/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
@@ -43,7 +43,7 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Chỉnh sửa phiếu nhập hàng</h2>
+                    <h2>Thông tin phiếu nhập hàng</h2>
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -63,9 +63,9 @@
                                             <div class="col-md-6">
                                                 <label>Tên nhà cung cấp</label>
                                                 <div class="checkbox">
-                                                    <select name="supplierId" id="supplierId">
-                                                        <c:forEach items="${lstSupplier}" var="c">
-                                                            <option value='${c.id}' ${phieunhap.getSupplierEntity().getId() == c.id ? "selected" : ""}>${c.nameSupplier}</option>
+                                                    <select name="supplierId" id="supplierId" readonly="true">
+                                                        <c:forEach items="${lstSupplier}" var="c" >
+                                                            <option readonly="true" value='${c.id}' ${phieunhap.getSupplierEntity().getId() == c.id ? "selected" : ""}>${c.nameSupplier}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
@@ -73,7 +73,7 @@
                                             <div class="col-md-6">
                                                 <label >Mô tả đơn hàng </label>
                                                 <br>
-                                                <textarea rows="4" cols="50" name="editer" id="editer" >${phieunhap.getNote()}</textarea>
+                                                <textarea rows="4" cols="50" name="editer" id="editer" readonly>${phieunhap.getNote()}</textarea>
                                             </div>
                                         </div>
 
@@ -87,7 +87,7 @@
                                                     <th>Giá sản phẩm (vnđ)</th>
                                                     <th>Tổng giá trị (vnđ)</th>
                                                     <th>Tình trạng</th>
-                                                        <th></th>
+                                                    <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -111,13 +111,13 @@
                                                                     Nhập hàng</button>
                                                             </c:if>
                                                         </td>
-                                                        <%--<td>
-                                                            <button  type ="button" onclick="Update(this,${phieunhap.getId()},${hangnhap.getProductEntity().getId()},${hangnhap.getProductEntity().getPrice()}
-                                                                    ,${hangnhap.getQuantity()})" class="center">Cập nhật</button>
+                                                            <%--<td>
+                                                                <button  type ="button" onclick="Update(this,${phieunhap.getId()},${hangnhap.getProductEntity().getId()},${hangnhap.getProductEntity().getPrice()}
+                                                                        ,${hangnhap.getQuantity()})" class="center">Cập nhật</button>
 
-                                                            <button  type ="button" onclick="DeleteRow(this,${phieunhap.getId()},${hangnhap.getProductEntity().getId()},${hangnhap.getProductEntity().getPrice()}
-                                                                     ,${hangnhap.getQuantity()})" class="center">Xóa</button>
-                                                        </td>--%>
+                                                                <button  type ="button" onclick="DeleteRow(this,${phieunhap.getId()},${hangnhap.getProductEntity().getId()},${hangnhap.getProductEntity().getPrice()}
+                                                                         ,${hangnhap.getQuantity()})" class="center">Xóa</button>
+                                                            </td>--%>
                                                     </tr>
                                                 </c:forEach>
                                                 <%--<tr>
@@ -141,7 +141,7 @@
 
                                         <%--<button type="button" id="btnAdd" class="btn btn-default">Cập nhật</button>--%>
                                         <a href='<c:url value="/admin-warehouse_receipt-list?type=list"/>'><button type="button" class="btn btn-primary">Quay lại trang trước</button></a>
-                                        <button type="reset" class="btn btn-primary">Reset</button>
+                                        <%--<button type="reset" class="btn btn-primary">Reset</button>--%>
                                     </form>
                                 </div>
                             </div>
