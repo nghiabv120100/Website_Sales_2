@@ -3,6 +3,7 @@ package com.website.controller.web;
 import com.website.models.CartEntity;
 import com.website.models.UserEntity;
 import com.website.service.CartService;
+import com.website.service.UserService;
 import org.hibernate.Session;
 
 import javax.servlet.RequestDispatcher;
@@ -18,12 +19,14 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/account-manager"})
 public class UserController extends HttpServlet {
 
+    UserService userService = new UserService();
     CartService cartService = new CartService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url="";
         HttpSession session = req.getSession();
-        UserEntity user = (UserEntity)session.getAttribute("user");
+        UserEntity userSess = (UserEntity)session.getAttribute("user");
+        UserEntity user = userService.findById(userSess.getId());
         if (user!=null) {
             List<CartEntity> lstCart = cartService.findByUserID(user.getId());
             req.setAttribute("lstCart",lstCart);

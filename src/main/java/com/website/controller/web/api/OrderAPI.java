@@ -2,10 +2,12 @@ package com.website.controller.web.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.website.models.CartEntity;
+import com.website.models.ProductEntity;
 import com.website.models.Product_Cart_Entity;
 import com.website.models.UserEntity;
 import com.website.service.CartItemService;
 import com.website.service.CartService;
+import com.website.service.ProductService;
 import com.website.service.UserService;
 
 import javax.inject.Inject;
@@ -22,6 +24,7 @@ public class OrderAPI extends HttpServlet {
     private UserService userService = new UserService();
     private CartService cartService = new CartService();
     private CartItemService cartItemService = new CartItemService();
+    private ProductService productService = new ProductService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req,resp);
@@ -45,6 +48,10 @@ public class OrderAPI extends HttpServlet {
             for (Product_Cart_Entity cartItem: cartEntity.getProductCartEntityList()) {
                 cartItem.setCartEntity(cartEntity);
                 cartItemService.save(cartItem);
+                // Update quantity
+                ProductEntity productEntity = productService.findById(cartItem.getProductEntity().getId());
+                productEntity.setQuantity(productEntity.getQuantity()-cartItem.getQuantity());
+                productService.update(productEntity);
             }
 
             if (isOnline !=null) {

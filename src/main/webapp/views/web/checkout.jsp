@@ -31,11 +31,11 @@
 				<div class="col-sm-6">
 					<div class="shopper-info">
 						<p>Thông tin tài khoản</p>
-						<form action="${pageContext.request.contextPath}/api-user-change-Inf" method="get" id="info" >
+						<form action="${pageContext.request.contextPath}/api-user-change-Inf" method="get" id="info1" >
 
-							<input class="form-one" readonly id="fullname" type="text" placeholder="Tên" name="fullname"
+							<input class="form-one"  id="fullname" type="text" placeholder="Tên" name="fullname"
 								   value="${user.getFullname()}">
-							<label style="color: red">${errUserName}</label>
+							<label style="color: red">${errFullName}</label>
 
 							<input style="" id="email" type="text" placeholder="Email" name="email"
 								   value="${user.getEmail()}">
@@ -46,8 +46,14 @@
 							<input id="phonenumber" type="number" placeholder="Số điện thoại" name="phoneNumber" min="0"
 								   value="${user.getPhone_number()}">
 							<span class="form-message"></span>
-							<%--							<label style="color: red">${errPhone}</label>--%>
+							<div>
+								<label style="color: red">${errPhone}</label>
+							</div>
+
 							<button type="submit" class="btn btn-primary">Thay đổi thông tin</button>
+							<div>
+								<label style="color: green">${success}</label>
+							</div>
 
 						</form>
 					</div>
@@ -60,7 +66,9 @@
 							<input id="newPassword" type="password" placeholder="Mật khẩu mới">
 							<input id="confirmPassword" type="password" placeholder="Xác nhận mật khẩu">
 						</form>
-						<a class="btn btn-primary" onclick="changePassword()" href="">Cập nhật thông tin</a>
+						<button class="btn btn-primary" onclick="changePassword()" >Cập nhật thông tin</button>
+
+						<div id="notification"></div>
 					</div>
 				</div>
 			</div>
@@ -172,10 +180,26 @@
 		var oldPassword =$('#oldPassword').val();
 		var newPassword =$('#newPassword').val();
 		var confirmPassword =$('#confirmPassword').val();
+		var notify= document.querySelector('#notification')
+		if (newPassword != confirmPassword) {
+			console.log("Notify")
+			notify.innerHTML="<label style=\"color: red\">Mật khẩu xác thực không chính xác</label>";
+			return ;
+		}
+		else if (newPassword.length < 1 || confirmPassword.length < 1) {
+			notify.innerHTML="<label style=\"color: red\">Mật khẩu mới không được để trống</label>";
+			return ;
+		}
+		else if (newPassword.length < 6 || confirmPassword.length < 6) {
+			notify.innerHTML="<label style=\"color: red\">Độ dài mật khẩu phải ít nhất 6 ký tự</label>";
+			return ;
+		} else if (oldPassword.length < 1) {
+			notify.innerHTML="<label style=\"color: red\">Vui lòng nhật mật khẩu</label>";
+			return ;
+		}
 		var data ={
 			oldPassword:oldPassword,
 			password:newPassword,
-			confirmation_pwd:confirmPassword
 		}
 		console.log(data)
 		$.ajax({
@@ -187,9 +211,11 @@
 			data:JSON.stringify(data),
 			dataType: 'json',
 			success: function (result){
+				notify.innerHTML="<label style=\"color: green\">Đổi mật khẩu thành công</label>";
 				console.log("Success");
 			},
-			errMode: function (error){
+			error: function (error){
+				notify.innerHTML="<label style=\"color: red\">Mật khẩu không chính xác</label>";
 				console.log("Error");
 			}
 

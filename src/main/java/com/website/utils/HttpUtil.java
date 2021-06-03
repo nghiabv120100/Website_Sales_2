@@ -10,6 +10,10 @@ HttpUtil {
 
     private  String value;
 
+    public String getValue() {
+        return value;
+    }
+
     public HttpUtil(String value){
         this.value=value;
 
