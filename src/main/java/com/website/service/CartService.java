@@ -28,4 +28,8 @@ public class CartService {
         return cartDAO.findByUserId(id);
     }
 
+    public List<CartEntity> findByYear(int year){
+        return cartDAO.findByYear(year);
+    }
+
 }
