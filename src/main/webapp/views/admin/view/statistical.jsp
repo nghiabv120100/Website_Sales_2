@@ -56,6 +56,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="panel panel-back noti-box">
+                        <div class="text-box" style="color: greenyellow">
+                            <button style="color: #1a1b1c; background: #0551ea" onclick="location.href='${pageContext.request.contextPath }/TK_SanPhamDaBanController?type='"/>Sản phẩm đã bán</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

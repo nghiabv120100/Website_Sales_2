@@ -43,13 +43,13 @@
         var chart = new CanvasJS.Chart("chartContainer", {
             theme: "light2",
             title: {
-                text: "Doanh số bán hàng theo tháng của năm : ${year}"
+                text: "Doanh thu bán hàng theo tháng của năm : ${year}"
             },
             axisX: {
                 title: "Tháng"
             },
             axisY: {
-                title: "Doanh số bán được (vnđ)",
+                title: "Doanh thu bán được (vnđ)",
                 includeZero: true
             },
             data: [{

@@ -39,13 +39,13 @@
 
         var chart = new CanvasJS.Chart("chartContainer", {
             title: {
-                text: "Doanh số theo từng năm từ : ${start_year} - ${end_year}"
+                text: "Doanh thu theo từng năm từ : ${start_year} - ${end_year}"
             },
             axisX: {
                 title: "Năm"
             },
             axisY: {
-                title: "Doanh số bán được (vnđ)",
+                title: "Doanh thu bán được (vnđ)",
                 includeZero: true
             },
             data: [{

@@ -93,7 +93,7 @@
                                                 <tbody>
                                                 <c:forEach items="${listhangnhap}" var="hangnhap">
                                                     <tr>
-                                                        <td <%--width="310px"--%>>${hangnhap.getProductEntity().getProName()}</td>
+                                                        <td>${hangnhap.getProductEntity().getProName()}</td>
                                                         <td style="width: 160px;"> ${hangnhap.getQuantity()} </td>
                                                         <td>${hangnhap.getProductEntity().getPrice()}</td>
                                                         <td>${hangnhap.getQuantity() * hangnhap.getProductEntity().getPrice()}</td>
