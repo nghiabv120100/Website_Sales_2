@@ -181,7 +181,7 @@
             dataType: 'json',
             success: function (result){
                 console.log("Luu thanh cong");
-                window.location.href = "/Website_Sales_2_war/admin-warehouse_receipt-list?type=list";
+                window.location.href = "${pageContext.request.contextPath}/admin-warehouse_receipt-list?type=list";
             },
             errMode: function (error){
                 console.log("Error");

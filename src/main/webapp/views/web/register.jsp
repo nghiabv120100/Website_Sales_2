@@ -29,42 +29,42 @@
             <div class="form-group">
                 <label for="fullname">Full Name:</label>
                 <input required="true" type="text" value="${user.fullname}" class="form-control" id="fullname" name="fullname" placeholder = "Nhập full name" />
-                <span class="form-message"></span>
+                <span style="color: red" class="form-message"></span>
             </div>
 
             <div class="form-group">
                 <label for="username">User Name:</label>
                 <input required="true" type="text" value="${user.username}" class="form-control" id="username" name="username" placeholder = "Nhập User" />
-                <span class="form-message"></span>
+                <span style="color: red" class="form-message"></span>
             </div>
 
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input required="true" type="email" value="${user.email}" class="form-control" id="email" name="email" placeholder="Nhập email" />
-                <span class="form-message"></span>
+                <span style="color: red" class="form-message"></span>
             </div>
 
             <div class="form-group">
                 <label for="phone">Phone number:</label>
                 <input required="true" type="number" min="0" class="form-control" value="${user.phonenumber}" id="phone" placeholder="Nhập số điện thoại"/>
-                <span class="form-message"></span>
+                <span style="color: red" class="form-message"></span>
             </div>
             <div class="form-group">
                 <label for="pwd">Password:</label>
                 <input required="true" type="password" value="${user.passWord}" class="form-control" id="pwd" placeholder="Nhập mật khẩu"/>
-                <span class="form-message"></span>
+                <span style="color: red" class="form-message"></span>
             </div>
 
             <div class="form-group">
                 <label for="confirmation_pwd">Confirmation Password:</label>
                 <input required="true" type="password" class="form-control" placeholder="Xác nhận mật khẩu" id="confirmation_pwd">
-                <span class="form-message"></span>
+                <span style="color: red" class="form-message"></span>
             </div>
 
             <div class="form-group">
                 <label for="address">Address:</label>
                 <input type="text" class="form-control" value="${user.address}" id="address" placeholder="Nhập địa chỉ" />
-                <span class="form-message"></span>
+                <span style="color: red" class="form-message"></span>
             </div>
 
             <button type="submit" class="btn btn-success" id="btnRegister">Register</button>
@@ -125,8 +125,12 @@
             dataType: 'json',
 
             success: function (result){
-                console.log("Success");
-                window.location.href = "${url}?type=logout";
+                if(result == 0){
+                    alert("Tên đăng nhập đã có người sử dụng !  Yêu cầu nhập tên đăng nhập khác. ")
+                } else {
+                    console.log("Success");
+                    window.location.href = "${url}?type=logout";
+                }
             },
             error: function (error){
                 console.log("Error");

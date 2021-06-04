@@ -27,6 +27,9 @@ public class UserService {
         userEntity.setStatus(0);
         return userDAO.delete(userEntity);
     }
+    public int test_user (String username){
+        return userDAO.test_user(username);
+    }
 
     public UserEntity findByUserName(String username) {
         return userDAO.findByUserName(username);

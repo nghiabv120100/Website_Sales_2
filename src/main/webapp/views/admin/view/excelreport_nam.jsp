@@ -11,14 +11,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Danh số theo từng năm từ : ${start_year} - ${end_year} </title>
+    <title>Danh thu theo từng năm từ : ${start_year} - ${end_year} </title>
 </head>
 <body>
-<h1>Doanh số theo từng năm từ : ${start_year} - ${end_year} </h1>
+<h1>Doanh thu theo từng năm từ : ${start_year} - ${end_year} </h1>
 <table cellpadding="1"  cellspacing="1" border="1" bordercolor="gray">
     <tr>
         <td width="150px">Năm</td>
-        <td width="150px">Doanh số (vnđ)</td>
+        <td width="150px">Doanh thu (vnđ)</td>
     </tr>
     <%
         Integer start_year = (Integer) session.getAttribute("start_year");

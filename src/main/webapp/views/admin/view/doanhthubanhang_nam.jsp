@@ -22,8 +22,10 @@
 </head>
 <body>
 <form style="margin-left: 25px; margin-bottom: 10px" action="DT_NamController" method="get" enctype='multipart/form-data'>
-    <label style="size: 20px" >Năm bắt đầu : </label>   &emsp;  <input  name="start" value="${start_year}" id="start" type="number" min="2015" style="display: inline"/> <br/> <br/>
-    <label style="size: 20px" >Năm kết thúc : </label>   &emsp;  <input name="end" value="${end_year}" id="end" type="number" min="2015" style="display: inline"/> <span style="color: red">${error_tg}</span> <br/> <br/>
+    <label style="size: 20px" >Năm bắt đầu : </label>   &emsp;  <input  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+                                                                        name="start" value="${start_year}" id="start" type="number" min="2015" style="display: inline"/> <br/> <br/>
+    <label style="size: 20px" >Năm kết thúc : </label>   &emsp;  <input onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+                                                                        name="end" value="${end_year}" id="end" type="number" min="2015" style="display: inline"/> <span style="color: red">${error_tg}</span> <br/> <br/>
     <Button style="margin-left: 120px" type="submit">Tìm kiếm</Button>
 </form>
 <button  style="margin-left: 145px; margin-bottom: 30px; display: inline" onclick="location.href='${pageContext.request.contextPath }/views/admin/view/statistical.jsp'"/>Quay về</button>
@@ -39,13 +41,13 @@
 
         var chart = new CanvasJS.Chart("chartContainer", {
             title: {
-                text: "Doanh số theo từng năm từ : ${start_year} - ${end_year}"
+                text: "Doanh thu theo từng năm từ : ${start_year} - ${end_year}"
             },
             axisX: {
                 title: "Năm"
             },
             axisY: {
-                title: "Doanh số bán được (vnđ)",
+                title: "Doanh thu bán được (vnđ)",
                 includeZero: true
             },
             data: [{
