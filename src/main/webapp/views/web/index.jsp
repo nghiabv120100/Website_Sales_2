@@ -87,9 +87,9 @@
 														<div class="single-products">
 															<div class="productinfo text-center">
 																<a
-																		href="${pageContext.request.contextPath }/list-laptop?type=detail_product&id=${i.getId()}&quantity=1">
+																		href="${pageContext.request.contextPath }/client-product-list?type=detail_product&id=${i.getId()}&quantity=1">
 																	<div class="c1">
-																		<img height="250" width="200" class="c2" src="${imgUrl}" alt="Fail" style="width: 300px;height: 200px;padding-left: 40px;"/>
+																		<img  height="250" width="200" class="c2" src="${imgUrl}" alt="Fail" style="width: 300px;height: 200px;padding-left: 40px;"/>
 																		<div class="c3">
 																			<a  <%--href="${APIurl}?id=${i.getId()}"--%>
 																					href="${pageContext.request.contextPath }/client-product-list?type=detail_product&id=${i.getId()}&quantity=1"
@@ -137,12 +137,12 @@
 														<div class="single-products">
 															<div class="productinfo text-center">
 																<a
-																		href="${pageContext.request.contextPath }/list-laptop?type=detail_product&id=${i.getId()}&quantity=1">
+																		href="${pageContext.request.contextPath }/client-product-list?type=detail_product&id=${i.getId()}&quantity=1">
 																	<div class="c1">
 																		<img height="250" width="200" class="c2" src="${imgUrl}" alt="Fail" style="width: 300px;height: 200px;padding-left: 40px;"/>
 																		<div class="c3">
 																			<a  <%--href="${APIurl}?id=${i.getId()}"--%>
-																					href="${pageContext.request.contextPath }/list-laptop?type=detail_product&id=${i.getId()}&quantity=1"
+																					href="${pageContext.request.contextPath }/client-product-list?type=detail_product&id=${i.getId()}&quantity=1"
 																					class="btn btn-default add-to-cart"><i
 																					class="fa fa-shopping-cart"></i>Chi tiết sản phẩm</a>
 																		</div>
@@ -194,12 +194,12 @@
 														<div class="single-products">
 															<div class="productinfo text-center">
 																<a
-																		href="${pageContext.request.contextPath }/list-laptop?type=detail_product&id=${i.getId()}&quantity=1">
+																		href="${pageContext.request.contextPath }/client-product-list?type=detail_product&id=${i.getId()}&quantity=1">
 																	<div class="c1">
 																		<img height="250" width="200" class="c2" src="${imgUrl}" alt="Fail" style="width: 300px;height: 200px;padding-left: 40px;"/>
 																		<div class="c3">
 																			<a  <%--href="${APIurl}?id=${i.getId()}"--%>
-																					href="${pageContext.request.contextPath }/list-laptop?type=detail_product&id=${i.getId()}&quantity=1"
+																					href="${pageContext.request.contextPath }/client-product-list?type=detail_product&id=${i.getId()}&quantity=1"
 																					class="btn btn-default add-to-cart"><i
 																					class="fa fa-shopping-cart"></i>Chi tiết sản phẩm</a>
 																		</div>

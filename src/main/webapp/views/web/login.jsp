@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url value="/views/web" var="login"></c:url>
 <c:url value="/validationlogin" var="loginApi"></c:url>
+<c:url value="/trang-chu" var="APIurl"></c:url>
 <%--<c:url value="/trang-chu" var="HomeUrl"> </c:url>--%>
 <html>
 <head>
@@ -58,18 +59,32 @@
                         <form action="${pageContext.request.contextPath }/trang-chu" method="post" id="register-form">
                             <div class="form-group">
                                 <h5>Tên tài khoản</h5>
-                                <input id="username2" name="userName" type="text" class="form-control" placeholder="Nhập tên tài khoản">
+                                <input id="username2" name="userName" type="text" class="form-control" value="${username}" placeholder="Nhập tên tài khoản">
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <h5>Nhập email</h5>
-                                <input id="email" name="emailReset" type="text" class="form-control" placeholder="Nhập email">
+                                <input id="email" name="emailReset" type="text" value="${email}" class="form-control" placeholder="Nhập email">
                                 <span class="form-message"></span>
                             </div>
-                            <label>${msg}</label><br>
-                            <button type="submit" class="btn btn-success btn-primary " style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Gửi </button>
+
+                            <label style="color: green">${msg}</label><br>
+                            <button type="submit" class="btn btn-success btn-primary " style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Lấy mã xác thực </button>
+                            <div class="form-group">
+                                <h5>Nhập mật khẩu mới</h5>
+                                <input id="newpassword" type="password" value="" class="form-control" placeholder="Nhập mật khẩu mới">
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <h5>Nhập mã xác thực</h5>
+                                <input id="code" type="text" value="" class="form-control" placeholder="Nhập mã xác thực">
+                                <span class="form-message"></span>
+                            </div>
+                            <button type="button" class="btn btn-success btn-primary " onclick="resetPassword()" style="margin-top: 10px; color: white; background-color: #696763; border: none;" >Reset mật khẩu </button>
                             <input type="hidden" name="action" value="login">
+                            <div id="notification"></div>
                             <span class="form-message"></span>
+
                         </form>
                     </div>
                 </div>
@@ -100,6 +115,46 @@
             Validator.isEmail('#email')
         ]
     });
+
+    function resetPassword(){
+
+        var username= $('#username2').val();
+        var password= $('#newpassword').val();
+        var email= $('#email').val();
+        var code =$('#code').val();
+        var data={
+            "username":username,
+            "passWord":password,
+            "email":email,
+        }
+        var notify= document.querySelector('#notification')
+        if (username =='' || password =='' ||email=='' ||code=='') {
+            notify.innerHTML="<label style=\"color: red\">Vui lòng nhập thông tin đầy đủ</label>";
+            return ;
+        }
+        if (password.length < 6) {
+            notify.innerHTML="<label style=\"color: red\">Vui lòng nhập ít nhất 6 ký tự</label>";
+            return ;
+        }
+        $.ajax({
+            url: '${APIurl}'+'?code='+code,
+            type: 'PUT',
+            enctype: 'multipart/form-data',
+            processData:false,
+            contentType: 'application/json',
+            data:JSON.stringify(data),
+            dataType: 'json',
+            success: function (result){
+                console.log("Success");
+                notify.innerHTML="<label style=\"color: green\">Đổi mật khẩu thành công</label>";
+                <%--window.location.href = "${PCurl}?type=list&message=insert_success";--%>
+            },
+            error: function (error){
+                console.log("Error");
+                notify.innerHTML="<label style=\"color: red\">Đổi mật khẩu thất bại</label>";
+            }
+        })
+    }
 </script>
 </body>
 </html>

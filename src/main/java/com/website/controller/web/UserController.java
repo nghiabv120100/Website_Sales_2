@@ -26,8 +26,9 @@ public class UserController extends HttpServlet {
         String url="";
         HttpSession session = req.getSession();
         UserEntity userSess = (UserEntity)session.getAttribute("user");
-        UserEntity user = userService.findById(userSess.getId());
-        if (user!=null) {
+
+        if (userSess!=null) {
+            UserEntity user = userService.findById(userSess.getId());
             List<CartEntity> lstCart = cartService.findByUserID(user.getId());
             req.setAttribute("lstCart",lstCart);
             req.setAttribute("user",user);

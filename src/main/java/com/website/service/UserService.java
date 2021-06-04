@@ -28,4 +28,8 @@ public class UserService {
         return userDAO.delete(userEntity);
     }
 
+    public UserEntity findByUserName(String username) {
+        return userDAO.findByUserName(username);
+    }
+
 }
