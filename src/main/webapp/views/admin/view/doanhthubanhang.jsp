@@ -22,7 +22,8 @@
 </head>
 <body>
 <form style="margin-left: 25px; margin-bottom: 25px; margin-top: 50px" action="DT_ThangController" method="get" enctype='multipart/form-data'>
-    <label style="size: 20px" >Năm : </label>   &emsp;  <input name="n" id="n" type="number" min="2015" value="${year}" style="display: inline"/>
+    <label style="size: 20px" >Năm : </label>   &emsp;  <input onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+                                                               name="n" id="n" type="number" min="2015" value="${year}" style="display: inline"/>
     <Button type="submit">Tìm kiếm</Button>
 </form>
 <button style="margin-left: 90px" onclick="location.href='${pageContext.request.contextPath }/views/admin/view/statistical.jsp'"/>Quay về</button>

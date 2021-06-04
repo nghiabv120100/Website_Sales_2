@@ -45,25 +45,25 @@
                     <h2>Thống kê sản phẩm đã bán</h2>
                 </div>
             </div>
+            <hr />
             <div class="row">
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                         <div class="text-box" style="color: greenyellow">
-                            <button style="color: #1a1b1c; background: #0551ea" onclick="location.href='${pageContext.request.contextPath }/TK_SanPhamDaBanController?type=nam&nam=0' "/>Thống kê theo năm</button>
+                            <button style="color: #1a1b1c; background: #eadf05; height: 150px; width: 200px; font-weight: bolder"
+                                    onclick="location.href='${pageContext.request.contextPath }/TK_SanPhamDaBanController?type=nam&nam=0' "/>Thống kê theo năm</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="panel panel-back noti-box">
+                        <div class="text-box" style="color: greenyellow">
+                            <button style="color: #1a1b1c; background: #06f8c8; height: 150px; width: 200px; font-weight: bolder"
+                                    onclick="location.href='${pageContext.request.contextPath }/TK_SanPhamDaBanController?type=thang&nam=0&thang=0' "/>Thống kê theo tháng</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <%--<div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-6">
-                    <div class="panel panel-back noti-box">
-                        <div class="text-box" style="color: greenyellow">
-                            <button style="color: #1a1b1c; background: #0551ea" onclick="location.href='${pageContext.request.contextPath }/TK_SanPhamDaBanController?type=nam&nam=0' "/>Thống kê theo năm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
-            <!-- /. ROW  -->
             <hr />
             <%--<div class="row">
                 <div class="col-md-12">

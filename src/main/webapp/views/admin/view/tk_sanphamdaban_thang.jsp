@@ -17,7 +17,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thống kê sản phẩm đã bán năm : ${tk_year}</title>
+    <title>Thống kê sản phẩm đã bán : tháng ${tk_motnh} năm ${tk_year2}</title>
     <!-- BOOTSTRAP STYLES-->
     <link href="${url}/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
@@ -42,7 +42,7 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Thống kê sản phẩm đã bán năm : ${tk_year}</h2>
+                    <h2>Thống kê sản phẩm đã bán : tháng ${tk_motnh} năm ${tk_year2}</h2>
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -51,14 +51,16 @@
                 <div class="col-md-12">
                     <div>
                         <form style="margin-left: 25px; margin-bottom: 25px; margin-top: 50px" action="TK_SanPhamDaBanController" method="get" enctype='multipart/form-data'>
-                            <input hidden id="type" name="type" value="nam">
-                            <label style="size: 20px" >Năm : </label>   &emsp;  <input onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
-                                                                                       name="nam" id="nam" type="number" min="2015" value="${tk_year}" style="display: inline"/>
+                            <input hidden id="type" name="type" value="thang">
+                            <label style="size: 20px" >Tháng : </label>   &emsp;  <input onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+                                                                                         name="thang" id="thang" type="number" min="1" max="12" value="${tk_motnh}" style="display: inline"/>
+                            &nbsp <label style="size: 20px" >Năm : </label>   &emsp;  <input onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+                                                                                       name="nam" id="nam" type="number" min="2015" value="${tk_year2}" style="display: inline"/>
                             <Button type="submit">Tìm kiếm</Button>
                         </form>
                         <button style="margin-left: 90px; display: inline" onclick="location.href='${pageContext.request.contextPath }/TK_SanPhamDaBanController?type='"/>Quay về</button>
-                        <button style="margin-left: 10px; display: inline" onclick="location.href='${pageContext.request.contextPath }/TK_SanPhamDaBanController?type=nam&nam=${tk_year}&sort=giamdan'"/>Giảm dần</button>
-                        <form style="margin-left: 90px; margin-bottom: 50px; margin-top: 25px" action="${pageContext.request.contextPath}/views/admin/view/excel_sanphamnam.jsp" method="post" enctype='multipart/form-data'>
+                        <button style="margin-left: 10px; display: inline" onclick="location.href='${pageContext.request.contextPath }/TK_SanPhamDaBanController?type=thang&nam=${tk_year2}&thang=${tk_motnh}&sort=giamdan'"/>Giảm dần</button>
+                        <form style="margin-left: 90px; margin-bottom: 50px; margin-top: 25px" action="${pageContext.request.contextPath}/views/admin/view/excel_sanphamthang.jsp" method="post" enctype='multipart/form-data'>
                             <Button type="submit" value="submit">Xuất ra excel</Button>
                         </form>
                     </div>
@@ -81,7 +83,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${data_year}" var="pro">
+                                    <c:forEach items="${data_month}" var="pro">
                                         <tr>
                                             <td>${pro.getKey().getId()}</td>
                                             <c:url value="/image/${pro.getKey().getImage()}" var="imgUrl"></c:url>

@@ -45,21 +45,24 @@
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                         <div class="text-box" style="color: greenyellow">
-                            <button style="color: #1a1b1c; background: #eadf05" onclick="location.href='${pageContext.request.contextPath }/DT_ThangController?n='"/>Doanh thu bán hàng theo tháng</button>
+                            <button style="color: #1a1b1c; background: #eadf05; height: 150px; width: 200px; font-weight: bolder"
+                                    onclick="location.href='${pageContext.request.contextPath }/DT_ThangController?n='"/>Doanh thu bán hàng theo tháng</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                         <div class="text-box" style="color: greenyellow">
-                            <button style="color: #1a1b1c; background: #0551ea" onclick="location.href='${pageContext.request.contextPath }/DT_NamController?start=&end='"/>Doanh thu bán hàng theo năm</button>
+                            <button style="color: #ecec11; background: #0551ea; height: 150px; width: 200px; font-weight: bolder"
+                                    onclick="location.href='${pageContext.request.contextPath }/DT_NamController?start=&end='"/>Doanh thu bán hàng theo năm</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                         <div class="text-box" style="color: greenyellow">
-                            <button style="color: #1a1b1c; background: #0551ea" onclick="location.href='${pageContext.request.contextPath }/TK_SanPhamDaBanController?type='"/>Sản phẩm đã bán</button>
+                            <button style="color: #1a1b1c; background: #14ea05; height: 150px; width: 200px; font-weight: bolder"
+                                    onclick="location.href='${pageContext.request.contextPath }/TK_SanPhamDaBanController?type='"/>Sản phẩm đã bán</button>
                         </div>
                     </div>
                 </div>

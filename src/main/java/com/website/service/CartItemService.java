@@ -17,4 +17,8 @@ public class CartItemService {
     public List<Product_Cart_Entity> find_cart_pro (int year){
         return cartItemDAO.find_cart_pro(year);
     }
+
+    public List<Product_Cart_Entity> find_cart_pro_month_year (int year, int month){
+        return cartItemDAO.find_cart_pro_month_year(year,month);
+    }
 }
