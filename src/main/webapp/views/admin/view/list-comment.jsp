@@ -39,7 +39,7 @@
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Quản lí đơn hàng</h2>
+						<h2>Quản lí bình luận</h2>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -48,7 +48,7 @@
 					<div class="col-md-12">
 						<!-- Advanced Tables -->
 						<div class="panel panel-default">
-							<div class="panel-heading">Đơn hàng mới</div>
+							<div class="panel-heading">Danh sách bình luận</div>
 							<div class="panel-body">
 								<div class="table-responsive">
 									<table class="table table-striped table-bordered table-hover"
@@ -157,5 +157,6 @@
 			})
 		}
 	</script>
+		</div>
 </body>
 </html>
