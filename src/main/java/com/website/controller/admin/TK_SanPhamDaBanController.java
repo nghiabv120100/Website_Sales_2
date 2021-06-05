@@ -50,13 +50,13 @@ public class TK_SanPhamDaBanController extends HttpServlet {
             }
 
             ///Tim danh sach san pham ban duoc theo nam
-            productCartEntityList = cartItemService.find_cart_pro(year);
+            productCartEntityList  = cartItemService.find_cart_pro(year);
 
             ///Gan so luong san pham va gia tri ban duoc ban duoc tung nam
             for(int i=0; i<productCartEntityList.size(); i++){
                 Product_Cart_Entity item = productCartEntityList.get(i);
                 if(map.containsKey(item.getProductEntity())){
-                    map.put(item.getProductEntity(), map.get(item) + item.getQuantity() * item.getProductEntity().getPrice() );
+                    map.put(item.getProductEntity(), map.get(item.getProductEntity()) + item.getQuantity() * item.getProductEntity().getPrice() );
                 } else {
                     map.put(item.getProductEntity(), item.getQuantity() * item.getProductEntity().getPrice());
                 }
@@ -104,13 +104,13 @@ public class TK_SanPhamDaBanController extends HttpServlet {
             }
 
             ///Tim danh sach san pham ban duoc theo nam va thang
-            productCartEntityList = cartItemService.find_cart_pro_month_year(year,month);
+            productCartEntityList  = cartItemService.find_cart_pro_month_year(year,month);
 
             ///Gan so luong san pham va gia tri ban duoc ban duoc tung thang
             for(int i=0; i<productCartEntityList.size(); i++){
                 Product_Cart_Entity item = productCartEntityList.get(i);
                 if(map.containsKey(item.getProductEntity())){
-                    map.put(item.getProductEntity(), map.get(item) + item.getQuantity() * item.getProductEntity().getPrice() );
+                    map.put(item.getProductEntity(), map.get(item.getProductEntity()) + item.getQuantity() * item.getProductEntity().getPrice() );
                 } else {
                     map.put(item.getProductEntity(), item.getQuantity() * item.getProductEntity().getPrice());
                 }
