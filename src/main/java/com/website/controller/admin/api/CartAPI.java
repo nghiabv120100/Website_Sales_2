@@ -30,7 +30,10 @@ public class CartAPI extends HttpServlet {
 
         Integer id = Integer.parseInt(req.getReader().readLine());
         CartEntity cartEntity = cartService.findById(id);
-        cartEntity.setStatus(cartEntity.getStatus()%3+1);
+        cartEntity.setStatus(cartEntity.getStatus()%4+1);
+        if (cartEntity.getStatus()==3) {
+            cartEntity.setStatus(cartEntity.getStatus()+1);
+        }
         CartEntity cartEntity1 = cartService.update(cartEntity);
         mapper.writeValue(resp.getOutputStream(),cartEntity1);
     }
